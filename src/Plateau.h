@@ -6,8 +6,17 @@
 
 
 
+
 typedef struct plateau{
-    Case 
+    Case* joueur;
+
+    Case* mur;
+    int nb_murs;
+
+    Case* relique;
+    int nb_reliques;
+    
+    Case* gardien;
 }*Plateau;
 
 
