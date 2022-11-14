@@ -19,7 +19,7 @@ typedef struct {
 
 
 /*fonction permettant d'initialiser la case*/
-Case init_case(int x, int y);
+Case * init_case(int x, int y);
 
 
 
