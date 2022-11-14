@@ -1,4 +1,4 @@
-#include "graphique.h"
+#include "Graphisme.h"
 #include "Plateau.h"
 
 
@@ -10,14 +10,7 @@ void boutons(){
 
 
 void init_fenetre(){
-  MLV_image *image;
   MLV_create_window();
-  image = MLV_load_image("image.png");
-	MLV_resize_image_with_proportions( image, TAILLE_X, TAILLE_Y);
-
-
-  MLV_actualise_window();
-  /*boucle et affichage de boutons*/
 }
 
 
