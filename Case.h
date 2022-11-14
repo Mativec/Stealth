@@ -1,3 +1,13 @@
+/**
+ * @file Case.h
+ * @author Richard ARNAOUT, Matias VECCHIO
+ * @brief Module de gestion des cases du plateua de jeu.
+ * @version 0.1
+ * @date 2022-11-14
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #ifndef __CASE__
 #define __CASE__
 

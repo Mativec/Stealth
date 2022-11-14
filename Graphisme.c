@@ -1,4 +1,15 @@
-#include "graphique.h"
+/**
+ * @file Graphisme.c
+ * @author Richard ARNAOUT, Matias VECCHIO
+ * @brief Implémentation du module graphique
+ * @version 0.1
+ * @date 2022-11-14
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
+
+#include "Graphisme.h"
 #include "Plateau.h"
 
 
