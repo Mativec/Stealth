@@ -14,12 +14,6 @@
 
     #include <stdlib.h>
     #include <stdio.h>
-    #include "Case.h"
 
-    /**
-     * @brief Return 1 si tout vas bien, 0 sinon
-     * 
-     */
-    int test_init_case();
 
 #endif

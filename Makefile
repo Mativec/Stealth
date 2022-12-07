@@ -1,19 +1,16 @@
 CC = gcc
-OBJ = Main.o Test.o Case.o
+OBJ = Test.o Graphisme.o Input.o
 CFLAGS = -ansi -pedantic -Wall
-EXEC = ProgC
+LDFLAGS = -lMLV
+EXEC = a.out
 
-$(EXEC): $(OBJ)
-	$(CC) -o $@ $^ $(CFLAGS)
+base : $(EXEC) clean
 
-Main.o: Main.c Case.h Test.h
-Test.o: Test.c Test.h Case.h
-Case.o: Case.c Case.h
+$(EXEC): Main.c $(OBJ)
+	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS)
 
-
-%.o: %.c
-	$(CC) -c $< $(CFLAGS)
+%.o: %.c config.h
+	$(CC) -c $< $(CFLAGS) $(LDFLAGS)
 
 clean:
 	rm *.o
-	rm $(EXEC)
