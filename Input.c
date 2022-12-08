@@ -9,19 +9,19 @@
  *
  */
 
-#include "Input.h"
+#include "Engine/Input.h"
 
 char* input_to_string(Input event) {
     switch (event) {
-        case UP:
+        case INPUT_UP:
             return "UP";
-        case LEFT:
+        case INPUT_LEFT:
             return "LEFT";
-        case RIGHT:
+        case INPUT_RIGHT:
             return "RIGHT";
-        case DOWN:
+        case INPUT_DOWN:
             return "DOWN";
-        case QUIT:
+        case INPUT_QUIT:
             return "QUIT";
         default:
             return "None";
@@ -29,16 +29,29 @@ char* input_to_string(Input event) {
 }
 
 Input get_event() {
-    MLV_Keyboard_button event;
-    if(MLV_get_event(&event, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL) == MLV_KEY){
-        switch(event){
-            case MLV_KEYBOARD_UP : return UP;
-            case MLV_KEYBOARD_LEFT : return LEFT;
-            case MLV_KEYBOARD_RIGHT : return RIGHT;
-            case MLV_KEYBOARD_DOWN : return DOWN;
-            case MLV_KEYBOARD_q : return QUIT;
-            default : return NONE;
+    static int noTwice = 0;
+
+    if(noTwice){
+        noTwice = 0;
+    }
+    else{
+        noTwice = 1;
+        if(MLV_get_keyboard_state(MLV_KEYBOARD_UP) == MLV_PRESSED){
+            return INPUT_UP;
+        }
+        else if(MLV_get_keyboard_state(MLV_KEYBOARD_LEFT) == MLV_PRESSED){
+            return INPUT_LEFT;
+        }
+        if(MLV_get_keyboard_state(MLV_KEYBOARD_RIGHT) == MLV_PRESSED){
+            return INPUT_RIGHT;
+        }
+        if(MLV_get_keyboard_state(MLV_KEYBOARD_DOWN) == MLV_PRESSED){
+            return INPUT_DOWN;
+        }
+        if(MLV_get_keyboard_state(MLV_KEYBOARD_q) == MLV_PRESSED){
+            return INPUT_QUIT;
         }
     }
-    return NONE;
+    
+    return INPUT_NONE;
 }

@@ -15,12 +15,12 @@
 #include <MLV/MLV_event.h>
 
 typedef enum __input{
-    NONE,
-    UP,
-    RIGHT,
-    LEFT,
-    DOWN,
-    QUIT
+    INPUT_NONE,
+    INPUT_UP,
+    INPUT_RIGHT,
+    INPUT_LEFT,
+    INPUT_DOWN,
+    INPUT_QUIT
 } Input;
 
 Input get_event();

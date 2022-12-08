@@ -9,19 +9,27 @@
  *
  */
 
-#include "Graphisme.h"
+#include "Engine/Graphisme.h"
 
 void init_window() {
-    MLV_create_window(NAME, NULL, SIZE_X, SIZE_Y);
-    MLV_clear_window(MLV_COLOR_WHITE);
+    MLV_create_window(NAME, ICON, SIZE_X, SIZE_Y);
+    MLV_actualise_window();
 }
 
-void draw_window() {
+void draw_window(Engine_Obj obj) {
     static int init = 0;
+
+    /* Window initiated ? */
     if (!init) {
         init = 1;
         init_window();
     }
+
+    /* clean the window */
+    MLV_clear_window(MLV_COLOR_WHITE);
+
+    /* draw on the window */
+    MLV_draw_filled_circle(obj.x, obj.y, 10, MLV_COLOR_RED);
     return;
 }
 
@@ -37,6 +45,7 @@ void refresh(time_t end_time, time_t new_time) {
     if (extratime > 0) {
         MLV_wait_milliseconds((int)(extratime * 1000));
     }
+    MLV_actualise_window();
 }
 
 void free_window() {
