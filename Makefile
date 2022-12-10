@@ -17,5 +17,5 @@ bin/Input.o : src/Input.c include/Input.h
 bin/Player.o : src/Player.c include/Player.h include/Object.h include/Input.h
 
 clean:
-	rm bin/*
+	rm bin/*.o
 	rm $(EXEC)
