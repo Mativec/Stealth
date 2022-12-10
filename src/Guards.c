@@ -11,18 +11,11 @@
 
 #include "../include/Guards.h"
 
-
-
 /*essayer de gerer la colision avec les angles de vues et le toucher du garde*/
-int collision(Engine_Obj guard, Engine_Obj player){
-    if( ((guard.x == player.x && guard.y == player.y) || (player.x == guard.x-5 || player.x == guard.x+5)) && ((player.y == guard.x-5 || player.x == guard.x+5)) )
+int collision(Engine_Obj guard, Engine_Obj player) {
+    if (((guard.x == player.x && guard.y == player.y) || (player.x == guard.x - 5 || player.x == guard.x + 5)) && ((player.y == guard.x - 5 || player.x == guard.x + 5))) {
         return 1;
-    else
+    } else {
         return 0;
+    }
 }
-
-
-
-
-
-

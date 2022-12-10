@@ -11,12 +11,13 @@
 #define _POSIX_C_SOURCE 199309L
 
 #include <time.h>
+#include <MLV/MLV_time.h>
 
 #include "../include/all.h"
 
 int main(int argc, char* argv[]) {
     struct timespec end_time, new_time;
-    Input event;
+    Engine_Input event;
     Engine_Obj object;
     int play;
 
@@ -30,7 +31,7 @@ int main(int argc, char* argv[]) {
 
 /*******************************************************************************/
 
-    play = 0;
+    play = 1;
     object = *init_object(500, 500, SPEED_PLAYER);
 
     /* Main loop over the frames... */
@@ -42,13 +43,8 @@ int main(int argc, char* argv[]) {
 
         /* Display of the currentframe, samplefunction */
         /* THIS FUNCTION CALLS ONCE AND ONLY ONCE MLV_update_window */
-        draw_window(object); /* Graphisme.h */
+        draw_window(object, guard); /* Graphisme.h */
 
-
-/******************************************************************/
-        /*apaprition of gard*/
-        draw_guard(guard);
-/*****************************************************/
 
         /* We get here some keyboard events*/
         event = get_event(); /* Input.h */
@@ -60,7 +56,7 @@ int main(int argc, char* argv[]) {
             */
         }
         
-        play = (event == INPUT_QUIT);
+        play *= (event != INPUT_QUIT);
 
         /* Move the entities on the grid */
         move_player(&object, event);
@@ -73,9 +69,8 @@ int main(int argc, char* argv[]) {
 
 
 /*******************************************************************************/
-        play *= !(event(INPUT_QUIT));
         /*Colision between gard and player*/
-        play *= collision(guard, object);
+        play *= !(collision(guard, object));
 
 
 /*********************************************************************************************/
@@ -85,6 +80,7 @@ int main(int argc, char* argv[]) {
 
         refresh(end_time.tv_sec, new_time.tv_sec); /* Graphisme.h */
     }
+    MLV_wait_seconds(1);
     free_window();
 
     return 0;
