@@ -33,6 +33,31 @@ void draw_window(Engine_Obj obj) {
     return;
 }
 
+
+/*
+void disp_coord(Engine_Obj player){
+    //MLV_ text pour afficher les coordonnées a chaque framerate en haut a gauche de la page
+}
+
+*/
+
+
+void draw_guard(Engine_Obj guard){
+    MLV_draw_filled_circle(guard.x, guard.y, 10, MLV_COLOR_BLUE);
+    return;
+}
+
+
+/* faire le deplacement du garde toutes les secondes il va avancer d'un cran et chaque 3 seconde il toune 
+<-, <- , <- , | | | , ->, -> , -> , | | | 
+void deplacement_guard(Engine_Obj guard){
+    Input
+
+}
+*/
+
+
+
 void refresh(time_t end_time, time_t new_time) {
     int frametime, extratime;
     

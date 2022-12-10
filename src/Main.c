@@ -18,7 +18,7 @@ int main(int argc, char* argv[]) {
     struct timespec end_time, new_time;
     Input event;
     Engine_Obj object;
-    int quit;
+    int play;
 
 
 /*******************************************************************************/
@@ -26,15 +26,15 @@ int main(int argc, char* argv[]) {
 
     Engine_Obj guard;
 
-    guard = *init_object(200, 200, SPEED_PLAYER);
+    guard = *init_object(400, 400, SPEED_PLAYER);
 
 /*******************************************************************************/
 
-    quit = 0;
+    play = 0;
     object = *init_object(500, 500, SPEED_PLAYER);
 
     /* Main loop over the frames... */
-    while (!quit) {
+    while (play) {
         /*Some declaration of variables*/
 
         /*Get the time in nano second at the start of the frame */
@@ -43,6 +43,12 @@ int main(int argc, char* argv[]) {
         /* Display of the currentframe, samplefunction */
         /* THIS FUNCTION CALLS ONCE AND ONLY ONCE MLV_update_window */
         draw_window(object); /* Graphisme.h */
+
+
+/******************************************************************/
+        /*apaprition of gard*/
+        draw_guard(guard);
+/*****************************************************/
 
         /* We get here some keyboard events*/
         event = get_event(); /* Input.h */
@@ -54,7 +60,7 @@ int main(int argc, char* argv[]) {
             */
         }
         
-        quit = (event == INPUT_QUIT);
+        play = (event == INPUT_QUIT);
 
         /* Move the entities on the grid */
         move_player(&object, event);
@@ -67,10 +73,9 @@ int main(int argc, char* argv[]) {
 
 
 /*******************************************************************************/
+        play *= !(event(INPUT_QUIT));
         /*Colision between gard and player*/
-        if(collision(&guard, &object)){
-            MLV_free_window();
-        }
+        play *= collision(guard, object);
 
 
 /*********************************************************************************************/

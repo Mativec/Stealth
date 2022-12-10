@@ -23,6 +23,9 @@
 
 void draw_window(Engine_Obj obj);
 
+void draw_guard(Engine_Obj guard);
+
+
 void refresh(time_t end_time, time_t new_time);
 
 void free_window();
