@@ -1,19 +1,21 @@
 CC = gcc
-OBJ = Main.o Test.o Case.o
+OBJ = bin/Graphisme.o bin/Input.o bin/Object.o bin/Player.o
 CFLAGS = -ansi -pedantic -Wall
-EXEC = ProgC
+LDFLAGS = -lMLV
+EXEC = a.out
 
-$(EXEC): $(OBJ)
-	$(CC) -o $@ $^ $(CFLAGS)
+$(EXEC): src/Main.c $(OBJ)
+	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS)
 
-Main.o: Main.c Case.h Test.h
-Test.o: Test.c Test.h Case.h
-Case.o: Case.c Case.h
+bin/%.o: src/%.c include/Config.h
+	$(CC) -o $@ -c $< $(CFLAGS) $(LDFLAGS)
 
+bin/Graphisme.o : src/Graphisme.c include/Graphisme.h include/Object.h
 
-%.o: %.c
-	$(CC) -c $< $(CFLAGS)
+bin/Input.o : src/Input.c include/Input.h
+
+bin/Player.o : src/Player.c include/Player.h include/Object.h include/Input.h
 
 clean:
-	rm *.o
+	rm bin/*
 	rm $(EXEC)
