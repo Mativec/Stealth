@@ -20,6 +20,16 @@ int main(int argc, char* argv[]) {
     Engine_Obj object;
     int quit;
 
+
+/*******************************************************************************/
+    /*DEV : OBJECT PLAYER AND GUARD*/
+
+    Engine_Obj guard;
+
+    guard = *init_object(200, 200, SPEED_PLAYER);
+
+/*******************************************************************************/
+
     quit = 0;
     object = *init_object(500, 500, SPEED_PLAYER);
 
@@ -54,6 +64,16 @@ int main(int argc, char* argv[]) {
         if (object.x < 0 || object.x > SIZE_X || object.y < 0 || object.y > SIZE_Y) {
             move_object(&object, OBJECT_REVERT);
         }
+
+
+/*******************************************************************************/
+        /*Colision between gard and player*/
+        if(collision(&guard, &object)){
+            MLV_free_window();
+        }
+
+
+/*********************************************************************************************/
 
         /* Get the time in nano second at the end of the frame */
         clock_gettime(CLOCK_REALTIME, &new_time);
