@@ -12,7 +12,7 @@
 
 #include <time.h>
 
-#include "Engine/all.h"
+#include "../include/all.h"
 
 int main(int argc, char* argv[]) {
     struct timespec end_time, new_time;

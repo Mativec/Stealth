@@ -9,7 +9,7 @@
  *
  */
 
-#include "Engine/Player.h"
+#include "../include/Player.h"
 
 void move_player(Engine_Obj *player, Input way) {
     switch (way) {

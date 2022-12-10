@@ -9,7 +9,7 @@
  *
  */
 
-#include "Engine/Object.h"
+#include "../include/Object.h"
 
 Engine_Obj *init_object(float x, float y, int speed) {
     Engine_Obj *new;

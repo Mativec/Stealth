@@ -9,7 +9,7 @@
  *
  */
 
-#include "Engine/Input.h"
+#include "../include/Input.h"
 
 char* input_to_string(Input event) {
     switch (event) {

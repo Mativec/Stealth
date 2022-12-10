@@ -1,23 +1,21 @@
 CC = gcc
-OBJ = Graphisme.o Input.o Object.o Player.o
+OBJ = bin/Graphisme.o bin/Input.o bin/Object.o bin/Player.o
 CFLAGS = -ansi -pedantic -Wall
 LDFLAGS = -lMLV
 EXEC = a.out
-DOC = Engine
 
-base : $(EXEC) clean
-
-$(EXEC): Main.c $(OBJ)
+$(EXEC): src/Main.c $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS)
 
-%.o: %.c $(DOC)/Config.h
-	$(CC) -c $< $(CFLAGS) $(LDFLAGS)
+bin/%.o: src/%.c include/Config.h
+	$(CC) -o $@ -c $< $(CFLAGS) $(LDFLAGS)
 
-Graphisme.o : Graphisme.c $(DOC)/Graphisme.h $(DOC)/Object.h
+bin/Graphisme.o : src/Graphisme.c include/Graphisme.h include/Object.h
 
-Input.o : Input.c $(DOC)/Input.h
+bin/Input.o : src/Input.c include/Input.h
 
-Player.o : Player.c $(DOC)/Player.h $(DOC)/Object.h $(DOC)/Input.h
+bin/Player.o : src/Player.c include/Player.h include/Object.h include/Input.h
 
 clean:
-	rm *.o
+	rm bin/*
+	rm $(EXEC)

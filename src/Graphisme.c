@@ -9,7 +9,7 @@
  *
  */
 
-#include "Engine/Graphisme.h"
+#include "../include/Graphisme.h"
 
 void init_window() {
     MLV_create_window(NAME, ICON, SIZE_X, SIZE_Y);
