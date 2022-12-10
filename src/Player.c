@@ -11,7 +11,7 @@
 
 #include "../include/Player.h"
 
-void move_player(Engine_Obj *player, Input way) {
+void move_player(Engine_Obj *player, Engine_Input way) {
     switch (way) {
         case INPUT_UP:
             move_object(player, OBJECT_UP);

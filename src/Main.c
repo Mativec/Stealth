@@ -16,15 +16,15 @@
 
 int main(int argc, char* argv[]) {
     struct timespec end_time, new_time;
-    Input event;
+    Engine_Input event;
     Engine_Obj object;
-    int quit;
+    int play;
 
-    quit = 0;
+    play = 1;
     object = *init_object(500, 500, SPEED_PLAYER);
 
     /* Main loop over the frames... */
-    while (!quit) {
+    while (play) {
         /*Some declaration of variables*/
 
         /*Get the time in nano second at the start of the frame */
@@ -44,7 +44,7 @@ int main(int argc, char* argv[]) {
             */
         }
         
-        quit = (event == INPUT_QUIT);
+        play *= (event != INPUT_QUIT);
 
         /* Move the entities on the grid */
         move_player(&object, event);
