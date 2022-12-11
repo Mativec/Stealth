@@ -30,6 +30,7 @@ char* input_to_string(Engine_Input event) {
 
 Engine_Input get_event() {
     static int noTwice = 0;
+    static MLV_Keyboard_button actualEvent = MLV_NONE;
 
     if(noTwice){
         noTwice = 0;
@@ -42,13 +43,13 @@ Engine_Input get_event() {
         else if(MLV_get_keyboard_state(MLV_KEYBOARD_LEFT) == MLV_PRESSED){
             return INPUT_LEFT;
         }
-        if(MLV_get_keyboard_state(MLV_KEYBOARD_RIGHT) == MLV_PRESSED){
+        else if(MLV_get_keyboard_state(MLV_KEYBOARD_RIGHT) == MLV_PRESSED){
             return INPUT_RIGHT;
         }
-        if(MLV_get_keyboard_state(MLV_KEYBOARD_DOWN) == MLV_PRESSED){
+        else if(MLV_get_keyboard_state(MLV_KEYBOARD_DOWN) == MLV_PRESSED){
             return INPUT_DOWN;
         }
-        if(MLV_get_keyboard_state(MLV_KEYBOARD_q) == MLV_PRESSED){
+        else if(MLV_get_keyboard_state(MLV_KEYBOARD_q) == MLV_PRESSED){
             return INPUT_QUIT;
         }
     }
