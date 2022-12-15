@@ -27,12 +27,12 @@ int main(int argc, char* argv[]) {
 
     Engine_Obj guard;
 
-    guard = *init_object(400, 400, SPEED_PLAYER);
+    guard = *init_object(400, 400, SPEED);
 
 /*******************************************************************************/
 
     play = 1;
-    object = *init_object(500, 500, SPEED_PLAYER);
+    object = *init_object(500, 500, SPEED);
 
     /* Main loop over the frames... */
     while (play) {

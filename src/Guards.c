@@ -15,30 +15,22 @@
 /*essayer de gerer la colision avec les angles de vues et le toucher du garde*/
 int collision(Engine_Obj guard, Engine_Obj player) {
   double d;
-  double x1, x2, y1, y2, r1, r2;
-
-  x1 = guard.x;
-  x2 = player.x;
-  y1 = guard.y;
-  y2 = player.y;
-  r1 = 40;
-  r2 = 5;
 
 
-  d = sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+  d = distance_between_objects(guard, player);
 
-  if(d <= r1 - r2 ){
+  if(d < SIGHT_GUARDIAN - SIZE_PLAYER ){
     printf("reussi");
     return 1;
   }
-  else if(d <= r2 - r1){
+  else if(d < SIZE_PLAYER - SIGHT_GUARDIAN){
     printf("reussi");
     return 1;
   }
-  else if(d < r1 + r2){
+  else if(d < SIGHT_GUARDIAN + SIZE_PLAYER){
     return 1;
   }
-  else if(d == r1 + r2){
+  else if(d == SIGHT_GUARDIAN + SIZE_PLAYER){
     return 1;
   }
   else{

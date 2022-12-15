@@ -14,6 +14,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 
 typedef struct engine_object{
     float x;
@@ -58,5 +59,15 @@ void move_object(Engine_Obj *obj, Engine_Orientation way);
  * @return char* : string version.
  */
 char *object_to_string(Engine_Obj obj);
+
+
+/**
+ * @brief Return the distance between 2 objects.
+ * 
+ * @param obj1 
+ * @param obj2 
+ * @return double 
+ */
+double distance_between_objects(Engine_Obj obj1, Engine_Obj obj2);
 
 #endif

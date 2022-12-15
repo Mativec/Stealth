@@ -2,6 +2,7 @@
 #define __GUARDS__
 
 #include "Object.h"
+#include "Config.h"
 #include <math.h>
 
 

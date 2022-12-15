@@ -55,3 +55,8 @@ void move_object(Engine_Obj *obj, Engine_Orientation way) {
 char *object_to_string(Engine_Obj obj) {
     return NULL;
 }
+
+
+double distance_between_objects(Engine_Obj obj1, Engine_Obj obj2){
+  return sqrt((obj1.x - obj2.x) * (obj1.x - obj2.x) + (obj1.y - obj2.y) * (obj1.y - obj2.y));
+}

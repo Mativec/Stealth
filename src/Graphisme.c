@@ -28,6 +28,7 @@ void disp_coord(Engine_Obj player){
 */
 
 void draw_guard(Engine_Obj guard) {
+    MLV_draw_filled_circle(guard.x, guard.y, SIGHT_GUARDIAN, MLV_COLOR_LIGHT_BLUE);
     MLV_draw_filled_circle(guard.x, guard.y, 10, MLV_COLOR_BLUE);
 }
 
@@ -67,7 +68,7 @@ void draw_window(Engine_Obj player, Engine_Obj guard) {
     MLV_clear_window(MLV_COLOR_WHITE);
 
     /* draw on the window */
-    MLV_draw_filled_circle(player.x, player.y, 10, MLV_COLOR_RED);
+    MLV_draw_filled_circle(player.x, player.y, SIZE_PLAYER, MLV_COLOR_RED);
 
     draw_guard(guard);
 }
