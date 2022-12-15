@@ -1,7 +1,7 @@
 CC = gcc
 OBJ = bin/Graphisme.o bin/Input.o bin/Object.o bin/Player.o bin/Guards.o
 CFLAGS = -ansi -pedantic -Wall
-LDFLAGS = -lMLV
+LDFLAGS = -lMLV -lm -g
 EXEC = a.out
 
 $(EXEC): src/Main.c $(OBJ)
