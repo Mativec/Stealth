@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include "Config.h"
 
 typedef struct engine_object{
     float x;
@@ -69,5 +70,13 @@ char *object_to_string(Engine_Obj obj);
  * @return double 
  */
 double distance_between_objects(Engine_Obj obj1, Engine_Obj obj2);
+
+
+/**
+ * @brief Check if objects is out of the map, revert if yes.
+ * 
+ * @param object 
+ */
+void out_of_bound(Engine_Obj *object);
 
 #endif

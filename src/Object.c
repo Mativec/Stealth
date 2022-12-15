@@ -60,3 +60,10 @@ char *object_to_string(Engine_Obj obj) {
 double distance_between_objects(Engine_Obj obj1, Engine_Obj obj2){
   return sqrt((obj1.x - obj2.x) * (obj1.x - obj2.x) + (obj1.y - obj2.y) * (obj1.y - obj2.y));
 }
+
+void out_of_bound(Engine_Obj *object){
+    if (object->x < 0 || object->x > SIZE_X || object->y < 0 || object->y > SIZE_Y) {
+        move_object(object, OBJECT_REVERT);
+    }
+}
+

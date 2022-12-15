@@ -63,9 +63,7 @@ int main(int argc, char* argv[]) {
 
 
         /* Collision detection and other game mechanisms */
-        if (object.x < 0 || object.x > SIZE_X || object.y < 0 || object.y > SIZE_Y) {
-            move_object(&object, OBJECT_REVERT);
-        }
+        out_of_bound(&object);
 
 
 /*******************************************************************************/
