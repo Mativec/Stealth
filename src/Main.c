@@ -38,11 +38,6 @@ int main(int argc, char* argv[]) {
         event = get_event(); /* Input.h */
 
         /* Dealing with the events */
-        if (event != INPUT_NONE) {
-            /*
-            printf("%s\n", input_to_string(event));
-            */
-        }
         
         play *= (event != INPUT_QUIT);
 
