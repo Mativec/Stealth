@@ -18,10 +18,20 @@ int main(int argc, char* argv[]) {
     struct timespec end_time, new_time;
     Input event;
     Engine_Obj object;
-    int quit;
+    Walls walls;
+    int quit, nb_wall;
 
     quit = 0;
-    object = *init_object(500, 500, SPEED_PLAYER);
+    nb_wall = 0;
+
+    object = *init_object(30, 20);
+
+    printf("Walls init\n");
+    walls = (Walls) malloc(sizeof(Wall));
+    add_wall(&walls, &nb_wall, *init_wall(0, 0, OBJECT_DOWN, SIZE_Y));
+    add_wall(&walls, &nb_wall, *init_wall(0, 0, OBJECT_RIGHT, SIZE_X));
+    add_wall(&walls, &nb_wall, *init_wall(SIZE_X, SIZE_Y, OBJECT_UP, SIZE_Y));
+    add_wall(&walls, &nb_wall, *init_wall(SIZE_X,SIZE_Y, OBJECT_LEFT, SIZE_X));
 
     /* Main loop over the frames... */
     while (!quit) {
@@ -32,16 +42,15 @@ int main(int argc, char* argv[]) {
 
         /* Display of the currentframe, samplefunction */
         /* THIS FUNCTION CALLS ONCE AND ONLY ONCE MLV_update_window */
-        draw_window(object); /* Graphisme.h */
+        draw_window(object, walls, 2); /* Graphisme.h */
 
         /* We get here some keyboard events*/
         event = get_event(); /* Input.h */
 
         /* Dealing with the events */
         if (event != INPUT_NONE) {
-            /*
             printf("%s\n", input_to_string(event));
-            */
+            printf("%s\n", object_to_string(object));
         }
         
         quit = (event == INPUT_QUIT);

@@ -14,8 +14,11 @@
 
 #define NAME "Game"
 #define ICON NULL
-#define SIZE_X 1200
-#define SIZE_Y 900
-#define SPEED_PLAYER 1
+#define SIZE_X 60
+#define SIZE_Y 45
+#define SCALE 20 /* Difference on size between game and it's graphical representation */
+#define SPEED 0.06
+#define SIZE_PLAYER 0.5
+#define SIZE_WALL 1
 
 #endif

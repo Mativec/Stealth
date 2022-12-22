@@ -20,8 +20,9 @@
 
 #include "Config.h"
 #include "Object.h"
+#include "Wall.h"
 
-void draw_window(Engine_Obj obj);
+void draw_window(Engine_Obj obj, Walls walls, int nb_walls);
 
 void refresh(time_t end_time, time_t new_time);
 

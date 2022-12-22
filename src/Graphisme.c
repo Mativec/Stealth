@@ -12,12 +12,34 @@
 #include "../include/Graphisme.h"
 
 void init_window() {
-    MLV_create_window(NAME, ICON, SIZE_X, SIZE_Y);
+    MLV_create_window(NAME, ICON, SIZE_X * SCALE, SIZE_Y * SCALE);
     MLV_actualise_window();
 }
 
-void draw_window(Engine_Obj obj) {
+void draw_wall(Wall wall) {
+    int width, height;
+
+    width = SIZE_WALL;
+    height = SIZE_WALL;
+
+    if (wall.orientation == OBJECT_LEFT || wall.orientation == OBJECT_RIGHT) {
+        width = wall.size;
+    }
+    if (wall.orientation == OBJECT_UP || wall.orientation == OBJECT_DOWN) {
+        height = wall.size;
+    }
+
+    MLV_draw_filled_rectangle(
+        wall.coord.x * SCALE - SIZE_WALL / 2,
+        wall.coord.y * SCALE - SIZE_WALL / 2,
+        width * SCALE,
+        height * SCALE,
+        MLV_COLOR_GRAY25);
+}
+
+void draw_window(Engine_Obj obj, Walls walls, int nb_walls) {
     static int init = 0;
+    int i;
 
     /* Window initiated ? */
     if (!init) {
@@ -29,13 +51,21 @@ void draw_window(Engine_Obj obj) {
     MLV_clear_window(MLV_COLOR_WHITE);
 
     /* draw on the window */
-    MLV_draw_filled_circle(obj.x, obj.y, 10, MLV_COLOR_RED);
-    return;
+    MLV_draw_filled_circle(
+        obj.x * SCALE,
+        obj.y * SCALE,
+        SIZE_PLAYER * SCALE,
+        MLV_COLOR_RED);
+
+    /* draw walls */
+    for (i = 0; i < nb_walls; i++) {
+        draw_wall(walls[i]);
+    }
 }
 
 void refresh(time_t end_time, time_t new_time) {
     int frametime, extratime;
-    
+
     /* Compute the time spent for the current frame */
     frametime = new_time - end_time;
     frametime += (new_time - end_time) / 1.0E9;

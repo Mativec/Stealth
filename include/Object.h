@@ -14,11 +14,12 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
+#include "Config.h"
 
 typedef struct engine_object{
-    float x;
-    float y;
-    int speed;
+    double x;
+    double y;
 } Engine_Obj;
 
 typedef enum {
@@ -36,10 +37,9 @@ typedef enum {
  * 
  * @param x : x coordinate.
  * @param y : y coordinate.
- * @param speed : speed of the object (0 -> don't move).
  * @return Engine_Obj* a pointer to the new object.
  */
-Engine_Obj *init_object(float x, float y, int speed);
+Engine_Obj *init_object(float x, float y);
 
 
 /**
@@ -58,5 +58,7 @@ void move_object(Engine_Obj *obj, Engine_Orientation way);
  * @return char* : string version.
  */
 char *object_to_string(Engine_Obj obj);
+
+int *get_object_coord(Engine_Obj obj);
 
 #endif
