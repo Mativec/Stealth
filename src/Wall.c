@@ -11,7 +11,7 @@
 
 #include "../include/Wall.h"
 
-Wall * init_wall(float x, float y, Engine_Orientation way, int size) {
+Wall *init_wall(float x, float y, Engine_Orientation way, int size) {
     Wall *new_wall;
 
     new_wall = (Wall *)malloc(sizeof(Wall));
@@ -24,21 +24,37 @@ Wall * init_wall(float x, float y, Engine_Orientation way, int size) {
     return new_wall;
 }
 
-void add_wall(Walls * walls, int * nb_wall, Wall wall){
+void add_wall(Walls *walls, int *nb_wall, Wall wall) {
     static int buffer = 0;
 
     assert(walls);
     assert(nb_wall);
 
-    while((*nb_wall) < buffer){
-        buffer *= 2;
-        *walls = realloc(*walls, buffer);
+    if (buffer == 0) {
+        buffer = 4;
+        *walls = (Walls)malloc(sizeof(Wall) * buffer);
     }
-    (*walls)[*nb_wall] = wall;
-    (*nb_wall)++;
-    printf("nb_wall : %d (%f, %f, %d)\n", *nb_wall, wall.coord.x, wall.coord.y, wall.size);
+
+    printf("used : %d vs free : %d\n", (*nb_wall), buffer);
+    while ((*nb_wall) >= buffer) {
+        buffer *= 2;
+        *walls = realloc(*walls, sizeof(Wall) * buffer);
+    }
+    if ((*walls) != NULL) {
+        (*walls)[(*nb_wall)] = wall;
+        (*nb_wall)++;
+    }
 }
 
 Walls generate_walls(int nb_walls) {
     return NULL;
+}
+
+void wall_collision(Engine_Obj *obj) {
+    int *coords;
+
+    coords = get_object_coord(*obj);
+    if (coords[0] <= 0 || coords[0] >= SIZE_X || coords[1] <= 0 || coords[1] >= SIZE_Y) {
+        move_object(obj, OBJECT_REVERT);
+    }
 }

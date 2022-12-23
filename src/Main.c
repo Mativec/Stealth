@@ -17,17 +17,16 @@
 int main(int argc, char* argv[]) {
     struct timespec end_time, new_time;
     Input event;
-    Engine_Obj object;
+    Engine_Obj player;
     Walls walls;
     int quit, nb_wall;
 
     quit = 0;
     nb_wall = 0;
+    walls = NULL;
 
-    object = *init_object(30, 20);
+    player = *init_object(30, 20);
 
-    printf("Walls init\n");
-    walls = (Walls) malloc(sizeof(Wall));
     add_wall(&walls, &nb_wall, *init_wall(0, 0, OBJECT_DOWN, SIZE_Y));
     add_wall(&walls, &nb_wall, *init_wall(0, 0, OBJECT_RIGHT, SIZE_X));
     add_wall(&walls, &nb_wall, *init_wall(SIZE_X, SIZE_Y, OBJECT_UP, SIZE_Y));
@@ -42,27 +41,27 @@ int main(int argc, char* argv[]) {
 
         /* Display of the currentframe, samplefunction */
         /* THIS FUNCTION CALLS ONCE AND ONLY ONCE MLV_update_window */
-        draw_window(object, walls, 2); /* Graphisme.h */
+        draw_window(player, walls, 2); /* Graphisme.h */
 
         /* We get here some keyboard events*/
         event = get_event(); /* Input.h */
 
         /* Dealing with the events */
         if (event != INPUT_NONE) {
+            /*
             printf("%s\n", input_to_string(event));
-            printf("%s\n", object_to_string(object));
+            printf("%s\n", object_to_string(player));
+            */
         }
         
         quit = (event == INPUT_QUIT);
 
         /* Move the entities on the grid */
-        move_player(&object, event);
+        move_player(&player, event);
 
 
         /* Collision detection and other game mechanisms */
-        if (object.x < 0 || object.x > SIZE_X || object.y < 0 || object.y > SIZE_Y) {
-            move_object(&object, OBJECT_REVERT);
-        }
+        wall_collision(&player);
 
         /* Get the time in nano second at the end of the frame */
         clock_gettime(CLOCK_REALTIME, &new_time);

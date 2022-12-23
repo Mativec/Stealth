@@ -11,21 +11,24 @@
 #ifndef __WALL__
 #define __WALL__
 
+#include <assert.h>
+#include <stdlib.h>
+
 #include "Config.h"
 #include "Object.h"
-#include <stdlib.h>
-#include <assert.h>
 
-typedef struct _wall{
+typedef struct _wall {
     Engine_Obj coord;
     Engine_Orientation orientation;
     int size;
-}Wall, *Walls;
+} Wall, *Walls;
 
-Wall * init_wall(float x, float y, Engine_Orientation way, int size);
+Wall *init_wall(float x, float y, Engine_Orientation way, int size);
 
-void add_wall(Walls *walls, int * nb_wall, Wall wall);
+void add_wall(Walls *walls, int *nb_wall, Wall wall);
 
 Walls generate_walls(int nb_walls);
+
+void wall_collision(Engine_Obj *obj);
 
 #endif

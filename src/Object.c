@@ -51,11 +51,11 @@ void move_object(Engine_Obj *obj, Engine_Orientation way) {
     }
 }
 
-int *get_object_coord(Engine_Obj obj){
-    int* coords;
+int *get_object_coord(Engine_Obj obj) {
+    int *coords;
 
-    coords = (int*) malloc(sizeof(int) * 2);
-    if(coords != NULL){
+    coords = (int *)malloc(sizeof(int) * 2);
+    if (coords != NULL) {
         coords[0] = (int)obj.x;
         coords[1] = (int)obj.y;
     }
@@ -63,14 +63,14 @@ int *get_object_coord(Engine_Obj obj){
 }
 
 char *object_to_string(Engine_Obj obj) {
-    int * coord;
-    char * output;
+    int *coord;
+    char *output;
 
-    output = "";
+    output = (char *)malloc(sizeof(char) * 64);
     coord = get_object_coord(obj);
 
-    printf("(%d, %d)", coord[0], coord[1]);
-    /* sprintf(output, "(%d, %d)", coord[0], coord[1]); */
+    /* printf("(%d, %d)\n", coord[0], coord[1]); */
+    sprintf(output, "(%d, %d)", coord[0], coord[1]);
 
     free(coord);
     return output;
