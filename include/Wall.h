@@ -29,6 +29,8 @@ void add_wall(Walls *walls, int *nb_wall, Wall wall);
 
 Walls generate_walls(int nb_walls);
 
+char *orientation_to_string(Engine_Orientation orientation);
+
 void wall_collision(Engine_Obj *obj);
 
 #endif

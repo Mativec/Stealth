@@ -35,7 +35,6 @@ void add_wall(Walls *walls, int *nb_wall, Wall wall) {
         *walls = (Walls)malloc(sizeof(Wall) * buffer);
     }
 
-    printf("used : %d vs free : %d\n", (*nb_wall), buffer);
     while ((*nb_wall) >= buffer) {
         buffer *= 2;
         *walls = realloc(*walls, sizeof(Wall) * buffer);
@@ -50,11 +49,36 @@ Walls generate_walls(int nb_walls) {
     return NULL;
 }
 
+char *orientation_to_string(Engine_Orientation orientation){
+    switch (orientation)
+    {
+    case OBJECT_UP:
+        return "Up";
+    
+    case OBJECT_LEFT:
+        return "Left";
+    
+    case OBJECT_DOWN:
+        return "Down";
+    
+    case OBJECT_RIGHT:
+        return "Right";
+    
+    case OBJECT_REVERT:
+        return "Revert";
+    
+    case OBJECT_NONE:
+        return "None";
+    default :
+        return "";
+    }
+}
+
 void wall_collision(Engine_Obj *obj) {
     int *coords;
 
     coords = get_object_coord(*obj);
-    if (coords[0] <= 0 || coords[0] >= SIZE_X || coords[1] <= 0 || coords[1] >= SIZE_Y) {
+    if (coords[0] <= 0 || coords[0] >= (SIZE_X - 1) || coords[1] <= 0 || coords[1] >= (SIZE_Y - 1)) {
         move_object(obj, OBJECT_REVERT);
     }
 }

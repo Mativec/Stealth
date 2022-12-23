@@ -29,8 +29,8 @@ int main(int argc, char* argv[]) {
 
     add_wall(&walls, &nb_wall, *init_wall(0, 0, OBJECT_DOWN, SIZE_Y));
     add_wall(&walls, &nb_wall, *init_wall(0, 0, OBJECT_RIGHT, SIZE_X));
-    add_wall(&walls, &nb_wall, *init_wall(SIZE_X, SIZE_Y, OBJECT_UP, SIZE_Y));
-    add_wall(&walls, &nb_wall, *init_wall(SIZE_X,SIZE_Y, OBJECT_LEFT, SIZE_X));
+    add_wall(&walls, &nb_wall, *init_wall(SIZE_X - 1, SIZE_Y, OBJECT_UP, SIZE_Y));
+    add_wall(&walls, &nb_wall, *init_wall(SIZE_X, SIZE_Y - 1, OBJECT_LEFT, SIZE_X));
 
     /* Main loop over the frames... */
     while (!quit) {
@@ -41,7 +41,7 @@ int main(int argc, char* argv[]) {
 
         /* Display of the currentframe, samplefunction */
         /* THIS FUNCTION CALLS ONCE AND ONLY ONCE MLV_update_window */
-        draw_window(player, walls, 2); /* Graphisme.h */
+        draw_window(player, walls, nb_wall); /* Graphisme.h */
 
         /* We get here some keyboard events*/
         event = get_event(); /* Input.h */
@@ -53,12 +53,11 @@ int main(int argc, char* argv[]) {
             printf("%s\n", object_to_string(player));
             */
         }
-        
+
         quit = (event == INPUT_QUIT);
 
         /* Move the entities on the grid */
         move_player(&player, event);
-
 
         /* Collision detection and other game mechanisms */
         wall_collision(&player);

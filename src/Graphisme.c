@@ -17,24 +17,44 @@ void init_window() {
 }
 
 void draw_wall(Wall wall) {
-    int width, height;
+    float x, y, width, height;
 
+    x = wall.coord.x;
+    y = wall.coord.y;
     width = SIZE_WALL;
     height = SIZE_WALL;
 
-    if (wall.orientation == OBJECT_LEFT || wall.orientation == OBJECT_RIGHT) {
+
+    switch (wall.orientation)
+    {
+    case OBJECT_LEFT:
+        x -= wall.size;
         width = wall.size;
-    }
-    if (wall.orientation == OBJECT_UP || wall.orientation == OBJECT_DOWN) {
+        break;
+
+    case OBJECT_RIGHT:
+        width = wall.size;
+        break;
+
+    case OBJECT_UP:
+        y -= wall.size;
         height = wall.size;
+        break;
+
+    case OBJECT_DOWN:
+        height = wall.size;
+        break;
+    
+    default:
+        break;
     }
 
-    MLV_draw_filled_rectangle(
-        wall.coord.x * SCALE - SIZE_WALL / 2,
-        wall.coord.y * SCALE - SIZE_WALL / 2,
-        width * SCALE,
-        height * SCALE,
-        MLV_COLOR_GRAY25);
+    x = (x - SIZE_WALL / 2) * SCALE;
+    y = (y - SIZE_WALL / 2) * SCALE;
+    width *= SCALE;
+    height *= SCALE;
+
+    MLV_draw_filled_rectangle(x, y, width, height, MLV_COLOR_GRAY25);
 }
 
 void draw_window(Engine_Obj obj, Walls walls, int nb_walls) {
