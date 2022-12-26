@@ -11,7 +11,7 @@
 
 #include "../include/Object.h"
 
-Engine_Obj *init_object(float x, float y, int speed) {
+Engine_Obj *init_object(float x, float y, float speed) {
     Engine_Obj *new;
 
     new = (Engine_Obj *)malloc(sizeof(Engine_Obj));
@@ -25,7 +25,7 @@ Engine_Obj *init_object(float x, float y, int speed) {
 }
 
 void move_object(Engine_Obj *obj, Engine_Orientation way) {
-    static int base_x, base_y;
+    static double base_x, base_y;
 
     if (way == OBJECT_REVERT) {
         obj->x = base_x;
@@ -65,5 +65,7 @@ void out_of_bound(Engine_Obj *object){
     if (object->x < 0 || object->x > SIZE_X || object->y < 0 || object->y > SIZE_Y) {
         move_object(object, OBJECT_REVERT);
     }
+    //gerer le out of band du rayon gardien
+    // gerer le out of band du mur
+    
 }
-

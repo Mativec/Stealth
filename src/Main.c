@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
 
     Engine_Obj guard;
 
-    guard = *init_object(400, 400, SPEED);
+    guard = *init_object(400, 400, SPEED_GUARD);
 
 /*******************************************************************************/
 
@@ -64,8 +64,9 @@ int main(int argc, char* argv[]) {
 
         /* Collision detection and other game mechanisms */
         out_of_bound(&object);
-
-
+        //gerer un deplacement aleatoire et si le gardien touche un mur ou un out of band il revert sur une autre pos
+        move_object(&guard, OBJECT_LEFT);
+        out_of_bound(&guard);
 /*******************************************************************************/
         /*Colision between gard and player*/
         play *= !(collision(guard, object));
@@ -75,7 +76,7 @@ int main(int argc, char* argv[]) {
 
         /* Get the time in nano second at the end of the frame */
         clock_gettime(CLOCK_REALTIME, &new_time);
-
+        printf("%f, %f, %f\n", guard.x, guard.y, guard.speed);
         refresh(end_time.tv_sec, new_time.tv_sec); /* Graphisme.h */
     }
     MLV_wait_seconds(1);

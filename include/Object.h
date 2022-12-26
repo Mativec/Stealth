@@ -20,7 +20,7 @@
 typedef struct engine_object{
     float x;
     float y;
-    int speed;
+    float speed;
 } Engine_Obj;
 
 typedef enum {
@@ -41,7 +41,7 @@ typedef enum {
  * @param speed : speed of the object (0 -> don't move).
  * @return Engine_Obj* a pointer to the new object.
  */
-Engine_Obj *init_object(float x, float y, int speed);
+Engine_Obj *init_object(float x, float y, float speed);
 
 
 /**
