@@ -23,6 +23,8 @@ int main(int argc, char* argv[]) {
     quit = 0;
     object = *init_object(500, 500, SPEED_PLAYER);
 
+    title_screen();
+
     /* Main loop over the frames... */
     while (!quit) {
         /*Some declaration of variables*/

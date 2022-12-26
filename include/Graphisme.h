@@ -15,6 +15,7 @@
 #include <MLV/MLV_time.h>
 #include <MLV/MLV_shape.h>
 #include <MLV/MLV_color.h>
+#include <MLV/MLV_mouse.h>
 
 #include <string.h>
 
@@ -24,6 +25,8 @@
 void draw_window(Engine_Obj obj);
 
 void refresh(time_t end_time, time_t new_time);
+
+void title_screen();
 
 void free_window();
 

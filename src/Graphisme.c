@@ -11,9 +11,29 @@
 
 #include "../include/Graphisme.h"
 
+
 void init_window() {
     MLV_create_window(NAME, ICON, SIZE_X, SIZE_Y);
     MLV_actualise_window();
+}
+
+void title_screen(){
+    int x,y;
+    MLV_Image *image;
+
+    image = MLV_load_image("../image_menu.jpg");
+    MLV_resize_image(image, SIZE_X, SIZE_Y);
+    init_window();
+    MLV_draw_image(image, SIZE_X, SIZE_Y);
+    MLV_wait_mouse(&x,&y);
+
+    //affichage du bouton jouer et des options et de quitter
+    /*
+    do{
+        MLV_wait_mouse(&x, &y);
+    }
+    while();
+    */
 }
 
 void draw_window(Engine_Obj obj) {
