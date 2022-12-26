@@ -1,6 +1,6 @@
 CC = gcc
 OBJ = bin/Graphisme.o bin/Input.o bin/Object.o bin/Player.o
-CFLAGS = -ansi -pedantic -Wall
+CFLAGS = -ansi -pedantic -Wall -g
 LDFLAGS = -lMLV
 EXEC = a.out
 

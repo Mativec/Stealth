@@ -20,20 +20,20 @@ void init_window() {
 void title_screen(){
     int x,y;
     MLV_Image *image;
-
-    image = MLV_load_image("../image_menu.jpg");
-    MLV_resize_image(image, SIZE_X, SIZE_Y);
     init_window();
+    image = MLV_load_image("./image.jpg");
+    MLV_resize_image_with_proportions(image, SIZE_X, SIZE_Y);
     MLV_draw_image(image, SIZE_X, SIZE_Y);
+    MLV_actualise_window();
     MLV_wait_mouse(&x,&y);
-
-    //affichage du bouton jouer et des options et de quitter
+    /*affichage du bouton jouer et des options et de quitter*/
     /*
     do{
         MLV_wait_mouse(&x, &y);
     }
     while();
     */
+   free_window();
 }
 
 void draw_window(Engine_Obj obj) {
