@@ -18,21 +18,23 @@
 int main(int argc, char* argv[]) {
     struct timespec end_time, new_time;
     Engine_Input event;
-    Engine_Obj object;
+    Engine_Obj object, *tmp2;
     int play;
 
 
 /*******************************************************************************/
     /*DEV : OBJECT PLAYER AND GUARD*/
 
-    Engine_Guard guard;
+    Engine_Guard guard, *tmp;
 
-    guard = *init_guard(400, 400);
+    tmp = init_guard(400, 400);
+    guard = *tmp;
 
 /*******************************************************************************/
 
     play = 1;
-    object = *init_object(500, 500, SPEED);
+    tmp2 = init_object(500, 500, SPEED);
+    object = *tmp2;
 
     /* Main loop over the frames... */
     while (play) {
@@ -81,6 +83,9 @@ int main(int argc, char* argv[]) {
     }
     MLV_wait_seconds(1);
     free_window();
+    free(tmp->obj);
+    free(tmp);
+    free(tmp2);
 
     return 0;
 }
