@@ -16,6 +16,7 @@
 #include <MLV/MLV_shape.h>
 #include <MLV/MLV_color.h>
 #include <MLV/MLV_mouse.h>
+#include <MLV/MLV_text.h>
 
 #include <string.h>
 

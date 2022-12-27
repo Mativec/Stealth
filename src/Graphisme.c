@@ -17,6 +17,15 @@ void init_window() {
     MLV_actualise_window();
 }
 
+
+
+
+void buttons(){
+    MLV_draw_text_box(500, 450, 170, 110, "PLAY",120, MLV_COLOR_BLACK, MLV_COLOR_BLUE1, MLV_COLOR_YELLOW1, MLV_TEXT_CENTER,MLV_HORIZONTAL_CENTER, MLV_VERTICAL_CENTER);
+    MLV_draw_text_box(250, 450, 170, 110, "SETTINGS",120, MLV_COLOR_BLACK, MLV_COLOR_BLUE1, MLV_COLOR_YELLOW1, MLV_TEXT_CENTER,MLV_HORIZONTAL_CENTER, MLV_VERTICAL_CENTER);
+    MLV_draw_text_box(750, 450, 170, 110, "QUIT",120, MLV_COLOR_BLACK, MLV_COLOR_BLUE1, MLV_COLOR_YELLOW1, MLV_TEXT_CENTER,MLV_HORIZONTAL_CENTER, MLV_VERTICAL_CENTER);
+}
+
 void title_screen(){
     int x,y;
     MLV_Image *image;
@@ -24,6 +33,7 @@ void title_screen(){
     image = MLV_load_image("./image.jpg");
     MLV_resize_image_with_proportions(image, SIZE_X, SIZE_Y);
     MLV_draw_image(image, SIZE_X, SIZE_Y);
+    buttons();
     MLV_actualise_window();
     MLV_wait_mouse(&x,&y);
     /*affichage du bouton jouer et des options et de quitter*/
