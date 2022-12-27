@@ -18,7 +18,8 @@
 #define SIZE_Y 900
 
 #define SPEED 1
-#define SPEED_GUARD 0.1
+#define SPEED_GUARD 0.2
+#define FREQ_MOVE_GUARD 200
 
 #define SIZE_PLAYER 5
 #define SIGHT_GUARDIAN 45

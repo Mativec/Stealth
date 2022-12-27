@@ -61,11 +61,11 @@ double distance_between_objects(Engine_Obj obj1, Engine_Obj obj2){
   return sqrt((obj1.x - obj2.x) * (obj1.x - obj2.x) + (obj1.y - obj2.y) * (obj1.y - obj2.y));
 }
 
-void out_of_bound(Engine_Obj *object){
+int out_of_bound(Engine_Obj *object){
     if (object->x < 0 || object->x > SIZE_X || object->y < 0 || object->y > SIZE_Y) {
-        move_object(object, OBJECT_REVERT);
+        return 1;
     }
-    //gerer le out of band du rayon gardien
-    // gerer le out of band du mur
+    return 0;
+    /* gerer le out of band du mur */
     
 }

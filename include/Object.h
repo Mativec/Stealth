@@ -77,6 +77,6 @@ double distance_between_objects(Engine_Obj obj1, Engine_Obj obj2);
  * 
  * @param object 
  */
-void out_of_bound(Engine_Obj *object);
+int out_of_bound(Engine_Obj *object);
 
 #endif
