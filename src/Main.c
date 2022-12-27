@@ -15,6 +15,9 @@
 #include "../include/all.h"
 
 int main(int argc, char* argv[]) {
+
+
+
     struct timespec end_time, new_time;
     Input event;
     Engine_Obj object;
@@ -22,6 +25,7 @@ int main(int argc, char* argv[]) {
 
     quit = 0;
     object = *init_object(500, 500, SPEED_PLAYER);
+
 
     title_screen();
 

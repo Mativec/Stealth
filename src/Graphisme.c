@@ -30,7 +30,8 @@ void title_screen(){
     int x,y;
     MLV_Image *image;
     init_window();
-    image = MLV_load_image("./image.jpg");
+    MLV_draw_rectangle(0,0,SIZE_X,SIZE_Y,MLV_COLOR_ALICE_BLUE);
+    image = MLV_load_image("./aaa.jpg");
     MLV_resize_image_with_proportions(image, SIZE_X, SIZE_Y);
     MLV_draw_image(image, SIZE_X, SIZE_Y);
     buttons();
@@ -45,6 +46,18 @@ void title_screen(){
     */
    free_window();
 }
+
+
+
+
+void loose_screen(){
+    MLV_free_window();
+    init_window();
+    MLV_draw_text_box(500, 450, 170, 110, "GAME OVER",120, MLV_COLOR_BLACK, MLV_COLOR_BLUE1, MLV_COLOR_YELLOW1, MLV_TEXT_CENTER,MLV_HORIZONTAL_CENTER, MLV_VERTICAL_CENTER);
+    MLV_wait_milliseconds(3);
+    MLV_free_window();
+}
+
 
 void draw_window(Engine_Obj obj) {
     static int init = 0;
