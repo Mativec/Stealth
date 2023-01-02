@@ -19,7 +19,7 @@ Engine_Guard *init_guard(int x, int y){
   new = (Engine_Guard*) malloc(sizeof(Engine_Guard));
 
   if (new != NULL) {
-    new->obj = init_object(x, y, SPEED_GUARD );
+    new->obj = init_object(x, y);
     new->direction = OBJECT_NONE;
     new->cpt = 0;
     }
@@ -31,18 +31,16 @@ Engine_Guard *init_guard(int x, int y){
 
 
 /*essayer de gerer la colision avec les angles de vues et le toucher du garde*/
-int collision(Engine_Obj guard, Engine_Obj player) {
+int detection(Engine_Obj guard, Engine_Obj player) {
   double d;
 
 
   d = distance_between_objects(guard, player);
 
   if(d < SIGHT_GUARDIAN - SIZE_PLAYER ){
-    printf("reussi");
     return 1;
   }
   else if(d < SIZE_PLAYER - SIGHT_GUARDIAN){
-    printf("reussi");
     return 1;
   }
   else if(d < SIGHT_GUARDIAN + SIZE_PLAYER){
@@ -77,7 +75,7 @@ Engine_Orientation guard_direction(){
 }
 
 
-void move_guard(Engine_Guard *guard){
+void move_guard(Engine_Guard *guard, Engine_Walls walls, int nb_walls){
   guard->cpt--;
 
   if(guard->cpt <= 0){
@@ -86,8 +84,8 @@ void move_guard(Engine_Guard *guard){
   }
   move_object(guard->obj, guard->direction);
   
-  if(out_of_bound(guard->obj)){
+  if(wall_collision(*(guard->obj), walls, nb_walls)){
     move_object(guard->obj, OBJECT_REVERT);
-    move_guard(guard);
+    move_guard(guard, walls, nb_walls);
   }
 }

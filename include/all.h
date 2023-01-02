@@ -15,4 +15,5 @@
 #include "Input.h"
 #include "Object.h"
 #include "Player.h"
+#include "Wall.h"
 #include "Guards.h"
