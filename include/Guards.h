@@ -21,7 +21,7 @@ typedef struct {
 
 
 
-Engine_Guard *init_guard();
+Engine_Guard *init_guard(int x, int y);
 
 /*Colision between gard and player, return 1 if player and guard are in same position, else 0;
 */

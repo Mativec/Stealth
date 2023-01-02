@@ -23,7 +23,7 @@
 
 #define SIZE_PLAYER 0.5
 #define SIZE_GUARD 10
-#define SIZE_WALL 10
-#define SIGHT_GUARDIAN 45
+#define SIZE_WALL 1
+#define SIGHT_GUARDIAN 2
 
 #endif

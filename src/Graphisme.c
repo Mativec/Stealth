@@ -77,11 +77,12 @@ void refresh(time_t end_time, time_t new_time) {
 
 void draw_guard(Engine_Obj guard) {
     MLV_draw_filled_circle(guard.x * SCALE, guard.y * SCALE, SIGHT_GUARDIAN * SCALE, MLV_COLOR_LIGHT_BLUE);
-    MLV_draw_filled_circle(guard.x * SCALE, guard.y * SCALE, /*10*/ SIZE_GUARD, MLV_COLOR_BLUE);
+    MLV_draw_filled_circle(guard.x * SCALE, guard.y * SCALE, SIZE_GUARD, MLV_COLOR_BLUE);
 }
 
 void draw_window(Engine_Obj player, Engine_Obj guard, Engine_Walls walls, int nb_walls) {
     static int init = 0;
+    int i;
 
     /* Window initiated ? */
     if (!init) {
@@ -101,4 +102,8 @@ void draw_window(Engine_Obj player, Engine_Obj guard, Engine_Walls walls, int nb
     for (i = 0; i < nb_walls; i++) {
         draw_wall(walls[i]);
     }
+}
+
+void free_window(){
+    MLV_free_window();
 }

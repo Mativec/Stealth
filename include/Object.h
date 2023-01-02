@@ -12,12 +12,12 @@
 #ifndef __OBJECT
 #define __OBJECT
 
+
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#include "Config.h"
-#include <math.h>
 #include "Config.h"
 
 /**
@@ -75,13 +75,12 @@ char *object_to_string(Engine_Obj obj);
  */
 int *get_object_coord(Engine_Obj obj);
 
-
 /**
  * @brief Return the distance between 2 objects.
- * 
- * @param obj1 
- * @param obj2 
- * @return double 
+ *
+ * @param obj1
+ * @param obj2
+ * @return double
  */
 double distance_between_objects(Engine_Obj obj1, Engine_Obj obj2);
 

@@ -54,7 +54,7 @@ void add_wall(Engine_Walls *walls, int *nb_walls, Engine_Wall wall);
 
 
 /**
- * @brief generate all the walls for the gameand stock them on walls.
+ * @brief generate all the walls for the game and stock them on walls.
  * 
  * @param walls : a pointer to an array of Engine_Wall .
  * @param nb_walls : a pointer to the size of walls .
