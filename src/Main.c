@@ -27,10 +27,7 @@ int main(int argc, char* argv[]) {
 
     player = *init_object(30, 20);
 
-    add_wall(&walls, &nb_walls, *init_wall(0, 0, OBJECT_DOWN, SIZE_Y));
-    add_wall(&walls, &nb_walls, *init_wall(0, 0, OBJECT_RIGHT, SIZE_X));
-    add_wall(&walls, &nb_walls, *init_wall(SIZE_X - 1, SIZE_Y, OBJECT_UP, SIZE_Y));
-    add_wall(&walls, &nb_walls, *init_wall(SIZE_X, SIZE_Y - 1, OBJECT_LEFT, SIZE_X));
+    generate_walls(&walls, &nb_walls);
     add_wall(&walls, &nb_walls, *init_wall(30, 30, OBJECT_RIGHT, 5));
 
     /* Main loop over the frames... */
@@ -64,6 +61,7 @@ int main(int argc, char* argv[]) {
 
         refresh(end_time.tv_sec, new_time.tv_sec); /* Graphisme.h */
     }
+    printf("%s, %s\n", object_to_string(player), wall_to_string(walls[4]));
     free_window();
     free_walls(walls, &nb_walls);
 

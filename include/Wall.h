@@ -28,13 +28,14 @@ Engine_Wall *init_wall(float x, float y, Engine_Orientation way, int size);
 
 void add_wall(Engine_Walls *walls, int *nb_wall, Engine_Wall wall);
 
-Engine_Walls generate_walls(int nb_walls);
+void generate_walls(Engine_Walls *walls, int *nb_walls);
 
 char *orientation_to_string(Engine_Orientation orientation);
 
+char *wall_to_string(Engine_Wall wall);
+
 int wall_collision(Engine_Obj obj, Engine_Walls walls, int nb_walls);
 
-
-void free_walls(Engine_Walls walls, int * nb_walls);
+void free_walls(Engine_Walls walls, int *nb_walls);
 
 #endif

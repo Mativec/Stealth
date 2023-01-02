@@ -13,7 +13,7 @@
 
 Engine_Wall *init_wall(float x, float y, Engine_Orientation way, int size) {
     Engine_Wall *new_wall;
-    Engine_Obj * obj;
+    Engine_Obj *obj;
 
     new_wall = (Engine_Wall *)malloc(sizeof(Engine_Wall));
 
@@ -42,7 +42,7 @@ void add_wall(Engine_Walls *walls, int *nb_wall, Engine_Wall wall) {
         *walls = (Engine_Walls)malloc(sizeof(Engine_Wall) * buffer);
     }
 
-    if(*nb_wall >= buffer){
+    if (*nb_wall >= buffer) {
         while ((*nb_wall) >= buffer) {
             buffer *= 2;
         }
@@ -57,8 +57,14 @@ void add_wall(Engine_Walls *walls, int *nb_wall, Engine_Wall wall) {
     (*nb_wall)++;
 }
 
-Engine_Walls generate_walls(int nb_walls) {
-    return NULL;
+void generate_walls(Engine_Walls *walls, int *nb_walls) {
+    assert(walls != NULL);
+    assert(nb_walls != NULL);
+
+    add_wall(walls, nb_walls, *init_wall(0, 0, OBJECT_DOWN, SIZE_Y));
+    add_wall(walls, nb_walls, *init_wall(0, 0, OBJECT_RIGHT, SIZE_X));
+    add_wall(walls, nb_walls, *init_wall(SIZE_X - 1, SIZE_Y, OBJECT_UP, SIZE_Y));
+    add_wall(walls, nb_walls, *init_wall(SIZE_X, SIZE_Y - 1, OBJECT_LEFT, SIZE_X));
 }
 
 char *orientation_to_string(Engine_Orientation orientation) {
@@ -85,6 +91,20 @@ char *orientation_to_string(Engine_Orientation orientation) {
     }
 }
 
+char *wall_to_string(Engine_Wall wall) {
+    char *output;
+
+    output = (char *)malloc(sizeof(char) * 64);
+
+    sprintf(
+        output,
+        "%s, %s, %d",
+        object_to_string(wall.obj),
+        orientation_to_string(wall.orientation),
+        wall.size);
+    return output;
+}
+
 int wall_collision(Engine_Obj obj, Engine_Walls walls, int nb_walls) {
     int i, collision;
     int *obj_coord, *wall_coord;
@@ -96,33 +116,37 @@ int wall_collision(Engine_Obj obj, Engine_Walls walls, int nb_walls) {
 
     for (i = 0; i < nb_walls; i++) {
         wall_coord = get_object_coord(walls[i].obj);
+
         /* on the same line ? horizontally */
-        if (obj_coord[0] == wall_coord[0]){
-            /* obj is between origine and limit of the wall ? Based on it's orientation. */
-            if(walls[i].orientation == OBJECT_UP){
-                if((obj_coord[1] <= wall_coord[1]) && (obj_coord[1] > wall_coord[1] - walls[i].size)){
-                    collision = 1;
-                }
-            }
-            else if(walls[i].orientation == OBJECT_DOWN){
-                if((obj_coord[1] >= wall_coord[1]) && (obj_coord[1] < wall_coord[1] + walls[i].size)){
-                    collision = 1;
-                }
-            }
-        }
-        /* on the same line ? vertically */
-        else if (obj_coord[1] == wall_coord[1]){
-            /* obj is between origine and limit of the wall ? Based on it's orientation. */
-            if(walls[i].orientation == OBJECT_LEFT){
-                if((obj_coord[0] <= wall_coord[0]) && (obj_coord[0] > wall_coord[0] - walls[i].size)){
-                    collision = 1;
-                }
-            }
-            else if(walls[i].orientation == OBJECT_RIGHT){
-                if((obj_coord[0] >= wall_coord[0]) && (obj_coord[0] < wall_coord[0] + walls[i].size)){
-                    collision = 1;
-                }
-            }
+        /* obj is between origine and limit of the wall ? Based on it's orientation. */
+        if (
+            obj_coord[0] == wall_coord[0]
+            && walls[i].orientation == OBJECT_UP
+            && obj_coord[1] < wall_coord[1]
+            && obj_coord[1] >= wall_coord[1] - walls[i].size
+        ) {
+            collision = 1;
+        } else if (
+            obj_coord[0] == wall_coord[0]
+            && walls[i].orientation == OBJECT_DOWN
+            && obj_coord[1] >= wall_coord[1]
+            && obj_coord[1] < wall_coord[1] + walls[i].size
+        ) {
+            collision = 1;
+        } else if (
+            obj_coord[1] == wall_coord[1]
+            && walls[i].orientation == OBJECT_LEFT
+            && obj_coord[0] < wall_coord[0]
+            && obj_coord[0] >= wall_coord[0] - walls[i].size
+        ) {
+            collision = 1;
+        } else if (
+            obj_coord[1] == wall_coord[1]
+            && walls[i].orientation == OBJECT_RIGHT
+            && obj_coord[0] >= wall_coord[0]
+            && obj_coord[0] < wall_coord[0] + walls[i].size
+        ) {
+            collision = 1;
         }
     }
     free(obj_coord);
@@ -130,10 +154,10 @@ int wall_collision(Engine_Obj obj, Engine_Walls walls, int nb_walls) {
     return collision;
 }
 
-void free_walls(Engine_Walls walls, int * nb_walls){
+void free_walls(Engine_Walls walls, int *nb_walls) {
     assert(walls != NULL);
     assert(nb_walls != NULL);
 
-    free(walls);
     *nb_walls = 0;
+    free(walls);
 }

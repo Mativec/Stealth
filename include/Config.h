@@ -20,5 +20,6 @@
 #define SPEED 0.06
 #define SIZE_PLAYER 0.5
 #define SIZE_WALL 1
+#define BASE_MINSIDE 9
 
 #endif
