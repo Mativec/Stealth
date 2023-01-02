@@ -16,11 +16,11 @@ void init_window() {
     MLV_actualise_window();
 }
 
-void draw_wall(Wall wall) {
+void draw_wall(Engine_Wall wall) {
     float x, y, width, height;
 
-    x = wall.coord.x;
-    y = wall.coord.y;
+    x = wall.obj.x;
+    y = wall.obj.y;
     width = SIZE_WALL;
     height = SIZE_WALL;
 
@@ -57,7 +57,7 @@ void draw_wall(Wall wall) {
     MLV_draw_filled_rectangle(x, y, width, height, MLV_COLOR_GRAY25);
 }
 
-void draw_window(Engine_Obj obj, Walls walls, int nb_walls) {
+void draw_window(Engine_Obj obj, Engine_Walls walls, int nb_walls) {
     static int init = 0;
     int i;
 

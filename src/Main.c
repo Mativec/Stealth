@@ -18,19 +18,20 @@ int main(int argc, char* argv[]) {
     struct timespec end_time, new_time;
     Input event;
     Engine_Obj player;
-    Walls walls;
-    int quit, nb_wall;
+    Engine_Walls walls;
+    int quit, nb_walls;
 
     quit = 0;
-    nb_wall = 0;
+    nb_walls = 0;
     walls = NULL;
 
     player = *init_object(30, 20);
 
-    add_wall(&walls, &nb_wall, *init_wall(0, 0, OBJECT_DOWN, SIZE_Y));
-    add_wall(&walls, &nb_wall, *init_wall(0, 0, OBJECT_RIGHT, SIZE_X));
-    add_wall(&walls, &nb_wall, *init_wall(SIZE_X - 1, SIZE_Y, OBJECT_UP, SIZE_Y));
-    add_wall(&walls, &nb_wall, *init_wall(SIZE_X, SIZE_Y - 1, OBJECT_LEFT, SIZE_X));
+    add_wall(&walls, &nb_walls, *init_wall(0, 0, OBJECT_DOWN, SIZE_Y));
+    add_wall(&walls, &nb_walls, *init_wall(0, 0, OBJECT_RIGHT, SIZE_X));
+    add_wall(&walls, &nb_walls, *init_wall(SIZE_X - 1, SIZE_Y, OBJECT_UP, SIZE_Y));
+    add_wall(&walls, &nb_walls, *init_wall(SIZE_X, SIZE_Y - 1, OBJECT_LEFT, SIZE_X));
+    add_wall(&walls, &nb_walls, *init_wall(30, 30, OBJECT_RIGHT, 5));
 
     /* Main loop over the frames... */
     while (!quit) {
@@ -41,18 +42,12 @@ int main(int argc, char* argv[]) {
 
         /* Display of the currentframe, samplefunction */
         /* THIS FUNCTION CALLS ONCE AND ONLY ONCE MLV_update_window */
-        draw_window(player, walls, nb_wall); /* Graphisme.h */
+        draw_window(player, walls, nb_walls); /* Graphisme.h */
 
         /* We get here some keyboard events*/
         event = get_event(); /* Input.h */
 
         /* Dealing with the events */
-        if (event != INPUT_NONE) {
-            /*
-            printf("%s\n", input_to_string(event));
-            printf("%s\n", object_to_string(player));
-            */
-        }
 
         quit = (event == INPUT_QUIT);
 
@@ -60,7 +55,9 @@ int main(int argc, char* argv[]) {
         move_player(&player, event);
 
         /* Collision detection and other game mechanisms */
-        wall_collision(&player);
+        if(wall_collision(player, walls, nb_walls)){
+            move_object(&player, OBJECT_REVERT);
+        }
 
         /* Get the time in nano second at the end of the frame */
         clock_gettime(CLOCK_REALTIME, &new_time);
@@ -68,6 +65,7 @@ int main(int argc, char* argv[]) {
         refresh(end_time.tv_sec, new_time.tv_sec); /* Graphisme.h */
     }
     free_window();
+    free_walls(walls, &nb_walls);
 
     return 0;
 }
