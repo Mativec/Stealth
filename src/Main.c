@@ -61,7 +61,6 @@ int main(int argc, char* argv[]) {
 
         refresh(end_time.tv_sec, new_time.tv_sec); /* Graphisme.h */
     }
-    printf("%s, %s\n", object_to_string(player), wall_to_string(walls[4]));
     free_window();
     free_walls(walls, &nb_walls);
 

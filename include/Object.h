@@ -12,16 +12,25 @@
 #ifndef __OBJECT
 #define __OBJECT
 
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+
 #include "Config.h"
 
-typedef struct engine_object{
+/**
+ * @brief Base object for the game
+ *
+ */
+typedef struct engine_object {
     double x;
     double y;
 } Engine_Obj;
 
+/**
+ * @brief Orientation used for movement / object in general
+ *
+ */
 typedef enum {
     OBJECT_NONE,
     OBJECT_UP,
@@ -31,34 +40,37 @@ typedef enum {
     OBJECT_REVERT
 } Engine_Orientation;
 
-
 /**
  * @brief Initiate a new Object.
- * 
+ *
  * @param x : x coordinate.
  * @param y : y coordinate.
  * @return Engine_Obj* a pointer to the new object.
  */
 Engine_Obj *init_object(float x, float y);
 
-
 /**
  * @brief move an object base on it's speed.
- * 
+ *
  * @param obj : object to move
  * @param way : way to move obj
  */
 void move_object(Engine_Obj *obj, Engine_Orientation way);
 
-
 /**
  * @brief Return a string version of an object.
- * 
+ *
  * @param obj : object to transform.
  * @return char* : string version.
  */
 char *object_to_string(Engine_Obj obj);
 
+/**
+ * @brief Get obj's cooridinate.
+ *
+ * @param obj : the Engine_Object which we want the coordinate
+ * @return int* : an array of two integers ([x][y])
+ */
 int *get_object_coord(Engine_Obj obj);
 
 #endif

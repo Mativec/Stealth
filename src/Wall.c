@@ -29,11 +29,11 @@ Engine_Wall *init_wall(float x, float y, Engine_Orientation way, int size) {
     return new_wall;
 }
 
-void add_wall(Engine_Walls *walls, int *nb_wall, Engine_Wall wall) {
+void add_wall(Engine_Walls *walls, int *nb_walls, Engine_Wall wall) {
     static int buffer = 0;
 
     assert(walls != NULL);
-    assert(nb_wall != NULL);
+    assert(nb_walls != NULL);
 
     /* 1st wall to add ? */
     if (buffer == 0) {
@@ -42,8 +42,8 @@ void add_wall(Engine_Walls *walls, int *nb_wall, Engine_Wall wall) {
         *walls = (Engine_Walls)malloc(sizeof(Engine_Wall) * buffer);
     }
 
-    if (*nb_wall >= buffer) {
-        while ((*nb_wall) >= buffer) {
+    if (*nb_walls >= buffer) {
+        while ((*nb_walls) >= buffer) {
             buffer *= 2;
         }
         *walls = realloc(*walls, sizeof(Engine_Wall) * buffer);
@@ -53,8 +53,8 @@ void add_wall(Engine_Walls *walls, int *nb_wall, Engine_Wall wall) {
         exit(EXIT_FAILURE);
     }
 
-    (*walls)[(*nb_wall)] = wall;
-    (*nb_wall)++;
+    (*walls)[(*nb_walls)] = wall;
+    (*nb_walls)++;
 }
 
 void generate_walls(Engine_Walls *walls, int *nb_walls) {
