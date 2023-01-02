@@ -11,7 +11,7 @@
 
 #include "../include/Input.h"
 
-char* input_to_string(Input event) {
+char* input_to_string(Engine_Input event) {
     switch (event) {
         case INPUT_UP:
             return "UP";
@@ -28,7 +28,7 @@ char* input_to_string(Input event) {
     }
 }
 
-Input get_event() {
+Engine_Input get_event() {
     static int noTwice = 0;
 
     if(noTwice){

@@ -15,7 +15,7 @@
 #include "Object.h"
 #include "Input.h"
 
-void move_player(Engine_Obj *player, Input input);
+void move_player(Engine_Obj *player, Engine_Input input);
 
 
 #endif

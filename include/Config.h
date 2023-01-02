@@ -16,6 +16,12 @@
 #define ICON NULL
 #define SIZE_X 1200
 #define SIZE_Y 900
-#define SPEED_PLAYER 1
+
+#define SPEED 1
+#define SPEED_GUARD 0.2
+#define FREQ_MOVE_GUARD 200
+
+#define SIZE_PLAYER 10
+#define SIGHT_GUARDIAN 45
 
 #endif

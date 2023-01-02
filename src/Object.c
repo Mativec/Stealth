@@ -11,7 +11,7 @@
 
 #include "../include/Object.h"
 
-Engine_Obj *init_object(float x, float y, int speed) {
+Engine_Obj *init_object(float x, float y, float speed) {
     Engine_Obj *new;
 
     new = (Engine_Obj *)malloc(sizeof(Engine_Obj));
@@ -25,7 +25,7 @@ Engine_Obj *init_object(float x, float y, int speed) {
 }
 
 void move_object(Engine_Obj *obj, Engine_Orientation way) {
-    static int base_x, base_y;
+    static double base_x, base_y;
 
     if (way == OBJECT_REVERT) {
         obj->x = base_x;
@@ -54,4 +54,9 @@ void move_object(Engine_Obj *obj, Engine_Orientation way) {
 
 char *object_to_string(Engine_Obj obj) {
     return NULL;
+}
+
+
+double distance_between_objects(Engine_Obj obj1, Engine_Obj obj2){
+  return sqrt((obj1.x - obj2.x) * (obj1.x - obj2.x) + (obj1.y - obj2.y) * (obj1.y - obj2.y));
 }

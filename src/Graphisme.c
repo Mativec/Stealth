@@ -16,26 +16,18 @@ void init_window() {
     MLV_actualise_window();
 }
 
-void draw_window(Engine_Obj obj) {
-    static int init = 0;
-
-    /* Window initiated ? */
-    if (!init) {
-        init = 1;
-        init_window();
-    }
-
-    /* clean the window */
-    MLV_clear_window(MLV_COLOR_WHITE);
-
-    /* draw on the window */
-    MLV_draw_filled_circle(obj.x, obj.y, 10, MLV_COLOR_RED);
-    return;
+void free_window() {
+    MLV_free_window();
 }
+
+
+
+}
+
 
 void refresh(time_t end_time, time_t new_time) {
     int frametime, extratime;
-    
+
     /* Compute the time spent for the current frame */
     frametime = new_time - end_time;
     frametime += (new_time - end_time) / 1.0E9;
@@ -48,6 +40,20 @@ void refresh(time_t end_time, time_t new_time) {
     MLV_actualise_window();
 }
 
-void free_window() {
-    MLV_free_window();
+void draw_window(Engine_Obj player, Engine_Obj guard) {
+    static int init = 0;
+
+    /* Window initiated ? */
+    if (!init) {
+        init = 1;
+        init_window();
+    }
+
+    /* clean the window */
+    MLV_clear_window(MLV_COLOR_WHITE);
+
+    /* draw on the window */
+    MLV_draw_filled_circle(player.x, player.y, SIZE_PLAYER, MLV_COLOR_RED);
+
+    draw_guard(guard);
 }
