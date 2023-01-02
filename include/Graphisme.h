@@ -11,17 +11,17 @@
 #ifndef __GRAPHISME__
 #define __GRAPHISME__
 
-#include <MLV/MLV_window.h>
-#include <MLV/MLV_time.h>
-#include <MLV/MLV_shape.h>
 #include <MLV/MLV_color.h>
-
+#include <MLV/MLV_shape.h>
+#include <MLV/MLV_time.h>
+#include <MLV/MLV_window.h>
 #include <string.h>
 
 #include "Config.h"
 #include "Object.h"
+#include "Wall.h"
 
-void draw_window(Engine_Obj obj);
+void draw_window(Engine_Obj player, Engine_Obj guard, Engine_Walls walls, int nb_walls);
 
 void refresh(time_t end_time, time_t new_time);
 
