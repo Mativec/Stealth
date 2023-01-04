@@ -22,6 +22,9 @@ int main(int argc, char* argv[]) {
     Engine_Walls walls;
     int quit, nb_walls;
 
+
+    srand(time(NULL));
+
     quit = 0;
     nb_walls = 0;
 
@@ -38,7 +41,7 @@ int main(int argc, char* argv[]) {
 
         /* Display of the currentframe, samplefunction */
         /* THIS FUNCTION CALLS ONCE AND ONLY ONCE MLV_update_window */
-        draw_window(player, *(guard.obj), walls, nb_walls); /* Graphisme.h */
+        draw_window(player, guard.obj, walls, nb_walls); /* Graphisme.h */
 
         /* We get here some keyboard events*/
         event = get_event(); /* Input.h */
@@ -57,12 +60,12 @@ int main(int argc, char* argv[]) {
 
         /* Collision detection and other game mechanisms */
         if (wall_collision(player, walls, nb_walls)) {
-            move_object(&player, OBJECT_REVERT);
+            move_object(&player, OBJECT_REVERT, 0);
         }
 
         move_guard(&guard, walls, nb_walls);
 
-        if(detection(*(guard.obj), player)){
+        if (detection(guard.obj, player)) {
             quit = 1;
         }
 

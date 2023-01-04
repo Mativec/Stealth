@@ -57,7 +57,7 @@ Engine_Obj *init_object(double x, double y);
  * @param obj : object to move
  * @param way : way to move obj
  */
-void move_object(Engine_Obj *obj, Engine_Orientation way);
+void move_object(Engine_Obj *obj, Engine_Orientation way, double factor);
 
 /**
  * @brief Return a string version of an object.
