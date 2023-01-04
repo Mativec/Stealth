@@ -1,5 +1,5 @@
 CC = gcc
-OBJ = bin/Graphisme.o bin/Input.o bin/Object.o bin/Player.o bin/Guards.o bin/Wall.o
+OBJ = bin/Graphisme.o bin/Input.o bin/Object.o bin/Player.o bin/Guards.o bin/Wall.o bin/Relique.o
 CFLAGS = -ansi -pedantic -Wall
 LDFLAGS = -lMLV -lm
 EXEC = a.out
@@ -20,7 +20,9 @@ bin/Player.o : src/Player.c include/Player.h include/Object.h include/Input.h
 
 bin/Guards.o : src/Guards.c include/Guards.h include/Object.h
 
-bin/Object.o : src/Object.c
+bin/Object.o : src/Object.c include/Object.h
+
+bin/Relique.o : src/Relique.c include/Relique.h
 
 clean:
 	rm bin/*.o

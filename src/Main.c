@@ -20,15 +20,20 @@ int main(int argc, char* argv[]) {
     Engine_Obj player;
     Engine_Guard guard;
     Engine_Walls walls;
-    int quit, nb_walls;
+    /*tableau de reliques*/
+    Engine_Relique *reliques;
+    int quit, nb_walls, nb_reliques;
+
+    int i;
 
     quit = 0;
     nb_walls = 0;
+    nb_reliques = 0;
 
     player = *init_object(5, 5);
     guard = *init_guard(25, 30);
     generate_walls(&walls, &nb_walls);
-
+    add_Relique(&reliques, &nb_reliques, *init_reliques(20, 20));
     /* Main loop over the frames... */
     while (!quit) {
         /*Some declaration of variables*/
@@ -38,7 +43,7 @@ int main(int argc, char* argv[]) {
 
         /* Display of the currentframe, samplefunction */
         /* THIS FUNCTION CALLS ONCE AND ONLY ONCE MLV_update_window */
-        draw_window(player, *(guard.obj), walls, nb_walls); /* Graphisme.h */
+        draw_window(player, *(guard.obj), walls, nb_walls, reliques, nb_reliques); /* Graphisme.h */
 
         /* We get here some keyboard events*/
         event = get_event(); /* Input.h */
@@ -61,6 +66,12 @@ int main(int argc, char* argv[]) {
         }
 
         move_guard(&guard, walls, nb_walls);
+        for(i = 0; i < nb_reliques; i++){
+            printf("%s  %s\n", object_to_string(player), object_to_string(reliques[i].obj));
+            if(distance_between_objects(player, reliques[i].obj) == 0){
+                reliques[i].is_picked_up = 1;
+            }
+        }
 
         if(detection(*(guard.obj), player)){
             quit = 1;

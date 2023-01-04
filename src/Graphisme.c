@@ -57,7 +57,11 @@ void draw_wall(Engine_Wall wall) {
     MLV_draw_filled_rectangle(x, y, width, height, MLV_COLOR_GRAY25);
 }
 
-
+void draw_relique(Engine_Relique relique){
+    if(!relique.is_picked_up){
+        MLV_draw_filled_rectangle(relique.obj.x * SCALE, relique.obj.y * SCALE , 1 * SCALE, 1 * SCALE, MLV_COLOR_YELLOW1);
+    }
+}
 
 
 void refresh(time_t end_time, time_t new_time) {
@@ -80,7 +84,7 @@ void draw_guard(Engine_Obj guard) {
     MLV_draw_filled_circle(guard.x * SCALE, guard.y * SCALE, SIZE_GUARD, MLV_COLOR_BLUE);
 }
 
-void draw_window(Engine_Obj player, Engine_Obj guard, Engine_Walls walls, int nb_walls) {
+void draw_window(Engine_Obj player, Engine_Obj guard, Engine_Walls walls, int nb_walls, Engine_Relique *reliques, int nb_reliques) {
     static int init = 0;
     int i;
 
@@ -102,8 +106,14 @@ void draw_window(Engine_Obj player, Engine_Obj guard, Engine_Walls walls, int nb
     for (i = 0; i < nb_walls; i++) {
         draw_wall(walls[i]);
     }
+    /*draw reliques */
+    for(i = 0; i < nb_reliques; i++){
+        draw_relique(reliques[i]);
+    }
 }
 
 void free_window(){
     MLV_free_window();
 }
+
+

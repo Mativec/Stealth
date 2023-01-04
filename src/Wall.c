@@ -55,6 +55,7 @@ void add_wall(Engine_Walls *walls, int *nb_walls, Engine_Wall wall) {
 
     (*walls)[(*nb_walls)] = wall;
     (*nb_walls)++;
+    printf("buffer : %d vs nb_wall : %d\n", buffer, *nb_walls);
 }
 
 void generate_walls(Engine_Walls *walls, int *nb_walls) {
