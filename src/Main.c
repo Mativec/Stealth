@@ -48,7 +48,7 @@ int main(int argc, char* argv[]) {
         draw_window(player, guard.obj, walls, nb_walls); /* Graphisme.h */
 
         /* We get here some keyboard events*/
-        event = get_event(NULL, NULL); /* Input.h */
+        event = get_event(&(player.power_one), &(player.power_two));
 
         /* Dealing with the events */
         if (event != INPUT_NONE) {

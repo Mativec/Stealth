@@ -11,11 +11,11 @@
 
 #include "../include/Player.h"
 
-Engine_Player *init_player(double x, double y){
-    Engine_Player * new;
+Engine_Player *init_player(double x, double y) {
+    Engine_Player *new;
 
     new = (Engine_Player *)malloc(sizeof(Engine_Player));
-    if(new == NULL){
+    if (new == NULL) {
         fprintf(stderr, "Failed to init Player...\n");
         exit(EXIT_FAILURE);
     }
@@ -23,6 +23,8 @@ Engine_Player *init_player(double x, double y){
     new->orientation = OBJECT_NONE;
     new->mana = MAX_MANA;
     new->score = 0;
+    new->power_one = 0;
+    new->power_two = 0;
     new->speed = 0;
 
     return new;
@@ -33,16 +35,15 @@ void move_player(Engine_Player *player, Engine_Input way) {
 
     orientation = input_to_orientation(way);
 
-    if(orientation != OBJECT_NONE){
-        if(orientation != player->orientation){
+    if (orientation != OBJECT_NONE) {
+        if (orientation != player->orientation) {
             player->speed = 0.1;
             player->orientation = orientation;
-        }
-        else{
+        } else {
             player->speed += 0.03;
         }
-        
-        if(player->speed > MAX_SPEED_PLAYER){
+
+        if (player->speed > MAX_SPEED_PLAYER) {
             player->speed = MAX_SPEED_PLAYER;
         }
 
@@ -50,9 +51,8 @@ void move_player(Engine_Player *player, Engine_Input way) {
     }
 }
 
-
-char *player_to_string(Engine_Player player, char *player_name){
-    char * output;
+char *player_to_string(Engine_Player player, char *player_name) {
+    char *output;
 
     output = (char *)malloc(sizeof(char) * 64);
 
@@ -60,8 +60,7 @@ char *player_to_string(Engine_Player player, char *player_name){
         output, "%s, %s, %.2fv, %d, %d\n",
         object_to_string(player.obj),
         orientation_to_string(player.orientation),
-        player.speed, player.mana, player.score
-    );
+        player.speed, player.mana, player.score);
 
     return output;
 }

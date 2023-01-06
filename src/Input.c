@@ -11,7 +11,7 @@
 
 #include "../include/Input.h"
 
-char* input_to_string(Engine_Input event) {
+char *input_to_string(Engine_Input event) {
     switch (event) {
         case INPUT_UP:
             return "UP";
@@ -28,8 +28,8 @@ char* input_to_string(Engine_Input event) {
     }
 }
 
-Engine_Orientation input_to_orientation(Engine_Input input){
-    switch(input){
+Engine_Orientation input_to_orientation(Engine_Input input) {
+    switch (input) {
         case INPUT_UP:
             return OBJECT_UP;
         case INPUT_LEFT:
@@ -43,33 +43,39 @@ Engine_Orientation input_to_orientation(Engine_Input input){
     }
 }
 
-Engine_Input get_event(int *power_one,  int *power_two) {
+Engine_Input get_event(int *power_one, int *power_two) {
     static int noTwice = 0;
-    Engine_Input input;
+    MLV_Keyboard_modifier button_mod;
+    Engine_Input output;
 
-    input = INPUT_NONE;
+    output = INPUT_NONE;
 
     if(noTwice){
         noTwice = 0;
     }
     else{
         noTwice = 1;
-        if(MLV_get_keyboard_state(MOVE_UP) == MLV_PRESSED){
-            input = INPUT_UP;
+        
+        MLV_get_event(NULL, &button_mod, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+        if (power_one != NULL) {
+            *power_one = MLV_shift_key_was_pressed(button_mod);
         }
-        else if(MLV_get_keyboard_state(MOVE_LEFT) == MLV_PRESSED){
-            input = INPUT_LEFT;
+
+        if (MLV_get_keyboard_state(MOVE_UP) == MLV_PRESSED) {
+            output = INPUT_UP;
+        } else if (MLV_get_keyboard_state(MOVE_LEFT) == MLV_PRESSED) {
+            output = INPUT_LEFT;
+        } else if (MLV_get_keyboard_state(MOVE_RIGHT) == MLV_PRESSED) {
+            output = INPUT_RIGHT;
+        } else if (MLV_get_keyboard_state(MOVE_DOWN) == MLV_PRESSED) {
+            output = INPUT_DOWN;
+        } else if (MLV_get_keyboard_state(MLV_KEYBOARD_ESCAPE) == MLV_PRESSED) {
+            output = INPUT_QUIT;
         }
-        else if(MLV_get_keyboard_state(MOVE_RIGHT) == MLV_PRESSED){
-            input = INPUT_RIGHT;
-        }
-        else if(MLV_get_keyboard_state(MOVE_DOWN) == MLV_PRESSED){
-            input = INPUT_DOWN;
-        }
-        else if(MLV_get_keyboard_state(MLV_KEYBOARD_ESCAPE) == MLV_PRESSED){
-            input = INPUT_QUIT;
+        if (power_two != NULL && MLV_get_keyboard_state(MLV_KEYBOARD_SPACE)) {
+            *power_two = 1 - *power_two;
         }
     }
-    
-    return input;
+    return output;
 }
