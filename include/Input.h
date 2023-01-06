@@ -13,6 +13,7 @@
 #define __INPUT
 
 #include <MLV/MLV_event.h>
+#include <assert.h>
 
 #include "Object.h"
 
@@ -25,7 +26,7 @@ typedef enum __input{
     INPUT_QUIT
 } Engine_Input;
 
-Engine_Input get_event();
+Engine_Input get_event(int *power_one,  int *power_two);
 
 Engine_Orientation input_to_orientation(Engine_Input input);
 

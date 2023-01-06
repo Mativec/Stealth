@@ -43,30 +43,33 @@ Engine_Orientation input_to_orientation(Engine_Input input){
     }
 }
 
-Engine_Input get_event() {
+Engine_Input get_event(int *power_one,  int *power_two) {
     static int noTwice = 0;
+    Engine_Input input;
+
+    input = INPUT_NONE;
 
     if(noTwice){
         noTwice = 0;
     }
     else{
         noTwice = 1;
-        if(MLV_get_keyboard_state(MLV_KEYBOARD_UP) == MLV_PRESSED){
-            return INPUT_UP;
+        if(MLV_get_keyboard_state(MOVE_UP) == MLV_PRESSED){
+            input = INPUT_UP;
         }
-        else if(MLV_get_keyboard_state(MLV_KEYBOARD_LEFT) == MLV_PRESSED){
-            return INPUT_LEFT;
+        else if(MLV_get_keyboard_state(MOVE_LEFT) == MLV_PRESSED){
+            input = INPUT_LEFT;
         }
-        else if(MLV_get_keyboard_state(MLV_KEYBOARD_RIGHT) == MLV_PRESSED){
-            return INPUT_RIGHT;
+        else if(MLV_get_keyboard_state(MOVE_RIGHT) == MLV_PRESSED){
+            input = INPUT_RIGHT;
         }
-        else if(MLV_get_keyboard_state(MLV_KEYBOARD_DOWN) == MLV_PRESSED){
-            return INPUT_DOWN;
+        else if(MLV_get_keyboard_state(MOVE_DOWN) == MLV_PRESSED){
+            input = INPUT_DOWN;
         }
-        else if(MLV_get_keyboard_state(MLV_KEYBOARD_q) == MLV_PRESSED){
-            return INPUT_QUIT;
+        else if(MLV_get_keyboard_state(MLV_KEYBOARD_ESCAPE) == MLV_PRESSED){
+            input = INPUT_QUIT;
         }
     }
     
-    return INPUT_NONE;
+    return input;
 }

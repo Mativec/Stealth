@@ -14,6 +14,12 @@
 
 #define NAME "Game"
 #define ICON NULL
+
+#define MOVE_UP MLV_KEYBOARD_z
+#define MOVE_LEFT MLV_KEYBOARD_q
+#define MOVE_RIGHT MLV_KEYBOARD_d
+#define MOVE_DOWN MLV_KEYBOARD_s
+
 #define SIZE_X 60 /* XSize of the game area */
 #define SIZE_Y 45 /* YSize of the game area */
 #define SCALE 20 /* Difference on size between game and it's graphical representation */
