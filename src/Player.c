@@ -57,7 +57,7 @@ char *player_to_string(Engine_Player player, char *player_name){
     output = (char *)malloc(sizeof(char) * 64);
 
     sprintf(
-        output, "%s, %s, %f, %d, %d\n",
+        output, "%s, %s, %.2fv, %d, %d\n",
         object_to_string(player.obj),
         orientation_to_string(player.orientation),
         player.speed, player.mana, player.score
