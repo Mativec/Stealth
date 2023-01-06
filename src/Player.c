@@ -12,18 +12,19 @@
 #include "../include/Player.h"
 
 void move_player(Engine_Obj *player, Engine_Input way) {
+    double speed = 0.9;
     switch (way) {
         case INPUT_UP:
-            move_object(player, OBJECT_UP);
+            move_object(player, OBJECT_UP, speed);
             break;
         case INPUT_LEFT:
-            move_object(player, OBJECT_LEFT);
+            move_object(player, OBJECT_LEFT, speed);
             break;
         case INPUT_RIGHT:
-            move_object(player, OBJECT_RIGHT);
+            move_object(player, OBJECT_RIGHT, speed);
             break;
         case INPUT_DOWN:
-            move_object(player, OBJECT_DOWN);
+            move_object(player, OBJECT_DOWN, speed);
             break;
         default:
             break;

@@ -20,8 +20,15 @@ int main(int argc, char* argv[]) {
     Engine_Obj object;
     int play;
 
-    play = 1;
-    object = *init_object(500, 500, SPEED_PLAYER);
+
+    srand(time(NULL));
+
+    quit = 0;
+    nb_walls = 0;
+
+    player = *init_object(5, 5);
+    guard = *init_guard(25, 30);
+    generate_walls(&walls, &nb_walls);
 
     /* Main loop over the frames... */
     while (play) {
@@ -32,7 +39,7 @@ int main(int argc, char* argv[]) {
 
         /* Display of the currentframe, samplefunction */
         /* THIS FUNCTION CALLS ONCE AND ONLY ONCE MLV_update_window */
-        draw_window(object); /* Graphisme.h */
+        draw_window(player, guard.obj, walls, nb_walls); /* Graphisme.h */
 
         /* We get here some keyboard events*/
         event = get_event(); /* Input.h */
@@ -46,8 +53,14 @@ int main(int argc, char* argv[]) {
 
 
         /* Collision detection and other game mechanisms */
-        if (object.x < 0 || object.x > SIZE_X || object.y < 0 || object.y > SIZE_Y) {
-            move_object(&object, OBJECT_REVERT);
+        if (wall_collision(player, walls, nb_walls)) {
+            move_object(&player, OBJECT_REVERT, 0);
+        }
+
+        move_guard(&guard, walls, nb_walls);
+
+        if (detection(guard.obj, player)) {
+            quit = 1;
         }
 
         /* Get the time in nano second at the end of the frame */

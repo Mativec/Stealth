@@ -23,7 +23,7 @@ Engine_Obj *init_object(double x, double y) {
     return new;
 }
 
-void move_object(Engine_Obj *obj, Engine_Orientation way) {
+void move_object(Engine_Obj *obj, Engine_Orientation way, double factor) {
     static double base_x, base_y;
 
     if (way == OBJECT_REVERT) {
@@ -34,16 +34,16 @@ void move_object(Engine_Obj *obj, Engine_Orientation way) {
         base_y = obj->y;
         switch (way) {
             case OBJECT_UP:
-                obj->y -= SPEED;
+                obj->y -= factor * SPEED;
                 break;
             case OBJECT_LEFT:
-                obj->x -= SPEED;
+                obj->x -= factor * SPEED;
                 break;
             case OBJECT_RIGHT:
-                obj->x += SPEED;
+                obj->x += factor * SPEED;
                 break;
             case OBJECT_DOWN:
-                obj->y += SPEED;
+                obj->y += factor * SPEED;
                 break;
             default:
                 break;
