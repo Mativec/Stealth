@@ -63,14 +63,6 @@ void generate_walls(Engine_Walls *walls, int *nb_walls);
 
 
 /**
- * @brief Return a char* equivalent of the enum Engine_Orientation.
- * 
- * @param orientation : an Engine_Orientation's instance.
- * @return char* : it's string equivalent.
- */
-char *orientation_to_string(Engine_Orientation orientation);
-
-/**
  * @brief Return a char* equivalent of an instance of Engine_Wall
  * 
  * @param wall : an Engine_Wall's instance.

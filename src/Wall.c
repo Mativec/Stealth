@@ -67,30 +67,6 @@ void generate_walls(Engine_Walls *walls, int *nb_walls) {
     add_wall(walls, nb_walls, *init_wall(SIZE_X, SIZE_Y - 1, OBJECT_LEFT, SIZE_X));
 }
 
-char *orientation_to_string(Engine_Orientation orientation) {
-    switch (orientation) {
-        case OBJECT_UP:
-            return "Up";
-
-        case OBJECT_LEFT:
-            return "Left";
-
-        case OBJECT_DOWN:
-            return "Down";
-
-        case OBJECT_RIGHT:
-            return "Right";
-
-        case OBJECT_REVERT:
-            return "Revert";
-
-        case OBJECT_NONE:
-            return "None";
-        default:
-            return "";
-    }
-}
-
 char *wall_to_string(Engine_Wall wall) {
     char *output;
 

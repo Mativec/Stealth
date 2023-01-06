@@ -14,6 +14,8 @@
 
 #include <MLV/MLV_event.h>
 
+#include "Object.h"
+
 typedef enum __input{
     INPUT_NONE,
     INPUT_UP,
@@ -24,6 +26,8 @@ typedef enum __input{
 } Engine_Input;
 
 Engine_Input get_event();
+
+Engine_Orientation input_to_orientation(Engine_Input input);
 
 char *input_to_string(Engine_Input event);
 

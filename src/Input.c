@@ -28,6 +28,21 @@ char* input_to_string(Engine_Input event) {
     }
 }
 
+Engine_Orientation input_to_orientation(Engine_Input input){
+    switch(input){
+        case INPUT_UP:
+            return OBJECT_UP;
+        case INPUT_LEFT:
+            return OBJECT_LEFT;
+        case INPUT_RIGHT:
+            return OBJECT_RIGHT;
+        case INPUT_DOWN:
+            return OBJECT_DOWN;
+        default:
+            return OBJECT_NONE;
+    }
+}
+
 Engine_Input get_event() {
     static int noTwice = 0;
 

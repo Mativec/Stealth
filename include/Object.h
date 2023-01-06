@@ -33,7 +33,7 @@ typedef struct engine_object {
  * @brief Orientation used for movement / object in general
  *
  */
-typedef enum {
+typedef enum __orientation {
     OBJECT_NONE,
     OBJECT_UP,
     OBJECT_LEFT,
@@ -83,5 +83,13 @@ int *get_object_coord(Engine_Obj obj);
  * @return double
  */
 double distance_between_objects(Engine_Obj obj1, Engine_Obj obj2);
+
+/**
+ * @brief Return a char* equivalent of the enum Engine_Orientation.
+ * 
+ * @param orientation : an Engine_Orientation's instance.
+ * @return char* : it's string equivalent.
+ */
+char *orientation_to_string(Engine_Orientation orientation);
 
 #endif
