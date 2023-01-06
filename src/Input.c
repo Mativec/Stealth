@@ -46,6 +46,8 @@ Engine_Orientation input_to_orientation(Engine_Input input) {
 Engine_Input get_event(int *power_one, int *power_two) {
     static int noTwice = 0;
     MLV_Keyboard_modifier button_mod;
+    MLV_Button_state button_state;
+    MLV_Keyboard_button button;
     Engine_Input output;
 
     output = INPUT_NONE;
@@ -56,10 +58,15 @@ Engine_Input get_event(int *power_one, int *power_two) {
     else{
         noTwice = 1;
         
-        MLV_get_event(NULL, &button_mod, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+        MLV_get_event(&button, &button_mod, NULL, NULL, NULL, NULL, NULL, NULL, &button_state);
 
         if (power_one != NULL) {
-            *power_one = MLV_shift_key_was_pressed(button_mod);
+            *power_one =
+            MLV_get_keyboard_state(MLV_KEYBOARD_LSHIFT) == MLV_PRESSED
+            ||
+            MLV_get_keyboard_state(MLV_KEYBOARD_RSHIFT) == MLV_PRESSED
+            ;
+            
         }
 
         if (MLV_get_keyboard_state(MOVE_UP) == MLV_PRESSED) {
@@ -73,8 +80,11 @@ Engine_Input get_event(int *power_one, int *power_two) {
         } else if (MLV_get_keyboard_state(MLV_KEYBOARD_ESCAPE) == MLV_PRESSED) {
             output = INPUT_QUIT;
         }
-        if (power_two != NULL && MLV_get_keyboard_state(MLV_KEYBOARD_SPACE)) {
-            *power_two = 1 - *power_two;
+        if (power_two != NULL) {
+            if (button == MLV_KEYBOARD_SPACE && button_state == MLV_PRESSED){
+                fprintf(stderr, "SWITCH !\n");
+                *power_two = 1 - *power_two;
+            }
         }
     }
     return output;

@@ -76,13 +76,24 @@ void draw_guard(Engine_Obj guard) {
 }
 
 void draw_player(Engine_Player player) {
+    static int anim_frame = 0;
     float length, width, offset;
 
     width = 10;
     length = 20;
     offset = 15;
 
-    MLV_draw_filled_circle(player.obj.x * SCALE, player.obj.y * SCALE, SIZE_PLAYER * SCALE, MLV_COLOR_RED);
+    if(player.power_one){
+        MLV_draw_filled_circle(player.obj.x * SCALE, player.obj.y * SCALE, SIZE_PLAYER * SCALE + 2, MLV_COLOR_GREY1);
+    }
+    if (anim_frame && player.power_two) {
+        MLV_draw_filled_circle(player.obj.x * SCALE, player.obj.y * SCALE, SIZE_PLAYER * SCALE, MLV_COLOR_GREEN);
+        anim_frame = 0;
+    } else {
+        MLV_draw_filled_circle(player.obj.x * SCALE, player.obj.y * SCALE, SIZE_PLAYER * SCALE, MLV_COLOR_RED);
+        anim_frame = 1;
+    }
+
     MLV_draw_rectangle(player.obj.x * SCALE + offset, player.obj.y * SCALE - offset, length, width, MLV_COLOR_GREY);
     MLV_draw_filled_rectangle(player.obj.x * SCALE + offset, player.obj.y * SCALE - offset, (player.mana * length) / MAX_MANA, width, MLV_COLOR_BLUE);
 }
