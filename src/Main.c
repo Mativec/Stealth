@@ -17,8 +17,10 @@
 int main(int argc, char* argv[]) {
     struct timespec end_time, new_time;
     Engine_Input event;
-    Engine_Obj object;
-    int play;
+    Engine_Obj player;
+    Engine_Guard guard;
+    Engine_Walls walls;
+    int quit, nb_walls;
 
 
     srand(time(NULL));
@@ -31,7 +33,7 @@ int main(int argc, char* argv[]) {
     generate_walls(&walls, &nb_walls);
 
     /* Main loop over the frames... */
-    while (play) {
+    while (!quit) {
         /*Some declaration of variables*/
 
         /*Get the time in nano second at the start of the frame */
@@ -45,12 +47,16 @@ int main(int argc, char* argv[]) {
         event = get_event(); /* Input.h */
 
         /* Dealing with the events */
-        
-        play *= (event != INPUT_QUIT);
+        if (event != INPUT_NONE) {
+            /*
+            printf("%s\n", input_to_string(event));
+            */
+        }
+
+        quit = (event == INPUT_QUIT);
 
         /* Move the entities on the grid */
-        move_player(&object, event);
-
+        move_player(&player, event);
 
         /* Collision detection and other game mechanisms */
         if (wall_collision(player, walls, nb_walls)) {
@@ -68,6 +74,8 @@ int main(int argc, char* argv[]) {
 
         refresh(end_time.tv_sec, new_time.tv_sec); /* Graphisme.h */
     }
+    MLV_wait_milliseconds(1000);
+    free_walls(walls, &nb_walls);
     free_window();
 
     return 0;
