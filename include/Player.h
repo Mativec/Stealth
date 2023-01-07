@@ -23,8 +23,8 @@ typedef struct __player {
     Engine_Orientation orientation;
     int score;
     int mana;
-    int power_one;
-    int power_two;
+    int overcharge;
+    int invisibility;
     double speed;
 } Engine_Player;
 

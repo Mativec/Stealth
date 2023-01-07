@@ -23,8 +23,8 @@ Engine_Player *init_player(double x, double y) {
     new->orientation = OBJECT_NONE;
     new->mana = MAX_MANA;
     new->score = 0;
-    new->power_one = 0;
-    new->power_two = 0;
+    new->overcharge = 0;
+    new->invisibility = 0;
     new->speed = 0;
 
     return new;
@@ -43,8 +43,11 @@ void move_player(Engine_Player *player, Engine_Input way) {
             player->speed += 0.03;
         }
 
-        if (player->speed > MAX_SPEED_PLAYER) {
+        if (!player->overcharge && player->speed > MAX_SPEED_PLAYER) {
             player->speed = MAX_SPEED_PLAYER;
+        } else if(player->overcharge && player->speed > MAX_SPEED_PLAYER_OVERCHARGED){
+            player->speed = MAX_SPEED_PLAYER_OVERCHARGED;
+
         }
 
         move_object(&(player->obj), player->orientation, player->speed);

@@ -83,10 +83,10 @@ void draw_player(Engine_Player player) {
     length = 20;
     offset = 15;
 
-    if(player.power_one){
+    if(player.overcharge){
         MLV_draw_filled_circle(player.obj.x * SCALE, player.obj.y * SCALE, SIZE_PLAYER * SCALE + 2, MLV_COLOR_GREY1);
     }
-    if (anim_frame && player.power_two) {
+    if (anim_frame && player.invisibility) {
         MLV_draw_filled_circle(player.obj.x * SCALE, player.obj.y * SCALE, SIZE_PLAYER * SCALE, MLV_COLOR_GREEN);
         anim_frame = 0;
     } else {
@@ -112,9 +112,9 @@ void draw_window(Engine_Player player, Engine_Obj guard, Engine_Walls walls, int
     MLV_clear_window(MLV_COLOR_WHITE);
 
     /* draw on the window */
-    draw_player(player);
-
     draw_guard(guard);
+
+    draw_player(player);
 
     /* draw walls */
     for (i = 0; i < nb_walls; i++) {

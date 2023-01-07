@@ -48,7 +48,7 @@ int main(int argc, char* argv[]) {
         draw_window(player, guard.obj, walls, nb_walls); /* Graphisme.h */
 
         /* We get here some keyboard events*/
-        event = get_event(&(player.power_one), &(player.power_two));
+        event = get_event(&(player.overcharge), &(player.invisibility));
 
         /* Dealing with the events */
         if (event != INPUT_NONE) {
@@ -69,7 +69,8 @@ int main(int argc, char* argv[]) {
 
         move_guard(&guard, walls, nb_walls);
 
-        if (detection(guard.obj, player.obj)) {
+        /* His seen by a guardian and didn't activate the invisibility */
+        if (detection(guard.obj, player.obj) && !player.invisibility) {
             quit = 1;
         }
 

@@ -28,6 +28,8 @@
 
 #define SPEED 0.04 /* Speed of all objects */
 #define MAX_SPEED_PLAYER 0.9
+#define MAX_SPEED_PLAYER_OVERCHARGED 1.2
+
 
 #define SIZE_PLAYER 0.5
 #define SIZE_GUARD 10
