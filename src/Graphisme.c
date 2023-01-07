@@ -55,6 +55,7 @@ void title_screen(){
 
 
 void loose_screen(){
+    /*ne pas prendre , prendre celle du pplayer elle marche mieux*/
     MLV_free_window();
     init_window();
     MLV_draw_text_box(500, 450, 170, 110, "GAME OVER",120, MLV_COLOR_BLACK, MLV_COLOR_BLUE1, MLV_COLOR_YELLOW1, MLV_TEXT_CENTER,MLV_HORIZONTAL_CENTER, MLV_VERTICAL_CENTER);
@@ -66,6 +67,7 @@ void loose_screen(){
 void draw_window(Engine_Obj obj) {
     static int init = 0;
 
+
     /* Window initiated ? */
     if (!init) {
         init = 1;
@@ -73,7 +75,10 @@ void draw_window(Engine_Obj obj) {
     }
 
     /* clean the window */
-    MLV_clear_window(MLV_COLOR_WHITE);
+    MLV_clear_window(MLV_COLOR_BLUE_VIOLET);
+
+    
+
 
     /* draw on the window */
     MLV_draw_filled_circle(obj.x, obj.y, 10, MLV_COLOR_RED);
