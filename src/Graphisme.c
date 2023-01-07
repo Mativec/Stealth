@@ -122,6 +122,18 @@ void draw_window(Engine_Player player, Engine_Obj guard, Engine_Walls walls, int
     }
 }
 
+
+/*afficher des secondes de jeu passées avec le bouton rejouer et quitter*/
+void loose_screen(){
+    MLV_free_window();
+    init_window();
+    MLV_draw_text_box(500, 400, 300, 110, "GAME OVER",120, MLV_COLOR_BLACK, MLV_COLOR_BLUE1, MLV_COLOR_RED1, MLV_TEXT_CENTER,MLV_HORIZONTAL_CENTER, MLV_VERTICAL_CENTER);
+    MLV_actualise_window();
+    MLV_wait_seconds(3);
+}
+
+
+
 void free_window() {
     MLV_free_window();
 }
