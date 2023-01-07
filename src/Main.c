@@ -23,6 +23,7 @@ int main(int argc, char* argv[]) {
     Engine_Walls walls;
 
     int quit, nb_walls;
+    int mana_cost;
     char *player_name;
 
 
@@ -51,10 +52,14 @@ int main(int argc, char* argv[]) {
         event = get_event(&(player.overcharge), &(player.invisibility));
 
         /* Dealing with the events */
-        if (event != INPUT_NONE) {
-            /*
-            printf("%s\n", input_to_string(event));
-            */
+        
+        mana_cost = (player.overcharge * COST_OVERCHARGED) +  (player.invisibility * COST_INVISIBILITY);
+
+        if(player.mana >= mana_cost){
+            player.mana -= mana_cost;
+        }else{
+            player.invisibility = 0;
+            player.overcharge = 0;
         }
 
         quit = (event == INPUT_QUIT);
@@ -72,6 +77,12 @@ int main(int argc, char* argv[]) {
         /* His seen by a guardian and didn't activate the invisibility */
         if (detection(guard.obj, player.obj) && !player.invisibility) {
             quit = 1;
+        }
+
+        /* TODO : Mana on tuile */
+        player.mana ++;
+        if(player.mana > MAX_MANA){
+            player.mana = MAX_MANA;
         }
 
         /* Get the time in nano second at the end of the frame */
