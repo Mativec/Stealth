@@ -74,8 +74,8 @@ int main(int argc, char* argv[]) {
 
         move_guard(&guard, walls, nb_walls);
         for(i = 0; i < nb_reliques; i++){
-            printf("%s  %s\n", object_to_string(player), object_to_string(reliques[i].obj));
-            if(distance_between_objects(player, reliques[i].obj) == 0){
+            printf("%s  %s\n", player_to_string(player, player_name), object_to_string(reliques[i].obj));
+            if(distance_between_objects(player.obj, reliques[i].obj) == 0){
                 reliques[i].is_picked_up = 1;
             }
         }

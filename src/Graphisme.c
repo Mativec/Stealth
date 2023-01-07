@@ -102,7 +102,7 @@ void draw_player(Engine_Player player) {
     MLV_draw_filled_rectangle(player.obj.x * SCALE + offset, player.obj.y * SCALE - offset, (player.mana * length) / MAX_MANA, width, MLV_COLOR_BLUE);
 }
 
-void draw_window(Engine_Obj player, Engine_Obj guard, Engine_Walls walls, int nb_walls, Engine_Relique *reliques, int nb_reliques) {
+void draw_window(Engine_Player player, Engine_Obj guard, Engine_Walls walls, int nb_walls, Engine_Relique *reliques, int nb_reliques) {
     static int init = 0;
     int i;
 
