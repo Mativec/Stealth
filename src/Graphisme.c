@@ -24,29 +24,27 @@ void draw_wall(Engine_Wall wall) {
     width = SIZE_WALL;
     height = SIZE_WALL;
 
+    switch (wall.orientation) {
+        case OBJECT_LEFT:
+            x -= wall.size;
+            width = wall.size;
+            break;
 
-    switch (wall.orientation)
-    {
-    case OBJECT_LEFT:
-        x -= wall.size;
-        width = wall.size;
-        break;
+        case OBJECT_RIGHT:
+            width = wall.size;
+            break;
 
-    case OBJECT_RIGHT:
-        width = wall.size;
-        break;
+        case OBJECT_UP:
+            y -= wall.size;
+            height = wall.size;
+            break;
 
-    case OBJECT_UP:
-        y -= wall.size;
-        height = wall.size;
-        break;
+        case OBJECT_DOWN:
+            height = wall.size;
+            break;
 
-    case OBJECT_DOWN:
-        height = wall.size;
-        break;
-    
-    default:
-        break;
+        default:
+            break;
     }
 
     x = (x - SIZE_WALL / 2) * SCALE;
@@ -56,9 +54,6 @@ void draw_wall(Engine_Wall wall) {
 
     MLV_draw_filled_rectangle(x, y, width, height, MLV_COLOR_GRAY25);
 }
-
-
-
 
 void refresh(time_t end_time, time_t new_time) {
     int frametime, extratime;
@@ -80,7 +75,30 @@ void draw_guard(Engine_Obj guard) {
     MLV_draw_filled_circle(guard.x * SCALE, guard.y * SCALE, SIZE_GUARD, MLV_COLOR_BLUE);
 }
 
-void draw_window(Engine_Obj player, Engine_Obj guard, Engine_Walls walls, int nb_walls) {
+void draw_player(Engine_Player player) {
+    static int anim_frame = 0;
+    float length, width, offset;
+
+    width = 10;
+    length = 20;
+    offset = 15;
+
+    if(player.power_one){
+        MLV_draw_filled_circle(player.obj.x * SCALE, player.obj.y * SCALE, SIZE_PLAYER * SCALE + 2, MLV_COLOR_GREY1);
+    }
+    if (anim_frame && player.power_two) {
+        MLV_draw_filled_circle(player.obj.x * SCALE, player.obj.y * SCALE, SIZE_PLAYER * SCALE, MLV_COLOR_GREEN);
+        anim_frame = 0;
+    } else {
+        MLV_draw_filled_circle(player.obj.x * SCALE, player.obj.y * SCALE, SIZE_PLAYER * SCALE, MLV_COLOR_RED);
+        anim_frame = 1;
+    }
+
+    MLV_draw_rectangle(player.obj.x * SCALE + offset, player.obj.y * SCALE - offset, length, width, MLV_COLOR_GREY);
+    MLV_draw_filled_rectangle(player.obj.x * SCALE + offset, player.obj.y * SCALE - offset, (player.mana * length) / MAX_MANA, width, MLV_COLOR_BLUE);
+}
+
+void draw_window(Engine_Player player, Engine_Obj guard, Engine_Walls walls, int nb_walls) {
     static int init = 0;
     int i;
 
@@ -94,16 +112,16 @@ void draw_window(Engine_Obj player, Engine_Obj guard, Engine_Walls walls, int nb
     MLV_clear_window(MLV_COLOR_WHITE);
 
     /* draw on the window */
-    MLV_draw_filled_circle(player.x * SCALE, player.y * SCALE, SIZE_PLAYER * SCALE, MLV_COLOR_RED);
+    draw_player(player);
 
     draw_guard(guard);
-    
+
     /* draw walls */
     for (i = 0; i < nb_walls; i++) {
         draw_wall(walls[i]);
     }
 }
 
-void free_window(){
+void free_window() {
     MLV_free_window();
 }

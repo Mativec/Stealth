@@ -79,3 +79,30 @@ char *object_to_string(Engine_Obj obj) {
 double distance_between_objects(Engine_Obj obj1, Engine_Obj obj2){
   return sqrt(pow(obj1.x - obj2.x, 2) + pow(obj1.y - obj2.y, 2));
 }
+
+
+
+char *orientation_to_string(Engine_Orientation orientation) {
+    switch (orientation) {
+        case OBJECT_UP:
+            return "Up";
+
+        case OBJECT_LEFT:
+            return "Left";
+
+        case OBJECT_DOWN:
+            return "Down";
+
+        case OBJECT_RIGHT:
+            return "Right";
+
+        case OBJECT_REVERT:
+            return "Revert";
+
+        case OBJECT_NONE:
+            return "None";
+            
+        default:
+            return "";
+    }
+}
