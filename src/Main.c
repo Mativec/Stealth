@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
     generate_walls(&walls, &nb_walls);
 
     /* Main loop over the frames... */
-    while (!quit) {
+    do {
         /*Some declaration of variables*/
 
         /*Get the time in nano second at the start of the frame */
@@ -53,7 +53,7 @@ int main(int argc, char* argv[]) {
 
         /* Dealing with the events */
         
-        mana_cost = (player.overcharge * COST_OVERCHARGED) +  (player.invisibility * COST_INVISIBILITY);
+        mana_cost = (player.overcharge * MANA_PER_TUILE) +  (player.invisibility * MANA_PER_TUILE);
 
         if(player.mana >= mana_cost){
             player.mana -= mana_cost;
@@ -89,7 +89,8 @@ int main(int argc, char* argv[]) {
         clock_gettime(CLOCK_REALTIME, &new_time);
 
         refresh(end_time.tv_sec, new_time.tv_sec); /* Graphisme.h */
-    }
+    } while (!quit);
+    
     MLV_wait_milliseconds(1000);
     fprintf(stderr, "%s\n", player_to_string(player, player_name));
     free_walls(walls, &nb_walls);
