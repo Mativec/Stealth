@@ -70,9 +70,15 @@ void refresh(time_t end_time, time_t new_time) {
     MLV_actualise_window();
 }
 
-void draw_guard(Engine_Obj guard) {
-    MLV_draw_filled_circle(guard.x * SCALE, guard.y * SCALE, SIGHT_GUARDIAN * SCALE, MLV_COLOR_LIGHT_BLUE);
-    MLV_draw_filled_circle(guard.x * SCALE, guard.y * SCALE, SIZE_GUARD, MLV_COLOR_BLUE);
+void draw_guards(Engine_Guard *guards, int nb_guards) {
+    int i;
+
+    for(i = 0; i < nb_guards; i++){
+        MLV_draw_filled_circle(guards[i].obj.x * SCALE, guards[i].obj.y * SCALE, SIGHT_GUARDIAN * SCALE, MLV_COLOR_LIGHT_BLUE);
+    }
+    for(i = 0; i < nb_guards; i++){
+        MLV_draw_filled_circle(guards[i].obj.x * SCALE, guards[i].obj.y * SCALE, SIZE_GUARD, MLV_COLOR_BLUE);
+    }
 }
 
 void draw_player(Engine_Player player) {
@@ -83,7 +89,7 @@ void draw_player(Engine_Player player) {
     length = 20;
     offset = 15;
 
-    if(player.power_one){
+    if (player.power_one) {
         MLV_draw_filled_circle(player.obj.x * SCALE, player.obj.y * SCALE, SIZE_PLAYER * SCALE + 2, MLV_COLOR_GREY1);
     }
     if (anim_frame && player.power_two) {
@@ -98,7 +104,7 @@ void draw_player(Engine_Player player) {
     MLV_draw_filled_rectangle(player.obj.x * SCALE + offset, player.obj.y * SCALE - offset, (player.mana * length) / MAX_MANA, width, MLV_COLOR_BLUE);
 }
 
-void draw_window(Engine_Player player, Engine_Obj guard, Engine_Walls walls, int nb_walls) {
+void draw_window(Engine_Player player, Engine_Guard *guards, int nb_guards, Engine_Walls walls, int nb_walls){
     static int init = 0;
     int i;
 
@@ -114,7 +120,8 @@ void draw_window(Engine_Player player, Engine_Obj guard, Engine_Walls walls, int
     /* draw on the window */
     draw_player(player);
 
-    draw_guard(guard);
+    /* draw guards */
+    draw_guards(guards, nb_guards);
 
     /* draw walls */
     for (i = 0; i < nb_walls; i++) {

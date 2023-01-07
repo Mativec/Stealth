@@ -19,10 +19,12 @@ int main(int argc, char* argv[]) {
     
     Engine_Input event;
     Engine_Player player;
-    Engine_Guard guard;
+    Engine_Guard *guards;
     Engine_Walls walls;
 
-    int quit, nb_walls;
+    int quit;
+    int nb_walls, nb_guards;
+    int i;
     char *player_name;
 
 
@@ -33,8 +35,9 @@ int main(int argc, char* argv[]) {
     nb_walls = 0;
 
     player = *init_player(5, 5);
-    guard = *init_guard(25, 30);
+
     generate_walls(&walls, &nb_walls);
+    generate_guards(&guards, &nb_guards);
 
     /* Main loop over the frames... */
     while (!quit) {
@@ -45,7 +48,7 @@ int main(int argc, char* argv[]) {
 
         /* Display of the currentframe, samplefunction */
         /* THIS FUNCTION CALLS ONCE AND ONLY ONCE MLV_update_window */
-        draw_window(player, guard.obj, walls, nb_walls); /* Graphisme.h */
+        draw_window(player, guards, nb_guards, walls, nb_walls); /* Graphisme.h */
 
         /* We get here some keyboard events*/
         event = get_event(&(player.power_one), &(player.power_two));
@@ -67,10 +70,12 @@ int main(int argc, char* argv[]) {
             move_object(&(player.obj), OBJECT_REVERT, 0);
         }
 
-        move_guard(&guard, walls, nb_walls);
+        for (i = 0; i < nb_guards; i++){
+            move_guard(&(guards[i]), walls, nb_walls);
 
-        if (detection(guard.obj, player.obj)) {
-            quit = 1;
+            if (detection(guards[i].obj, player.obj)) {
+                quit = 1;
+            }
         }
 
         /* Get the time in nano second at the end of the frame */
