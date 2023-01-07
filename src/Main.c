@@ -16,21 +16,28 @@
 
 int main(int argc, char* argv[]) {
     struct timespec end_time, new_time;
+    
     Engine_Input event;
-    Engine_Obj player;
+    Engine_Player player;
     Engine_Guard guard;
     Engine_Walls walls;
     /*tableau de reliques*/
     Engine_Relique *reliques;
+
     int quit, nb_walls, nb_reliques;
 
     int i;
+    char *player_name;
 
+
+    srand(time(NULL));
+
+    player_name = "Player";
     quit = 0;
     nb_walls = 0;
     nb_reliques = 0;
 
-    player = *init_object(5, 5);
+    player = *init_player(5, 5);
     guard = *init_guard(25, 30);
     generate_walls(&walls, &nb_walls);
     add_Relique(&reliques, &nb_reliques, *init_reliques(20, 20));
@@ -43,10 +50,10 @@ int main(int argc, char* argv[]) {
 
         /* Display of the currentframe, samplefunction */
         /* THIS FUNCTION CALLS ONCE AND ONLY ONCE MLV_update_window */
-        draw_window(player, *(guard.obj), walls, nb_walls, reliques, nb_reliques); /* Graphisme.h */
+        draw_window(player, guard.obj, walls, nb_walls, reliques, nb_reliques); /* Graphisme.h */
 
         /* We get here some keyboard events*/
-        event = get_event(); /* Input.h */
+        event = get_event(&(player.power_one), &(player.power_two));
 
         /* Dealing with the events */
         if (event != INPUT_NONE) {
@@ -61,8 +68,8 @@ int main(int argc, char* argv[]) {
         move_player(&player, event);
 
         /* Collision detection and other game mechanisms */
-        if (wall_collision(player, walls, nb_walls)) {
-            move_object(&player, OBJECT_REVERT);
+        if (wall_collision(player.obj, walls, nb_walls)) {
+            move_object(&(player.obj), OBJECT_REVERT, 0);
         }
 
         move_guard(&guard, walls, nb_walls);
@@ -73,7 +80,7 @@ int main(int argc, char* argv[]) {
             }
         }
 
-        if(detection(*(guard.obj), player)){
+        if (detection(guard.obj, player.obj)) {
             quit = 1;
         }
 
@@ -83,6 +90,7 @@ int main(int argc, char* argv[]) {
         refresh(end_time.tv_sec, new_time.tv_sec); /* Graphisme.h */
     }
     MLV_wait_milliseconds(1000);
+    fprintf(stderr, "%s\n", player_to_string(player, player_name));
     free_walls(walls, &nb_walls);
     free_window();
 

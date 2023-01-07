@@ -14,16 +14,26 @@
 
 #define NAME "Game"
 #define ICON NULL
+
+#define MOVE_UP MLV_KEYBOARD_z
+#define MOVE_LEFT MLV_KEYBOARD_q
+#define MOVE_RIGHT MLV_KEYBOARD_d
+#define MOVE_DOWN MLV_KEYBOARD_s
+
 #define SIZE_X 60 /* XSize of the game area */
 #define SIZE_Y 45 /* YSize of the game area */
 #define SCALE 20 /* Difference on size between game and it's graphical representation */
 
-#define SPEED 0.06 /* Speed of all object */
-#define FREQ_MOVE_GUARD 200*1.2
+#define PROB_NEXT_DIRECTION_GUARD 50
+
+#define SPEED 0.04 /* Speed of all objects */
+#define MAX_SPEED_PLAYER 0.9
 
 #define SIZE_PLAYER 0.5
 #define SIZE_GUARD 10
 #define SIZE_WALL 1
-#define SIGHT_GUARDIAN 2
+
+#define SIGHT_GUARDIAN 4
+#define MAX_MANA 400
 
 #endif
