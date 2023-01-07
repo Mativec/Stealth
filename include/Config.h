@@ -17,5 +17,6 @@
 #define SIZE_X 1200
 #define SIZE_Y 900
 #define SPEED_PLAYER 1
+#define SIZE_ZERO 0
 
 #endif

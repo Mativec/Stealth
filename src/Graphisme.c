@@ -29,21 +29,24 @@ void buttons(){
 void title_screen(){
     int x,y;
     MLV_Image *image;
-    init_window();
-    MLV_draw_rectangle(0,0,SIZE_X,SIZE_Y,MLV_COLOR_ALICE_BLUE);
-    image = MLV_load_image("./aaa.jpg");
+
+    MLV_create_window( "SLEATH", "image", SIZE_X, SIZE_Y );
+    image = MLV_load_image("image_menu_s.jpg");
     MLV_resize_image_with_proportions(image, SIZE_X, SIZE_Y);
-    MLV_draw_image(image, SIZE_X, SIZE_Y);
+    MLV_draw_image(image, SIZE_ZERO , SIZE_ZERO);
+
     buttons();
     MLV_actualise_window();
     MLV_wait_mouse(&x,&y);
     /*affichage du bouton jouer et des options et de quitter*/
-    /*
     do{
         MLV_wait_mouse(&x, &y);
+        if(x >=170 && x <= 500 && y >= 110 && y <=450)
+        printf("russi");
+
     }
-    while();
-    */
+    while(x > SIZE_X || y > SIZE_Y);
+
    free_window();
 }
 
