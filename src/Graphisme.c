@@ -26,6 +26,7 @@ void buttons(){
     MLV_draw_text_box(750, 450, 170, 110, "QUIT",120, MLV_COLOR_BLACK, MLV_COLOR_BLUE1, MLV_COLOR_YELLOW1, MLV_TEXT_CENTER,MLV_HORIZONTAL_CENTER, MLV_VERTICAL_CENTER);
 }
 
+
 void title_screen(){
     int x,y;
     MLV_Image *image;
