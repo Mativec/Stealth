@@ -82,7 +82,6 @@ Engine_Input get_event(int *power_one, int *power_two) {
         }
         if (power_two != NULL) {
             if (button == MLV_KEYBOARD_SPACE && button_state == MLV_PRESSED){
-                fprintf(stderr, "SWITCH !\n");
                 *power_two = 1 - *power_two;
             }
         }
