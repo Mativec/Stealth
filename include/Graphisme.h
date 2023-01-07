@@ -28,4 +28,6 @@ void refresh(time_t end_time, time_t new_time);
 
 void free_window();
 
+void loose_screen();
+
 #endif

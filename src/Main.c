@@ -78,6 +78,7 @@ int main(int argc, char* argv[]) {
 
         refresh(end_time.tv_sec, new_time.tv_sec); /* Graphisme.h */
     }
+    loose_screen();
     MLV_wait_milliseconds(1000);
     fprintf(stderr, "%s\n", player_to_string(player, player_name));
     free_walls(walls, &nb_walls);
