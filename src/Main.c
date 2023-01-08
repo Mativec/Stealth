@@ -94,7 +94,7 @@ int main(int argc, char* argv[]) {
         /*mettre le if 3 reliques sont picked up et que le joueur atteint la pos initial c gagné
         */
         for(i = 0; i < nb_reliques; i++){
-            printf("%s  %s\n", object_to_string(player), object_to_string(reliques[i].obj));
+            /*printf("%s  %s\n", object_to_string(player), object_to_string(reliques[i].obj));*/
             if(distance_between_objects(player, reliques[i].obj) == 0){
                 reliques[i].is_picked_up = 1;
             }
