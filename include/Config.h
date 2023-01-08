@@ -24,7 +24,7 @@
 #define SIZE_Y 45 /* YSize of the game area */
 #define SCALE 20 /* Difference on size between game and it's graphical representation */
 
-#define PROB_NEXT_DIRECTION_GUARD 50
+#define PROB_NEXT_DIRECTION_GUARD 500
 
 #define SPEED 0.04 /* Speed of all objects */
 #define MAX_SPEED_PLAYER 0.9

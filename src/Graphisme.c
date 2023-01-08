@@ -112,9 +112,9 @@ void draw_window(Engine_Player player, Engine_Obj guard, Engine_Walls walls, int
     MLV_clear_window(MLV_COLOR_WHITE);
 
     /* draw on the window */
-    draw_player(player);
-
     draw_guard(guard);
+
+    draw_player(player);
 
     /* draw walls */
     for (i = 0; i < nb_walls; i++) {

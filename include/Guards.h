@@ -19,7 +19,7 @@ Engine_Guard *init_guard(int x, int y);
 
 /*Colision between gard and player, return 1 if player and guard are in same position, else 0;
  */
-int detection(Engine_Obj guard, Engine_Obj player);
+int detection(Engine_Obj guard, Engine_Obj player, Engine_Walls walls, int nb_walls);
 
 Engine_Orientation guard_direction();
 
