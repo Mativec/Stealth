@@ -35,7 +35,7 @@ int main(int argc, char* argv[]) {
     player = *init_player(5, 5);
     guard = *init_guard(40, 30);
     generate_walls(&walls, &nb_walls);
-    add_wall(&walls, &nb_walls, *init_wall(30, 0, OBJECT_DOWN, 40));
+    add_wall(&walls, &nb_walls, *init_wall(30, 15, OBJECT_DOWN, 10));
 
     /* Main loop over the frames... */
     while (!quit) {

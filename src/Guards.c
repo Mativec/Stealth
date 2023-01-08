@@ -33,26 +33,13 @@ int detection(Engine_Obj guard, Engine_Obj player) {
 */
 
 int detection(Engine_Obj guard, Engine_Obj player, Engine_Walls walls, int nb_walls) {
-    Engine_Obj **voisins;
+    Engine_Obj *tmp;
+    double p;
     int i;
 
     if(distance_between_objects(guard, player) < SIGHT_GUARDIAN){
-
-        voisins = (Engine_Obj **)malloc(sizeof(Engine_Obj*) * 6);
-        if(voisins != NULL){
-            voisins[0] = init_object(player.x + 1, player.y);
-            voisins[1] = init_object(player.x, player.y + 1);
-            voisins[2] = init_object(player.x - 1, player.y);
-            voisins[3] = init_object(player.x, player.y - 1);
-            voisins[4] = init_object(player.x + 1, player.y + 1);
-            voisins[5] = init_object(player.x - 1, player.y - 1);
-            
-            for(i = 0; i < 6; i++){
-                if(wall_collision(*(voisins[i]), walls, nb_walls)){
-                    return 0;
-                }
-            }
-        }
+        /* TODO */
+        tmp = NULL;
         return 1;
     }
     return 0;
