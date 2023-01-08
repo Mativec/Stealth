@@ -26,4 +26,8 @@
 #define SIZE_WALL 1
 #define SIGHT_GUARDIAN 2
 
+
+
+#define RANDMAX 40
+
 #endif

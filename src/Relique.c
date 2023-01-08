@@ -2,7 +2,7 @@
 
 
 
-Engine_Relique *init_reliques(double x, double y){
+Engine_Relique *init_relique(double x, double y){
     Engine_Relique *tmp = (Engine_Relique*)malloc(sizeof(Engine_Relique));
     if(tmp != NULL){
         tmp->obj = *init_object(x, y);
@@ -40,10 +40,10 @@ void add_Relique(Engine_Relique** tab, int* nb_reliques, Engine_Relique relique)
 }
 
 
-
-void generate_relique(){
-
+void free_reliques(Engine_Relique **tab){
+    free(tab);
 }
+
 
 
 

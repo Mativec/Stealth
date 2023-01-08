@@ -22,18 +22,42 @@ int main(int argc, char* argv[]) {
     Engine_Walls walls;
     /*tableau de reliques*/
     Engine_Relique *reliques;
-    int quit, nb_walls, nb_reliques;
 
+    int quit, nb_walls, nb_reliques, nb_relique;
+    int min, max;
+    double x, y;
+
+    /*pour move gard a deplacer */
     int i;
+
+
+    srand( time(NULL));
+    
+    
+    min = 20;
+    max = 40;
+
+
+
+
 
     quit = 0;
     nb_walls = 0;
-    nb_reliques = 0;
+    nb_reliques = 3;
+    nb_relique = 3;
 
     player = *init_object(5, 5);
     guard = *init_guard(25, 30);
     generate_walls(&walls, &nb_walls);
-    add_Relique(&reliques, &nb_reliques, *init_reliques(20, 20));
+
+
+/*ajout des reliques*/
+    for(i = 0; i < nb_relique; i++){
+        x = min + rand()/RANDMAX % (max + 1 - min);
+        y =   min + rand()/RANDMAX % (max + 1 - min);
+        add_Relique(&reliques, &nb_reliques, *init_relique((double)x,(double)y));
+    }
+
     /* Main loop over the frames... */
     while (!quit) {
         /*Some declaration of variables*/
@@ -66,6 +90,8 @@ int main(int argc, char* argv[]) {
         }
 
         move_guard(&guard, walls, nb_walls);
+
+        /*mettre le if 3 reliques sont picked up et que le joueur atteint la pos initial c gagné*/
         for(i = 0; i < nb_reliques; i++){
             printf("%s  %s\n", object_to_string(player), object_to_string(reliques[i].obj));
             if(distance_between_objects(player, reliques[i].obj) == 0){
@@ -84,6 +110,7 @@ int main(int argc, char* argv[]) {
     }
     MLV_wait_milliseconds(1000);
     free_walls(walls, &nb_walls);
+    free_reliques(&reliques);
     free_window();
 
     return 0;
