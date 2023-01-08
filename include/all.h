@@ -15,3 +15,4 @@
 #include "Input.h"
 #include "Object.h"
 #include "Player.h"
+#include "Sound.h"

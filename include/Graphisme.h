@@ -27,8 +27,10 @@ void draw_window(Engine_Obj obj);
 
 void refresh(time_t end_time, time_t new_time);
 
-void title_screen();
+void title_screen(MLV_Image *image);
 
 void free_window();
+
+void free_image(MLV_Image* image);
 
 #endif

@@ -21,14 +21,17 @@ int main(int argc, char* argv[]) {
     struct timespec end_time, new_time;
     Input event;
     Engine_Obj object;
+    MLV_Image *image;
+    MLV_Music *music;
     int quit;
 
     quit = 0;
+    image = NULL;
+    music = NULL;
     object = *init_object(500, 500, SPEED_PLAYER);
 
-
-    title_screen();
-
+    title_screen(image);
+    play_sound(music);
     /* Main loop over the frames... */
     while (!quit) {
         /*Some declaration of variables*/
@@ -66,6 +69,9 @@ int main(int argc, char* argv[]) {
 
         refresh(end_time.tv_sec, new_time.tv_sec); /* Graphisme.h */
     }
+    free_music(music);
+    free_image(image);
+
     free_window();
 
     return 0;
