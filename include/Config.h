@@ -38,6 +38,4 @@
 
 
 
-#define RANDMAX 40
-
 #endif

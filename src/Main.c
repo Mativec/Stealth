@@ -26,43 +26,23 @@ int main(int argc, char* argv[]) {
 
     int quit, nb_walls, nb_reliques;
 
-    int quit, nb_walls, nb_reliques, nb_relique;
-    int min, max;
-    double x, y;
-
     /*pour move gard a deplacer */
     int i;
     char *player_name;
-
-
     srand( time(NULL));
-    
-    
-    min = 20;
-    max = 40;
-
-
-
-
-
 
     player_name = "Player";
     quit = 0;
     nb_walls = 0;
-    nb_reliques = 3;
-    nb_relique = 3;
+    nb_reliques = 0;
 
     player = *init_player(5, 5);
     guard = *init_guard(25, 30);
     generate_walls(&walls, &nb_walls);
 
 
-/*ajout des reliques*/
-    for(i = 0; i < nb_relique; i++){
-        x = min + rand()/RANDMAX % (max + 1 - min);
-        y =   min + rand()/RANDMAX % (max + 1 - min);
-        add_Relique(&reliques, &nb_reliques, *init_relique((double)x,(double)y));
-    }
+    /*ajout des reliques*/
+    genere_relique(&reliques, &nb_reliques, walls, nb_walls);
 
     /* Main loop over the frames... */
     while (!quit) {
@@ -101,7 +81,7 @@ int main(int argc, char* argv[]) {
         */
         for(i = 0; i < nb_reliques; i++){
             /*printf("%s  %s\n", object_to_string(player), object_to_string(reliques[i].obj));*/
-            if(distance_between_objects(player, reliques[i].obj) == 0){
+            if(distance_between_objects(player.obj, reliques[i].obj) == 0){
                 reliques[i].is_picked_up = 1;
             }
         }

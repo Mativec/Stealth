@@ -39,6 +39,22 @@ void add_Relique(Engine_Relique** tab, int* nb_reliques, Engine_Relique relique)
     (*nb_reliques)++;
 }
 
+void genere_relique(Engine_Relique **tab, int *nb_reliques, Engine_Walls walls, int nb_walls){
+    int i, x , y;
+    Engine_Relique *tmp;
+    
+
+    for(i = 0; i < 3; i++){
+        do{
+            x =  rand() % SIZE_X;
+            y =  rand() % SIZE_Y;
+            tmp = init_relique((double)x,(double)y);
+        }while (wall_collision(tmp->obj, walls, nb_walls ));
+        
+        add_Relique(tab, nb_reliques, *tmp );
+    }
+
+}
 
 void free_reliques(Engine_Relique **tab){
     free(tab);

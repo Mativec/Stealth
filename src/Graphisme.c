@@ -56,7 +56,7 @@ void draw_wall(Engine_Wall wall) {
 }
 void draw_relique(Engine_Relique relique){
     if(!relique.is_picked_up){
-        MLV_draw_filled_rectangle(relique.obj.x * SCALE, relique.obj.y * SCALE , 1 * SCALE, 1 * SCALE, MLV_COLOR_YELLOW1);
+        MLV_draw_filled_rectangle(relique.obj.x * SCALE, relique.obj.y * SCALE , 1 * SCALE, 1 * SCALE, MLV_COLOR_GREEN1);
     }
 }
 void refresh(time_t end_time, time_t new_time) {

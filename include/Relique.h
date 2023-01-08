@@ -4,6 +4,7 @@
 #include <assert.h>
 #include <stdlib.h>
 #include "Object.h"
+#include "Wall.h"
 
 
 typedef struct{
@@ -19,5 +20,6 @@ void add_Relique(Engine_Relique** tab, int* nb_reliques, Engine_Relique relique)
 
 void free_reliques(Engine_Relique **tab);
 
+void genere_relique(Engine_Relique **tab, int *nb_reliques, Engine_Walls walls, int nb_walls);
 
 #endif
