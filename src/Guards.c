@@ -13,12 +13,15 @@
 
 Engine_Guard *init_guard(int x, int y) {
     Engine_Guard *new;
+
     new = (Engine_Guard *)malloc(sizeof(Engine_Guard));
 
     if (new != NULL) {
-        new->obj = init_object(x, y);
+        new->obj = *init_object(x, y);
         new->direction = OBJECT_NONE;
-        new->cpt = 0;
+
+        /* Speed between 0.3 & 0.8 -> don't change beside panic mode */
+        new->speed = (double)((rand() % 6) + 3) / 10;
     }
     return new;
 }
@@ -58,16 +61,19 @@ Engine_Orientation guard_direction() {
 }
 
 void move_guard(Engine_Guard *guard, Engine_Walls walls, int nb_walls) {
-    guard->cpt--;
+    float change_direction;
 
-    if (guard->cpt <= 0) {
-        guard->cpt = FREQ_MOVE_GUARD;
+    change_direction = rand() % PROB_NEXT_DIRECTION_GUARD;
+
+    /* 1/50 chance to change direction */
+    if (change_direction == 1 || guard->direction == OBJECT_NONE) {
         guard->direction = guard_direction();
     }
-    move_object(guard->obj, guard->direction);
 
-    if (wall_collision(*(guard->obj), walls, nb_walls)) {
-        move_object(guard->obj, OBJECT_REVERT);
+    move_object(&(guard->obj), guard->direction, guard->speed);
+
+    if (wall_collision(guard->obj, walls, nb_walls)) {
+        move_object(&(guard->obj), OBJECT_REVERT, 0);
         move_guard(guard, walls, nb_walls);
     }
 }

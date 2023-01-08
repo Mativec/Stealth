@@ -19,9 +19,10 @@
 #include "Relique.h"
 #include "Config.h"
 #include "Object.h"
+#include "Player.h"
 #include "Wall.h"
 
-void draw_window(Engine_Obj player, Engine_Obj guard, Engine_Walls walls, int nb_walls, Engine_Relique *reliques, int nb_reliques);
+void draw_window(Engine_Player player, Engine_Obj guard, Engine_Walls walls, int nb_walls, Engine_Relique *reliques, int nb_reliques);
    
 void refresh(time_t end_time, time_t new_time);
 
