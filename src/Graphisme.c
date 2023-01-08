@@ -83,7 +83,7 @@ void draw_window(Engine_Obj obj) {
     }
 
     /* clean the window */
-    MLV_clear_window(MLV_COLOR_AQUAMARINE1);
+    MLV_clear_window(MLV_COLOR_WHITE);
 
     
 
