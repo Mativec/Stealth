@@ -31,7 +31,7 @@ void title_screen(MLV_Image *image){
     int x,y;
 
     MLV_create_window( "SLEATH", "image", SIZE_X, SIZE_Y );
-    image = MLV_load_image("image_menu_s.jpg");
+    image = MLV_load_image("image_menu_sleath.jpg");
     MLV_resize_image(image, SIZE_X, SIZE_Y);
     MLV_draw_image(image, SIZE_ZERO , SIZE_ZERO);
 
@@ -40,9 +40,15 @@ void title_screen(MLV_Image *image){
     MLV_wait_mouse(&x,&y);
     /*affichage du bouton jouer et des options et de quitter*/
     do{
+        /*a travailler*/
         MLV_wait_mouse(&x, &y);
         if((x > SIZE_X/ 2.4) && x < ((SIZE_X/2.4) + (SIZE_X / 6)) && (y > SIZE_Y / 6) && (y < SIZE_Y / 6 + (SIZE_Y / 9))){
             printf("russi");
+            break;
+        }
+        if(x > SIZE_X /1.6  &&  x < (SIZE_X /1.6 + SIZE_Y/2) && y > SIZE_X / 6 && y < (SIZE_X / 6 + SIZE_Y/ 9)){
+            printf("jeu sorrti");
+            MLV_free_window();
             break;
         }
 
