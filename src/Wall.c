@@ -67,6 +67,24 @@ void generate_walls(Engine_Walls *walls, int *nb_walls) {
     add_wall(walls, nb_walls, *init_wall(SIZE_X, SIZE_Y - 1, OBJECT_LEFT, SIZE_X));
 }
 
+/*
+void terrain_generer(Engine_Walls *walls, int *nb_walls, Engine_Wall wall){
+    assert(walls != NULL);
+    assert(nb_walls != NULL);
+    assert(SIZE_X > SIZE_Y);
+    int minside = 9;
+    double probability;
+
+    if(SIZE_X < 2 * minside +1){
+        probability = 0;
+    }
+    if(SIZE_X < 4 * minside){
+        probability = 1/2;
+    }
+    add_wall(&walls, &nb_walls, *init_wall(SIZE_X /2 ));
+    
+}
+*/
 char *wall_to_string(Engine_Wall wall) {
     char *output;
 
