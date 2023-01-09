@@ -4,6 +4,7 @@
 #include <assert.h>
 #include <stdlib.h>
 #include "Object.h"
+#include "Player.h"
 #include "Wall.h"
 
 
@@ -22,4 +23,5 @@ void free_reliques(Engine_Relique **tab);
 
 void genere_relique(Engine_Relique **tab, int *nb_reliques, Engine_Walls walls, int nb_walls);
 
+void test_coord_reliques_joueurs(Engine_Relique *reliques, Engine_Player player, int nb_reliques);
 #endif

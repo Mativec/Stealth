@@ -104,8 +104,9 @@ void draw_player(Engine_Player player) {
 
 
 
-void draw_base_player(double x , double y){
-    MLV_draw_filled_circle( (double) x * SCALE, (double) y * SCALE, SIZE_PLAYER * SCALE + 2 , MLV_COLOR_YELLOW1);
+void draw_base_player(Engine_Obj base, double x, double y){
+    MLV_draw_filled_circle( x * SCALE, y * SCALE, SIZE_PLAYER * SCALE, MLV_COLOR_YELLOW1);
+    /*penser a free*/
 }
 
 void draw_window(Engine_Player player, Engine_Obj guard, Engine_Walls walls, int nb_walls, Engine_Relique *reliques, int nb_reliques) {
@@ -123,8 +124,6 @@ void draw_window(Engine_Player player, Engine_Obj guard, Engine_Walls walls, int
     
     /* draw on the window */
     draw_player(player);
-    
-
     draw_guard(guard);
 
     /* draw walls */
