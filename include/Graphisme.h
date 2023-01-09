@@ -28,4 +28,6 @@ void refresh(time_t end_time, time_t new_time);
 
 void free_window();
 
+
+void draw_base_player(double x , double y);
 #endif

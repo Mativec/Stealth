@@ -1,6 +1,6 @@
 CC = gcc
 OBJ = bin/Graphisme.o bin/Input.o bin/Object.o bin/Player.o bin/Guards.o bin/Wall.o bin/Relique.o
-CFLAGS = -ansi -pedantic -Wall
+CFLAGS = -ansi -pedantic -Wall -fsanitize=address
 LDFLAGS = -lMLV -lm -g
 EXEC = a.out
 

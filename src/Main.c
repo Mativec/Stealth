@@ -90,6 +90,8 @@ int main(int argc, char* argv[]) {
             quit = 1;
         }
 
+        
+
         /* Get the time in nano second at the end of the frame */
         clock_gettime(CLOCK_REALTIME, &new_time);
 
