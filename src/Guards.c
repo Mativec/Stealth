@@ -77,3 +77,8 @@ void move_guard(Engine_Guard *guard, Engine_Walls walls, int nb_walls) {
         move_guard(guard, walls, nb_walls);
     }
 }
+
+
+void mode_panique(Engine_Guard guard){
+    guard.speed = SPEED * 2;
+}

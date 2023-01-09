@@ -88,6 +88,7 @@ int main(int argc, char* argv[]) {
             /*printf("%s  %s\n", object_to_string(player), object_to_string(reliques[i].obj));*/
             if(distance_between_objects(player.obj, reliques[i].obj) == 0){
                 reliques[i].is_picked_up = 1;
+                mode_panique(guard);
             }
 
         }

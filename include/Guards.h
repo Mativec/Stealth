@@ -25,4 +25,7 @@ Engine_Orientation guard_direction();
 
 void move_guard(Engine_Guard *guard, Engine_Walls walls, int nb_walls);
 
+
+void mode_panique(Engine_Guard guard);
+
 #endif
