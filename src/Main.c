@@ -16,7 +16,7 @@
 
 int main(int argc, char* argv[]) {
     int i;
-    int quit, nb_walls, nb_reliques, nb_reliques_claims;
+    int quit, nb_walls, nb_guards, nb_reliques, nb_reliques_claims;
     char *player_name;
     struct timespec end_time, new_time;
 
@@ -30,6 +30,7 @@ int main(int argc, char* argv[]) {
     player_name = "Player";
     quit = 0;
     nb_walls = 0;
+    nb_guards = 0;
     nb_reliques = 0;
     nb_reliques_claims = 0;
 
@@ -37,7 +38,6 @@ int main(int argc, char* argv[]) {
 
     player = *init_player(BASE_PLAYER_X, BASE_PLAYER_Y);
     base_player = *init_object(player.obj.x, player.obj.y);
-    guard = *init_guard(25, 30);
     
     generate_walls(&walls, &nb_walls);
     generate_guards(&guards, &nb_guards);
@@ -69,13 +69,13 @@ int main(int argc, char* argv[]) {
 
         for(i = 0; i < nb_reliques; i++){
             /* If the relique aren't claimed and on the same position of the player */
-            if(!(reliques[i].is_picked_up) && distance_between_objects(player.obj, reliques[i].obj) == 0){
-                reliques[i].is_picked_up++;
+            if(!(reliques[i].is_picked_up) && contact_between_objects(player.obj, reliques[i].obj)){
+                reliques[i].is_picked_up = 1;
                 nb_reliques_claims++;
             }
-            if(nb_reliques_claims == nb_reliques){
-                quit = 2;
-            }
+        }
+        if(nb_reliques_claims == nb_reliques && contact_between_objects(player.obj, base_player)){
+            quit = 2;
         }
 
         for (i = 0; i < nb_guards; i++){
