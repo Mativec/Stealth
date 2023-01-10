@@ -129,11 +129,3 @@ int wall_collision(Engine_Obj obj, Engine_Walls walls, int nb_walls) {
     free(wall_coord);
     return collision;
 }
-
-void free_walls(Engine_Walls walls, int *nb_walls) {
-    assert(walls != NULL);
-    assert(nb_walls != NULL);
-
-    *nb_walls = 0;
-    free(walls);
-}
