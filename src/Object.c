@@ -77,9 +77,32 @@ char *object_to_string(Engine_Obj obj) {
 
 
 double distance_between_objects(Engine_Obj obj1, Engine_Obj obj2){
-  return sqrt(pow(obj1.x - obj2.x, 2) + pow(obj1.y - obj2.y, 2));
+    int *coord1, *coord2, result;
+
+    coord1 = get_object_coord(obj1);
+    coord2 = get_object_coord(obj2);
+    
+    result = sqrt(pow(coord1[0] - coord2[0], 2) + pow(coord1[1] - coord2[1], 2));
+
+    free(coord1);
+    free(coord2);
+
+    return result;
 }
 
+int contact_between_objects(Engine_Obj obj1, Engine_Obj obj2){
+    int *coord1, *coord2, result;
+
+    coord1 = get_object_coord(obj1);
+    coord2 = get_object_coord(obj2);
+    
+    result = (coord1[0] == coord2[0]) && (coord1[1] == coord2[1]);
+
+    free(coord1);
+    free(coord2);
+
+    return result;
+}
 
 
 char *orientation_to_string(Engine_Orientation orientation) {

@@ -17,3 +17,4 @@
 #include "Player.h"
 #include "Wall.h"
 #include "Guards.h"
+#include "Relique.h"

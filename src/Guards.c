@@ -27,10 +27,10 @@ Engine_Guard *init_guard(int x, int y) {
 }
 
 /*essayer de gerer la colision avec les angles de vues et le toucher du garde*/
-int detection(Engine_Obj guard, Engine_Obj player) {
+int detection(Engine_Obj guard, Engine_Obj target) {
     double d;
 
-    d = distance_between_objects(guard, player);
+    d = distance_between_objects(guard, target);
 
     if (d < SIGHT_GUARDIAN - SIZE_PLAYER) {
         return 1;
@@ -76,4 +76,14 @@ void move_guard(Engine_Guard *guard, Engine_Walls walls, int nb_walls) {
         move_object(&(guard->obj), OBJECT_REVERT, 0);
         move_guard(guard, walls, nb_walls);
     }
+}
+
+void generate_guards(Engine_Guard ** guards, int *nb_guards){
+
+    *guards = (Engine_Guard*)malloc(sizeof(Engine_Guard) * 5);
+
+    (*guards)[0] = *init_guard(25, 25);
+    (*guards)[1] = *init_guard(30, 30);
+
+    *nb_guards = 2;
 }

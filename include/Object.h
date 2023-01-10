@@ -84,6 +84,8 @@ int *get_object_coord(Engine_Obj obj);
  */
 double distance_between_objects(Engine_Obj obj1, Engine_Obj obj2);
 
+int contact_between_objects(Engine_Obj obj1, Engine_Obj obj2);
+
 /**
  * @brief Return a char* equivalent of the enum Engine_Orientation.
  * 

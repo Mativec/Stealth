@@ -34,9 +34,13 @@
 #define MANA_PER_TUILE 2
 
 #define SIZE_PLAYER 0.5
+#define BASE_PLAYER_X 5
+#define BASE_PLAYER_Y 5
 #define SIZE_GUARD 10
 #define SIZE_WALL 1
 
 #define SIGHT_GUARDIAN 4
+
+
 
 #endif
