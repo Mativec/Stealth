@@ -60,16 +60,6 @@ void genere_relique(Engine_Relique **tab, int *nb_reliques, Engine_Walls walls, 
 void test_coord_reliques_joueurs(Engine_Relique *reliques, Engine_Player player, int nb_reliques){
     int i;
     for(i = 0; i < nb_reliques; i++){
-        printf("pos joueur %f %f\n pos relique %f %f", player.obj.x, player.obj.y , reliques[i].obj.x, reliques[i].obj.y);
+        printf("pos joueur : %s\n pos relique : %s", object_to_string(player.obj) , object_to_string(reliques[i].obj));
     }
 }
-
-
-
-void free_reliques(Engine_Relique **tab){
-    free(tab);
-}
-
-
-
-

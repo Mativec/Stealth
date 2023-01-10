@@ -54,11 +54,13 @@ void draw_wall(Engine_Wall wall) {
 
     MLV_draw_filled_rectangle(x, y, width, height, MLV_COLOR_GRAY25);
 }
-void draw_relique(Engine_Relique relique){
-    if(!relique.is_picked_up){
-        MLV_draw_filled_rectangle(relique.obj.x * SCALE, relique.obj.y * SCALE , 1 * SCALE, 1 * SCALE, MLV_COLOR_GREEN1);
+
+void draw_relique(Engine_Relique relique) {
+    if (!relique.is_picked_up) {
+        MLV_draw_filled_rectangle(relique.obj.x * SCALE, relique.obj.y * SCALE, 1 * SCALE, 1 * SCALE, MLV_COLOR_GREEN1);
     }
 }
+
 void refresh(time_t end_time, time_t new_time) {
     int frametime, extratime;
 
@@ -87,7 +89,7 @@ void draw_player(Engine_Player player) {
     length = 20;
     offset = 15;
 
-    if(player.power_one){
+    if (player.power_one) {
         MLV_draw_filled_circle(player.obj.x * SCALE, player.obj.y * SCALE, SIZE_PLAYER * SCALE + 2, MLV_COLOR_GREY1);
     }
     if (anim_frame && player.power_two) {
@@ -102,16 +104,9 @@ void draw_player(Engine_Player player) {
     MLV_draw_filled_rectangle(player.obj.x * SCALE + offset, player.obj.y * SCALE - offset, (player.mana * length) / MAX_MANA, width, MLV_COLOR_BLUE);
 }
 
-
-
-void draw_base_player(Engine_Obj base, double x, double y){
-    MLV_draw_filled_circle( x * SCALE, y * SCALE, SIZE_PLAYER * SCALE, MLV_COLOR_YELLOW1);
-    /*penser a free*/
-}
-
-void draw_window(Engine_Player player, Engine_Obj guard, Engine_Walls walls, int nb_walls, Engine_Relique *reliques, int nb_reliques) {
+void draw_window(Engine_Obj base, Engine_Player player, Engine_Obj guard, Engine_Walls walls, int nb_walls, Engine_Relique *reliques, int nb_reliques) {
     static int init = 0;
-    int i;
+    int i, offset;
 
     /* Window initiated ? */
     if (!init) {
@@ -121,23 +116,20 @@ void draw_window(Engine_Player player, Engine_Obj guard, Engine_Walls walls, int
 
     /* clean the window */
     MLV_clear_window(MLV_COLOR_WHITE);
-    
+
     /* draw on the window */
-    draw_player(player);
+    for (i = 0; i < nb_reliques; i++) {
+        draw_relique(reliques[i]);
+    }
+
+    offset = SCALE/2;
+    MLV_draw_filled_rectangle(base.x * SCALE - offset, base.y * SCALE - offset, SCALE, SCALE, MLV_COLOR_YELLOW1);
+
     draw_guard(guard);
+    draw_player(player);
 
     /* draw walls */
     for (i = 0; i < nb_walls; i++) {
         draw_wall(walls[i]);
     }
-    /*draw reliques */
-    for(i = 0; i < nb_reliques; i++){
-        draw_relique(reliques[i]);
-    }
 }
-
-void free_window() {
-    MLV_free_window();
-}
-
-
