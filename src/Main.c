@@ -15,49 +15,49 @@
 #include "../include/all.h"
 
 int main(int argc, char* argv[]) {
+    int i;
+    int quit, nb_walls, nb_guards, nb_reliques, nb_reliques_claims;
+    char *player_name;
     struct timespec end_time, new_time;
-    
+
     Engine_Input event;
     Engine_Player player;
-    Engine_Guard guard;
+    Engine_Guard *guards;
     Engine_Walls walls;
-
-    int quit, nb_walls;
-    char *player_name;
-
-
-    srand(time(NULL));
+    Engine_Obj base_player;
+    Engine_Relique *reliques;
 
     player_name = "Player";
     quit = 0;
     nb_walls = 0;
+    nb_guards = 0;
+    nb_reliques = 0;
+    nb_reliques_claims = 0;
 
-    player = *init_player(5, 5);
-    guard = *init_guard(40, 30);
+    srand(time(NULL));
+
+    player = *init_player(BASE_PLAYER_X, BASE_PLAYER_Y);
+    base_player = *init_object(player.obj.x, player.obj.y);
+    
     generate_walls(&walls, &nb_walls);
+    generate_guards(&guards, &nb_guards);
+    genere_relique(&reliques, &nb_reliques, walls, nb_walls);
     add_wall(&walls, &nb_walls, *init_wall(30, 15, OBJECT_DOWN, 10));
 
     /* Main loop over the frames... */
     while (!quit) {
-        /*Some declaration of variables*/
 
         /*Get the time in nano second at the start of the frame */
         clock_gettime(CLOCK_REALTIME, &end_time);
 
         /* Display of the currentframe, samplefunction */
         /* THIS FUNCTION CALLS ONCE AND ONLY ONCE MLV_update_window */
-        draw_window(player, guard.obj, walls, nb_walls); /* Graphisme.h */
+        draw_window(base_player, player, guards, nb_guards, walls, nb_walls, reliques, nb_reliques); /* Graphisme.h */
 
         /* We get here some keyboard events*/
         event = get_event(&(player.power_one), &(player.power_two));
 
         /* Dealing with the events */
-        if (event != INPUT_NONE) {
-            /*
-            printf("%s\n", input_to_string(event));
-            */
-        }
-
         quit = (event == INPUT_QUIT);
 
         /* Move the entities on the grid */
@@ -68,10 +68,22 @@ int main(int argc, char* argv[]) {
             move_object(&(player.obj), OBJECT_REVERT, 0);
         }
 
-        move_guard(&guard, walls, nb_walls);
+        for(i = 0; i < nb_reliques; i++){
+            /* If the relique aren't claimed and on the same position of the player */
+            if(!(reliques[i].is_picked_up) && contact_between_objects(player.obj, reliques[i].obj)){
+                reliques[i].is_picked_up = 1;
+                nb_reliques_claims++;
+            }
+        }
+        if(nb_reliques_claims == nb_reliques && contact_between_objects(player.obj, base_player)){
+            quit = 2;
+        }
 
-        if (detection(guard.obj, player.obj, walls, nb_walls)) {
-            quit = 1;
+        for (i = 0; i < nb_guards; i++){
+            move_guard(&(guards[i]), walls, nb_walls);
+            if (detection(guards[i].obj, player.obj)) {
+                quit = 1;
+            }
         }
 
         /* Get the time in nano second at the end of the frame */
@@ -79,10 +91,14 @@ int main(int argc, char* argv[]) {
 
         refresh(end_time.tv_sec, new_time.tv_sec); /* Graphisme.h */
     }
+
+    if(quit == 2){
+        printf("Victoire\n");
+    }
+
     MLV_wait_milliseconds(1000);
     fprintf(stderr, "%s\n", player_to_string(player, player_name));
-    free_walls(walls, &nb_walls);
-    free_window();
-
+    
+    MLV_free_window();
     return 0;
 }

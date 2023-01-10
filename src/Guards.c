@@ -78,3 +78,13 @@ void move_guard(Engine_Guard *guard, Engine_Walls walls, int nb_walls) {
         move_guard(guard, walls, nb_walls);
     }
 }
+
+void generate_guards(Engine_Guard ** guards, int *nb_guards){
+
+    *guards = (Engine_Guard*)malloc(sizeof(Engine_Guard) * 5);
+
+    (*guards)[0] = *init_guard(25, 25);
+    (*guards)[1] = *init_guard(30, 30);
+
+    *nb_guards = 2;
+}

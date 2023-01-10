@@ -30,10 +30,14 @@
 #define MAX_SPEED_PLAYER 0.9
 
 #define SIZE_PLAYER 0.5
+#define BASE_PLAYER_X 5
+#define BASE_PLAYER_Y 5
 #define SIZE_GUARD 10
 #define SIZE_WALL 1
 
 #define SIGHT_GUARDIAN 4
 #define MAX_MANA 400
+
+
 
 #endif
