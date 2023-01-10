@@ -22,7 +22,7 @@ int main(int argc, char* argv[]) {
 
     Engine_Input event;
     Engine_Player player;
-    Engine_Guard guard;
+    Engine_Guard *guards;
     Engine_Walls walls;
     Engine_Obj base_player;
     Engine_Relique *reliques;
@@ -33,15 +33,15 @@ int main(int argc, char* argv[]) {
     nb_reliques = 0;
     nb_reliques_claims = 0;
 
-    srand( time(NULL));
+    srand(time(NULL));
 
     player = *init_player(BASE_PLAYER_X, BASE_PLAYER_Y);
     base_player = *init_object(player.obj.x, player.obj.y);
     guard = *init_guard(25, 30);
     
     generate_walls(&walls, &nb_walls);
+    generate_guards(&guards, &nb_guards);
     genere_relique(&reliques, &nb_reliques, walls, nb_walls);
-
 
     /* Main loop over the frames... */
     while (!quit) {
@@ -51,7 +51,7 @@ int main(int argc, char* argv[]) {
 
         /* Display of the currentframe, samplefunction */
         /* THIS FUNCTION CALLS ONCE AND ONLY ONCE MLV_update_window */
-        draw_window(base_player, player, guard.obj, walls, nb_walls, reliques, nb_reliques); /* Graphisme.h */
+        draw_window(base_player, player, guards, nb_guards, walls, nb_walls, reliques, nb_reliques); /* Graphisme.h */
 
         /* We get here some keyboard events*/
         event = get_event(&(player.power_one), &(player.power_two));
@@ -67,8 +67,6 @@ int main(int argc, char* argv[]) {
             move_object(&(player.obj), OBJECT_REVERT, 0);
         }
 
-        move_guard(&guard, walls, nb_walls);
-
         for(i = 0; i < nb_reliques; i++){
             /* If the relique aren't claimed and on the same position of the player */
             if(!(reliques[i].is_picked_up) && distance_between_objects(player.obj, reliques[i].obj) == 0){
@@ -80,8 +78,11 @@ int main(int argc, char* argv[]) {
             }
         }
 
-        if (detection(guard.obj, player.obj)) {
-            quit = 1;
+        for (i = 0; i < nb_guards; i++){
+            move_guard(&(guards[i]), walls, nb_walls);
+            if (detection(guards[i].obj, player.obj)) {
+                quit = 1;
+            }
         }
 
         /* Get the time in nano second at the end of the frame */

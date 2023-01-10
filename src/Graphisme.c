@@ -61,6 +61,18 @@ void draw_relique(Engine_Relique relique) {
     }
 }
 
+void draw_guards(Engine_Guard * guards, int nb_guards){
+    for(i = 0; i < nb_guards; i++){
+        MLV_draw_filled_circle(guards[i].obj.x * SCALE, guards[i].obj.y * SCALE, SIZE_GUARD, MLV_COLOR_BLUE);
+    }
+}
+
+void draw_fov_guards(Engine_Guard * guards, int nb_guards){
+    for(i = 0; i < nb_guards; i++){
+        MLV_draw_filled_circle(guards[i].obj.x * SCALE, guards[i].obj.y * SCALE, SIGHT_GUARDIAN * SCALE, MLV_COLOR_LIGHT_BLUE);
+    }
+}
+
 void refresh(time_t end_time, time_t new_time) {
     int frametime, extratime;
 
@@ -76,11 +88,6 @@ void refresh(time_t end_time, time_t new_time) {
     MLV_actualise_window();
 }
 
-void draw_guard(Engine_Obj guard) {
-    MLV_draw_filled_circle(guard.x * SCALE, guard.y * SCALE, SIGHT_GUARDIAN * SCALE, MLV_COLOR_LIGHT_BLUE);
-    MLV_draw_filled_circle(guard.x * SCALE, guard.y * SCALE, SIZE_GUARD, MLV_COLOR_BLUE);
-}
-
 void draw_player(Engine_Player player) {
     static int anim_frame = 0;
     float length, width, offset;
@@ -89,7 +96,7 @@ void draw_player(Engine_Player player) {
     length = 20;
     offset = 15;
 
-    if(player.power_one){
+    if (player.power_one) {
         MLV_draw_filled_circle(player.obj.x * SCALE, player.obj.y * SCALE, SIZE_PLAYER * SCALE + 2, MLV_COLOR_GREY1);
     }
     if (anim_frame && player.power_two) {
@@ -104,7 +111,7 @@ void draw_player(Engine_Player player) {
     MLV_draw_filled_rectangle(player.obj.x * SCALE + offset, player.obj.y * SCALE - offset, (player.mana * length) / MAX_MANA, width, MLV_COLOR_BLUE);
 }
 
-void draw_window(Engine_Obj base, Engine_Player player, Engine_Obj guard, Engine_Walls walls, int nb_walls, Engine_Relique *reliques, int nb_reliques) {
+void draw_window(Engine_Obj base, Engine_Player player, Engine_Guard *guards, int nb_guards, Engine_Walls walls, int nb_walls, Engine_Relique *reliques, int nb_reliques){
     static int init = 0;
     int i, offset;
 
@@ -117,15 +124,22 @@ void draw_window(Engine_Obj base, Engine_Player player, Engine_Obj guard, Engine
     /* clean the window */
     MLV_clear_window(MLV_COLOR_WHITE);
 
-    /* draw on the window */
+    /* draw guard's fov */
+    draw_fov_guards(guards, nb_guards);
+
+    /* draw reliques */
     for (i = 0; i < nb_reliques; i++) {
         draw_relique(reliques[i]);
     }
 
+    /* draw player's spawn */
     offset = SCALE/2;
     MLV_draw_filled_rectangle(base.x * SCALE - offset, base.y * SCALE - offset, SCALE, SCALE, MLV_COLOR_YELLOW1);
 
-    draw_guard(guard);
+    /* draw guards */
+    draw_guards(guards, nb_guards);
+    
+    /* draw player */
     draw_player(player);
 
     /* draw walls */
