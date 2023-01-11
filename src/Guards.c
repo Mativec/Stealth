@@ -21,7 +21,7 @@ Engine_Guard *init_guard(int x, int y) {
         new->direction = OBJECT_NONE;
 
         /* Speed between 0.3 & 0.8 -> don't change beside panic mode */
-        new->speed = (double)((rand() % 6) + 3) / 10;
+        new->speed = 0;
     }
     return new;
 }
@@ -60,10 +60,17 @@ Engine_Orientation guard_direction() {
     return OBJECT_NONE;
 }
 
+double guard_speed(){
+    return (double)((rand() % 6) + 3) / 10;
+}
+
 void move_guard(Engine_Guard *guard, Engine_Walls walls, int nb_walls) {
     float change_direction;
 
     change_direction = rand() % PROB_NEXT_DIRECTION_GUARD;
+    if(guard->speed == 0){
+        guard->speed = guard_speed();
+    }
 
     /* 1/50 chance to change direction */
     if (change_direction == 1 || guard->direction == OBJECT_NONE) {
@@ -73,7 +80,14 @@ void move_guard(Engine_Guard *guard, Engine_Walls walls, int nb_walls) {
     move_object(&(guard->obj), guard->direction, guard->speed);
 
     if (wall_collision(guard->obj, walls, nb_walls)) {
+        /* cancel movement */
         move_object(&(guard->obj), OBJECT_REVERT, 0);
+
+        /* reset guard's property */
+        guard->direction = OBJECT_NONE;
+        guard->speed = 0;
+
+        /* retry a movement */
         move_guard(guard, walls, nb_walls);
     }
 }
