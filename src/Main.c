@@ -117,11 +117,10 @@ int main(int argc, char* argv[]) {
     } while (!quit);
 
     if(quit == 2){
-        printf("Victoire ! %d pts\n", player.score);
+        printf("Victoire ! %s -> %d pts\n", player_name, player.score);
     }
     
     MLV_wait_milliseconds(1000);
-    fprintf(stderr, "%s\n", player_to_string(player, player_name));
     
     MLV_free_window();
     return 0;
