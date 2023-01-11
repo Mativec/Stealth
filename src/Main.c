@@ -15,9 +15,9 @@
 #include "../include/all.h"
 
 int main(int argc, char* argv[]) {
-    int i;
+    int i, j;
     int quit, nb_walls, nb_guards, nb_reliques, nb_reliques_claims;
-    int mana_cost;
+    int mana_cost, panic_mode, timer_panic_mode;
     char *player_name;
     struct timespec end_time, new_time;
 
@@ -34,6 +34,8 @@ int main(int argc, char* argv[]) {
     nb_guards = 0;
     nb_reliques = 0;
     nb_reliques_claims = 0;
+    panic_mode = 0;
+    timer_panic_mode = ((1/60) * 60) * TIMER_PANIC;
 
     srand(time(NULL));
 
@@ -52,7 +54,7 @@ int main(int argc, char* argv[]) {
 
         /* Display of the currentframe, samplefunction */
         /* THIS FUNCTION CALLS ONCE AND ONLY ONCE MLV_update_window */
-        draw_window(base_player, player, guards, nb_guards, walls, nb_walls, reliques, nb_reliques); /* Graphisme.h */
+        draw_window(base_player, player, guards, nb_guards, panic_mode, walls, nb_walls, reliques, nb_reliques); /* Graphisme.h */
 
         /* We get here some keyboard events*/
         event = get_event(&(player.overcharge), &(player.invisibility));
@@ -84,6 +86,13 @@ int main(int argc, char* argv[]) {
                 reliques[i].is_picked_up = 1;
                 nb_reliques_claims++;
             }
+            if(!panic_mode){
+                for (j = 0; j < nb_guards; j++){
+                    if(reliques[i].is_picked_up && detection(guards[j], reliques[i].obj, panic_mode)){
+                        panic_mode = 1;
+                    }
+                }
+            }
         }
         if(nb_reliques_claims == nb_reliques && contact_between_objects(player.obj, base_player)){
             quit = 2;
@@ -91,15 +100,21 @@ int main(int argc, char* argv[]) {
 
         /* His seen by a guardian and didn't activate the invisibility */
         for (i = 0; i < nb_guards; i++){
-            move_guard(&(guards[i]), walls, nb_walls);
-            if (detection(guards[i].obj, player.obj) && !player.invisibility) {
+            move_guard(&(guards[i]), panic_mode, walls, nb_walls);
+            if (detection(guards[i], player.obj, panic_mode) && !player.invisibility) {
                 quit = 1;
             }
-
+        }
         /* TODO : Mana on tuile */
         if(player.mana > MAX_MANA){
             player.mana = MAX_MANA;
         }
+
+        if(panic_mode){
+            timer_panic_mode -= 1;
+            if(timer_panic_mode <= 0){
+                panic_mode = 0;
+            }
         }
 
         /* Get the time in nano second at the end of the frame */
@@ -109,11 +124,10 @@ int main(int argc, char* argv[]) {
     } while (!quit);
 
     if(quit == 2){
-        printf("Victoire ! %dpts\n", player.score);
+        printf("Victoire ! %s -> %d pts\n", player_name, player.score);
     }
     
     MLV_wait_milliseconds(1000);
-    fprintf(stderr, "%s\n", player_to_string(player, player_name));
     
     MLV_free_window();
     return 0;
