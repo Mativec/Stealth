@@ -106,8 +106,12 @@ void draw_player(Engine_Player player) {
         alpha /= 2;
     }
     MLV_draw_filled_circle(player.obj.x * SCALE, player.obj.y * SCALE, SIZE_PLAYER * SCALE, MLV_convert_rgba_to_color(red, green, blue, alpha));
+
+    /* Mana jauge */
     MLV_draw_rectangle(player.obj.x * SCALE + offset, player.obj.y * SCALE - offset, length, width, MLV_COLOR_GREY);
-    MLV_draw_filled_rectangle(player.obj.x * SCALE + offset, player.obj.y * SCALE - offset, (player.mana * length) / MAX_MANA, width, MLV_COLOR_BLUE);
+    if(player.mana > 0){
+        MLV_draw_filled_rectangle(player.obj.x * SCALE + offset, player.obj.y * SCALE - offset, (player.mana * length) / MAX_MANA, width, MLV_COLOR_BLUE);
+    }
 }
 
 void draw_window(Engine_Obj base, Engine_Player player, Engine_Guard *guards, int nb_guards, Engine_Walls walls, int nb_walls, Engine_Relique *reliques, int nb_reliques) {

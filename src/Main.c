@@ -98,7 +98,6 @@ int main(int argc, char* argv[]) {
             }
 
         /* TODO : Mana on tuile */
-        player.mana ++;
         if(player.mana > MAX_MANA){
             player.mana = MAX_MANA;
         }
@@ -109,6 +108,10 @@ int main(int argc, char* argv[]) {
 
         refresh(end_time.tv_sec, new_time.tv_sec); /* Graphisme.h */
     } while (!quit);
+
+    if(quit == 2){
+        printf("Victoire ! %dpts\n", player.score);
+    }
     
     MLV_wait_milliseconds(1000);
     fprintf(stderr, "%s\n", player_to_string(player, player_name));
