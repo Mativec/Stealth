@@ -76,7 +76,7 @@ char *object_to_string(Engine_Obj obj) {
 }
 
 
-double distance_between_objects(Engine_Obj obj1, Engine_Obj obj2){
+int distance_between_objects(Engine_Obj obj1, Engine_Obj obj2){
     int *coord1, *coord2, result;
 
     coord1 = get_object_coord(obj1);

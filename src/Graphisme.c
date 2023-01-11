@@ -140,8 +140,8 @@ void draw_alert(int panic_mode) {
     if (panic_mode) {
         MLV_convert_color_to_rgba(MLV_COLOR_RED, &red, &green, &blue, &alpha);
         alpha /= 2;
-        for(i = 0; i < SCALE; i++){
-            MLV_draw_rectangle(i, i, (SIZE_X - i) * SCALE, (SIZE_Y - i) * SCALE, MLV_convert_rgba_to_color(red, green, blue, alpha));
+        for(i = 0; i < 5; i++){
+            MLV_draw_rectangle(i, i, SIZE_X* SCALE - i, SIZE_Y * SCALE - i, MLV_convert_rgba_to_color(red, green, blue, alpha));
         }
     }
 }
@@ -175,8 +175,6 @@ void draw_window(Engine_Obj base, Engine_Player player, Engine_Guard *guards, in
     draw_guards(guards, nb_guards);
 
     /* draw player */
-    draw_player(player);
-
     draw_player(player);
 
     /* draw walls */

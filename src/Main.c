@@ -17,7 +17,7 @@
 int main(int argc, char* argv[]) {
     int i, j;
     int quit, nb_walls, nb_guards, nb_reliques, nb_reliques_claims;
-    int mana_cost, panic_mode;
+    int mana_cost, panic_mode, timer_panic_mode;
     char *player_name;
     struct timespec end_time, new_time;
 
@@ -35,6 +35,7 @@ int main(int argc, char* argv[]) {
     nb_reliques = 0;
     nb_reliques_claims = 0;
     panic_mode = 0;
+    timer_panic_mode = ((1/60) * 60) * TIMER_PANIC;
 
     srand(time(NULL));
 
@@ -86,9 +87,8 @@ int main(int argc, char* argv[]) {
                 nb_reliques_claims++;
             }
             if(!panic_mode){
-
                 for (j = 0; j < nb_guards; j++){
-                    if(reliques[i].is_picked_up && detection(guards[j], reliques->obj)){
+                    if(reliques[i].is_picked_up && detection(guards[j], reliques[i].obj, panic_mode)){
                         panic_mode = 1;
                     }
                 }
@@ -101,13 +101,20 @@ int main(int argc, char* argv[]) {
         /* His seen by a guardian and didn't activate the invisibility */
         for (i = 0; i < nb_guards; i++){
             move_guard(&(guards[i]), panic_mode, walls, nb_walls);
-            if (detection(guards[i], player.obj) && !player.invisibility) {
+            if (detection(guards[i], player.obj, panic_mode) && !player.invisibility) {
                 quit = 1;
             }
         }
         /* TODO : Mana on tuile */
         if(player.mana > MAX_MANA){
             player.mana = MAX_MANA;
+        }
+
+        if(panic_mode){
+            timer_panic_mode -= 1;
+            if(timer_panic_mode <= 0){
+                panic_mode = 0;
+            }
         }
 
         /* Get the time in nano second at the end of the frame */

@@ -40,6 +40,8 @@
 #define SIZE_WALL 1
 
 #define SIGHT_GUARDIAN 4
+
+#define TIMER_PANIC 30 /* secondes */
 #define SIGHT_GUARDIAN_PANIC 6
 
 
