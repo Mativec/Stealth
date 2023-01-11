@@ -91,26 +91,27 @@ void refresh(time_t end_time, time_t new_time) {
 }
 
 void draw_player(Engine_Player player) {
-    static int anim_frame = 0;
     float length, width, offset;
+    Uint8 red, green, blue, alpha;
 
     width = 10;
     length = 20;
     offset = 15;
 
-    if (player.power_one) {
+    MLV_convert_color_to_rgba(MLV_COLOR_RED, &red, &green, &blue, &alpha);
+    if(player.overcharge){
         MLV_draw_filled_circle(player.obj.x * SCALE, player.obj.y * SCALE, SIZE_PLAYER * SCALE + 2, MLV_COLOR_GREY1);
     }
-    if (anim_frame && player.power_two) {
-        MLV_draw_filled_circle(player.obj.x * SCALE, player.obj.y * SCALE, SIZE_PLAYER * SCALE, MLV_COLOR_GREEN);
-        anim_frame = 0;
-    } else {
-        MLV_draw_filled_circle(player.obj.x * SCALE, player.obj.y * SCALE, SIZE_PLAYER * SCALE, MLV_COLOR_RED);
-        anim_frame = 1;
+    if (player.invisibility) {
+        alpha /= 2;
     }
+    MLV_draw_filled_circle(player.obj.x * SCALE, player.obj.y * SCALE, SIZE_PLAYER * SCALE, MLV_convert_rgba_to_color(red, green, blue, alpha));
 
+    /* Mana jauge */
     MLV_draw_rectangle(player.obj.x * SCALE + offset, player.obj.y * SCALE - offset, length, width, MLV_COLOR_GREY);
-    MLV_draw_filled_rectangle(player.obj.x * SCALE + offset, player.obj.y * SCALE - offset, (player.mana * length) / MAX_MANA, width, MLV_COLOR_BLUE);
+    if(player.mana > 0){
+        MLV_draw_filled_rectangle(player.obj.x * SCALE + offset, player.obj.y * SCALE - offset, (player.mana * length) / MAX_MANA, width, MLV_COLOR_BLUE);
+    }
 }
 
 void draw_window(Engine_Obj base, Engine_Player player, Engine_Guard *guards, int nb_guards, Engine_Walls walls, int nb_walls, Engine_Relique *reliques, int nb_reliques) {
@@ -142,6 +143,8 @@ void draw_window(Engine_Obj base, Engine_Player player, Engine_Guard *guards, in
     draw_guards(guards, nb_guards);
 
     /* draw player */
+    draw_player(player);
+
     draw_player(player);
 
     /* draw walls */

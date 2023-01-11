@@ -17,6 +17,7 @@
 int main(int argc, char* argv[]) {
     int i;
     int quit, nb_walls, nb_guards, nb_reliques, nb_reliques_claims;
+    int mana_cost;
     char *player_name;
     struct timespec end_time, new_time;
 
@@ -44,7 +45,7 @@ int main(int argc, char* argv[]) {
     genere_relique(&reliques, &nb_reliques, walls, nb_walls);
 
     /* Main loop over the frames... */
-    while (!quit) {
+    do {
 
         /*Get the time in nano second at the start of the frame */
         clock_gettime(CLOCK_REALTIME, &end_time);
@@ -54,9 +55,19 @@ int main(int argc, char* argv[]) {
         draw_window(base_player, player, guards, nb_guards, walls, nb_walls, reliques, nb_reliques); /* Graphisme.h */
 
         /* We get here some keyboard events*/
-        event = get_event(&(player.power_one), &(player.power_two));
+        event = get_event(&(player.overcharge), &(player.invisibility));
 
         /* Dealing with the events */
+        
+        mana_cost = (player.overcharge * MANA_PER_TUILE) +  (player.invisibility * MANA_PER_TUILE);
+
+        if(player.mana >= mana_cost){
+            player.mana -= mana_cost;
+        }else{
+            player.invisibility = 0;
+            player.overcharge = 0;
+        }
+
         quit = (event == INPUT_QUIT);
 
         /* Move the entities on the grid */
@@ -78,23 +89,29 @@ int main(int argc, char* argv[]) {
             quit = 2;
         }
 
+        /* His seen by a guardian and didn't activate the invisibility */
         for (i = 0; i < nb_guards; i++){
             move_guard(&(guards[i]), walls, nb_walls);
-            if (detection(guards[i].obj, player.obj)) {
+            if (detection(guards[i].obj, player.obj) && !player.invisibility) {
                 quit = 1;
             }
+
+        /* TODO : Mana on tuile */
+        if(player.mana > MAX_MANA){
+            player.mana = MAX_MANA;
+        }
         }
 
         /* Get the time in nano second at the end of the frame */
         clock_gettime(CLOCK_REALTIME, &new_time);
 
         refresh(end_time.tv_sec, new_time.tv_sec); /* Graphisme.h */
-    }
+    } while (!quit);
 
     if(quit == 2){
-        printf("Victoire\n");
+        printf("Victoire ! %dpts\n", player.score);
     }
-
+    
     MLV_wait_milliseconds(1000);
     fprintf(stderr, "%s\n", player_to_string(player, player_name));
     
