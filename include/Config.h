@@ -40,6 +40,7 @@
 #define SIZE_WALL 1
 
 #define SIGHT_GUARDIAN 4
+#define SIGHT_GUARDIAN_PANIC 6
 
 
 

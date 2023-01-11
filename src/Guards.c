@@ -27,10 +27,10 @@ Engine_Guard *init_guard(int x, int y) {
 }
 
 /*essayer de gerer la colision avec les angles de vues et le toucher du garde*/
-int detection(Engine_Obj guard, Engine_Obj target) {
+int detection(Engine_Guard guard, Engine_Obj target) {
     double d;
 
-    d = distance_between_objects(guard, target);
+    d = distance_between_objects(guard.obj, target);
 
     if (d < SIGHT_GUARDIAN - SIZE_PLAYER) {
         return 1;
@@ -60,16 +60,21 @@ Engine_Orientation guard_direction() {
     return OBJECT_NONE;
 }
 
-double guard_speed(){
-    return (double)((rand() % 6) + 3) / 10;
+double guard_speed(int panic_mode){
+    if(panic_mode){
+        return 1;
+    } else {
+        return (double)((rand() % 6) + 3) / 10;
+    }
 }
 
-void move_guard(Engine_Guard *guard, Engine_Walls walls, int nb_walls) {
+void move_guard(Engine_Guard *guard, int panic_mode, Engine_Walls walls, int nb_walls) {
     float change_direction;
+    int i;
 
     change_direction = rand() % PROB_NEXT_DIRECTION_GUARD;
     if(guard->speed == 0){
-        guard->speed = guard_speed();
+        guard->speed = guard_speed(panic_mode);
     }
 
     /* 1/50 chance to change direction */
@@ -79,7 +84,7 @@ void move_guard(Engine_Guard *guard, Engine_Walls walls, int nb_walls) {
 
     move_object(&(guard->obj), guard->direction, guard->speed);
 
-    if (wall_collision(guard->obj, walls, nb_walls)) {
+    if (!panic_mode && wall_collision(guard->obj, walls, nb_walls)) {
         /* cancel movement */
         move_object(&(guard->obj), OBJECT_REVERT, 0);
 
@@ -88,7 +93,23 @@ void move_guard(Engine_Guard *guard, Engine_Walls walls, int nb_walls) {
         guard->speed = 0;
 
         /* retry a movement */
-        move_guard(guard, walls, nb_walls);
+        move_guard(guard, panic_mode, walls, nb_walls);
+    }
+    else if(panic_mode){
+        for (i = 0; i < nb_walls; i++){
+            if(detection(*guard, walls[i].obj)){
+                /* cancel movement */
+                move_object(&(guard->obj), OBJECT_REVERT, 0);
+
+                /* reset guard's property */
+                guard->direction = OBJECT_NONE;
+                guard->speed = 0;
+
+                /* retry a movement */
+                move_guard(guard, panic_mode, walls, nb_walls);
+                return;
+            }
+        }
     }
 }
 
