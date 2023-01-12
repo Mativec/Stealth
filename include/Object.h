@@ -82,7 +82,7 @@ int *get_object_coord(Engine_Obj obj);
  * @param obj2
  * @return double
  */
-double distance_between_objects(Engine_Obj obj1, Engine_Obj obj2);
+int distance_between_objects(Engine_Obj obj1, Engine_Obj obj2);
 
 int contact_between_objects(Engine_Obj obj1, Engine_Obj obj2);
 

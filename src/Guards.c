@@ -21,13 +21,16 @@ Engine_Guard *init_guard(int x, int y) {
         new->direction = OBJECT_NONE;
 
         /* Speed between 0.3 & 0.8 -> don't change beside panic mode */
-        new->speed = (double)((rand() % 6) + 3) / 10;
+        new->speed = 0;
     }
     return new;
 }
 
-int in_fov_guard(Engine_Guard guard, Engine_Obj target) {
-    return distance_between_objects(guard.obj, target) < SIGHT_GUARDIAN;
+int in_fov_guard(Engine_Guard guard, Engine_Obj target, int panic_mode) {
+    int d;
+
+    d = distance_between_objects(guard.obj, target);
+    return panic_mode? d < SIGHT_GUARDIAN_PANIC : d < SIGHT_GUARDIAN;
 }
 
 int detection_axis_y(Engine_Guard guard, Engine_Obj target, Engine_Walls walls, int nb_walls){
@@ -109,20 +112,54 @@ Engine_Orientation guard_direction() {
     return OBJECT_NONE;
 }
 
-void move_guard(Engine_Guard *guard, Engine_Walls walls, int nb_walls) {
-    float change_direction;
+double guard_speed(int panic_mode){
+    double speed;
 
-    change_direction = rand() % PROB_NEXT_DIRECTION_GUARD;
+    speed = panic_mode? 1 : (double)((rand() % 6) + 3) / 10;
 
-    if (change_direction == 1 || guard->direction == OBJECT_NONE) {
+    return speed;
+}
+
+void move_guard(Engine_Guard *guard, int panic_mode, Engine_Walls walls, int nb_walls) {
+    int i;
+
+    if(guard->speed == 0 || panic_mode || guard->speed == 1){
+        guard->speed = guard_speed(panic_mode);
+    }
+
+    /* 1/50 chance to change direction */
+    if (guard->direction == OBJECT_NONE || (rand() % PROB_NEXT_DIRECTION_GUARD) == 1 ) {
         guard->direction = guard_direction();
     }
 
     move_object(&(guard->obj), guard->direction, guard->speed);
 
-    if (wall_collision(guard->obj, walls, nb_walls)) {
+    if (!panic_mode && wall_collision(guard->obj, walls, nb_walls)) {
+        /* cancel movement */
         move_object(&(guard->obj), OBJECT_REVERT, 0);
-        move_guard(guard, walls, nb_walls);
+
+        /* reset guard's property */
+        guard->direction = OBJECT_NONE;
+        guard->speed = 0;
+
+        /* retry a movement */
+        move_guard(guard, panic_mode, walls, nb_walls);
+    }
+    else if(panic_mode){
+        for (i = 0; i < nb_walls; i++){
+            if(detection(*guard, walls[i].obj, panic_mode)){
+                /* cancel movement */
+                move_object(&(guard->obj), OBJECT_REVERT, 0);
+
+                /* reset guard's property */
+                guard->direction = OBJECT_NONE;
+                guard->speed = 0;
+
+                /* retry a movement */
+                move_guard(guard, panic_mode, walls, nb_walls);
+                return;
+            }
+        }
     }
 }
 
