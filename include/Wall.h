@@ -40,7 +40,7 @@ typedef struct _wall {
  * @param size : width of the wall (from the base).
  * @return Engine_Wall* a pointer to a Wall.
  */
-Engine_Wall *init_wall(float x, float y, Engine_Orientation way, int size);
+Engine_Wall *init_wall(int x, int y, Engine_Orientation way, int size);
 
 
 /**
@@ -52,6 +52,7 @@ Engine_Wall *init_wall(float x, float y, Engine_Orientation way, int size);
  */
 void add_wall(Engine_Walls *walls, int *nb_walls, Engine_Wall wall);
 
+void generate_border(Engine_Walls *walls, int *nb_walls);
 
 /**
  * @brief generate all the walls for the game and stock them on walls.
@@ -59,7 +60,7 @@ void add_wall(Engine_Walls *walls, int *nb_walls, Engine_Wall wall);
  * @param walls : a pointer to an array of Engine_Wall .
  * @param nb_walls : a pointer to the size of walls .
  */
-void generate_walls(Engine_Walls *walls, int *nb_walls);
+void generate_walls(Engine_Walls *walls, int *nb_walls, int x, int y);
 
 
 /**

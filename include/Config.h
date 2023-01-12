@@ -44,6 +44,6 @@
 #define TIMER_PANIC 30 /* secondes */
 #define SIGHT_GUARDIAN_PANIC 6
 
-
+#define MINSIDE 9
 
 #endif

@@ -11,7 +11,7 @@
 
 #include "../include/Wall.h"
 
-Engine_Wall *init_wall(float x, float y, Engine_Orientation way, int size) {
+Engine_Wall *init_wall(int x, int y, Engine_Orientation way, int size) {
     Engine_Wall *new_wall;
     Engine_Obj *obj;
 
@@ -57,14 +57,54 @@ void add_wall(Engine_Walls *walls, int *nb_walls, Engine_Wall wall) {
     (*nb_walls)++;
 }
 
-void generate_walls(Engine_Walls *walls, int *nb_walls) {
+void generate_border(Engine_Walls *walls, int *nb_walls){
     assert(walls != NULL);
     assert(nb_walls != NULL);
-
+    
     add_wall(walls, nb_walls, *init_wall(0, 0, OBJECT_DOWN, SIZE_Y));
     add_wall(walls, nb_walls, *init_wall(0, 0, OBJECT_RIGHT, SIZE_X));
     add_wall(walls, nb_walls, *init_wall(SIZE_X - 1, SIZE_Y, OBJECT_UP, SIZE_Y));
     add_wall(walls, nb_walls, *init_wall(SIZE_X, SIZE_Y - 1, OBJECT_LEFT, SIZE_X));
+}
+
+void generate_walls(Engine_Walls *walls, int *nb_walls, int x, int y){
+    int tmp, split, opening;
+    Engine_Orientation direction;
+
+    assert(walls != NULL);
+    assert(nb_walls != NULL);
+
+    if(x <= y){
+        tmp = x;
+        x = y;
+        y = tmp;
+        direction = OBJECT_RIGHT;
+    }
+    else{
+        direction = OBJECT_DOWN;
+    }
+    fprintf(stderr, "x : %d, y : %d\n", x, y);
+
+
+    if((x < (2 * MINSIDE + 1)) || ((x < (4 * MINSIDE)) && ((rand() % 2) == 0))){
+        return;
+    }
+
+    /* Choose a random point to divise the sub-board in two part */
+    split = rand() % (x - 2 * MINSIDE) + MINSIDE;
+
+    /* Choose a random point for an 3 bloc opening */
+    opening = rand() % (MINSIDE - 2) + 1;
+
+    fprintf(stderr, "splt : %d, opening : %d\n", split, opening);
+
+    /* Generate the walls with an 3 bloc opening */
+    add_wall(walls, nb_walls, *init_wall(split, 0, direction, opening));
+    add_wall(walls, nb_walls, *init_wall(split, opening + 3, direction, y - opening));
+    
+    /* Appel récursif de la fonction pour générer des murs dans les compartiments créés */
+    generate_walls(walls, nb_walls, split, y);
+    generate_walls(walls, nb_walls, x - split - 2, y);
 }
 
 char *wall_to_string(Engine_Wall wall) {

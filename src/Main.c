@@ -47,7 +47,15 @@ int main(int argc, char* argv[]) {
     player = *init_player(BASE_PLAYER_X, BASE_PLAYER_Y);
     base_player = *init_object(player.obj.x, player.obj.y);
     
-    generate_walls(&walls, &nb_walls);
+    generate_border(&walls, &nb_walls);
+    generate_walls(&walls, &nb_walls, 58, 43);
+
+    fprintf(stderr, "ok, %d\n", nb_walls);
+    for(i = 0; i < nb_walls; i++){
+        fprintf(stderr, "i : %d\n", i);
+        fprintf(stderr, "wall : %s\n", wall_to_string(walls[i]));
+    }
+
     generate_guards(&guards, &nb_guards);
     genere_relique(&reliques, &nb_reliques, walls, nb_walls);
 
