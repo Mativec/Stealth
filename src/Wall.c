@@ -82,12 +82,11 @@ char *wall_to_string(Engine_Wall wall) {
 }
 
 int wall_collision(Engine_Obj obj, Engine_Walls walls, int nb_walls) {
-    int i, collision;
+    int i;
     int *obj_coord, *wall_coord;
 
     assert(walls != NULL);
 
-    collision = 0;
     obj_coord = get_object_coord(obj);
 
     for (i = 0; i < nb_walls; i++) {
@@ -101,31 +100,40 @@ int wall_collision(Engine_Obj obj, Engine_Walls walls, int nb_walls) {
             && obj_coord[1] < wall_coord[1]
             && obj_coord[1] >= wall_coord[1] - walls[i].size
         ) {
-            collision = 1;
+            free(obj_coord);
+            free(wall_coord);
+            return 1;
         } else if (
             obj_coord[0] == wall_coord[0]
             && walls[i].orientation == OBJECT_DOWN
             && obj_coord[1] >= wall_coord[1]
             && obj_coord[1] < wall_coord[1] + walls[i].size
         ) {
-            collision = 1;
+            free(obj_coord);
+            free(wall_coord);
+            return 1;
         } else if (
             obj_coord[1] == wall_coord[1]
             && walls[i].orientation == OBJECT_LEFT
             && obj_coord[0] < wall_coord[0]
             && obj_coord[0] >= wall_coord[0] - walls[i].size
         ) {
-            collision = 1;
+            free(obj_coord);
+            free(wall_coord);
+            return 1;
         } else if (
             obj_coord[1] == wall_coord[1]
             && walls[i].orientation == OBJECT_RIGHT
             && obj_coord[0] >= wall_coord[0]
             && obj_coord[0] < wall_coord[0] + walls[i].size
         ) {
-            collision = 1;
+            free(obj_coord);
+            free(wall_coord);
+            return 1;
         }
+
     }
     free(obj_coord);
     free(wall_coord);
-    return collision;
+    return 0;
 }

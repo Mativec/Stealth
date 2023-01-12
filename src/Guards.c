@@ -32,15 +32,63 @@ int detection(Engine_Obj guard, Engine_Obj player) {
 }
 */
 
-int detection(Engine_Obj guard, Engine_Obj player, Engine_Walls walls, int nb_walls) {
-    Engine_Obj *tmp;
-    double p;
-    int i;
+int detection_axis_x(Engine_Obj guard, Engine_Obj target, Engine_Walls walls, int nb_walls){
+    Engine_Obj tmp;
+    double a, pa, ya;
 
-    if(distance_between_objects(guard, player) < SIGHT_GUARDIAN){
-        /* TODO */
-        tmp = NULL;
-        return 1;
+    fprintf(stderr, "detection_axis_x\n");
+    a = guard.x;
+    pa = 1;
+    while(pa >= 0 && pa <= 1){
+        pa = (a - guard.x) / (target.x - guard.x);
+        ya = pa * guard.y + (1 - pa) * target.y;
+        tmp = *init_object(a, abs(ya));
+        a -= 1;
+        /* 
+        fprintf(stderr, "G:%s & Tmp1:%s & Targ:%s\n", object_to_string(guard), object_to_string(tmp), object_to_string(target));
+        fprintf(stderr, "t1 : %d\n", wall_collision(tmp, walls, nb_walls));
+        getc(stdin);
+        */
+        if(wall_collision(tmp, walls, nb_walls)){
+            return 0;
+        }
+    }
+    return 1;
+}
+
+int detection_axis_y(Engine_Obj guard, Engine_Obj target, Engine_Walls walls, int nb_walls){
+    Engine_Obj tmp;
+    double b, pb, xb;
+
+
+    fprintf(stderr, "detection_axis_y\n");
+    b = guard.y;
+    pb = 1;
+    while(pb >= 0 && pb <= 1){
+        pb = (b - guard.y) / (target.y - guard.y);
+        xb = pb * guard.x + (1 - pb) * target.x;
+        tmp = *init_object(abs(xb), b);
+        b += 1;
+        /* 
+        fprintf(stderr, "G:%s & Tmp1:%s & Targ:%s\n", object_to_string(guard), object_to_string(tmp), object_to_string(target));
+        fprintf(stderr, "t1 : %d\n", wall_collision(tmp, walls, nb_walls));
+        getc(stdin);
+        */
+        if(wall_collision(tmp, walls, nb_walls)){
+            return 0;
+        }
+    }
+    return 1;
+}
+
+int detection(Engine_Obj guard, Engine_Obj target, Engine_Walls walls, int nb_walls) {
+
+    if(distance_between_objects(guard, target) < SIGHT_GUARDIAN){
+        return
+        detection_axis_x(guard, target, walls, nb_walls)
+        &&
+        detection_axis_y(guard, target, walls, nb_walls)
+        ;
     }
     return 0;
 }
@@ -83,8 +131,8 @@ void generate_guards(Engine_Guard ** guards, int *nb_guards){
 
     *guards = (Engine_Guard*)malloc(sizeof(Engine_Guard) * 5);
 
-    (*guards)[0] = *init_guard(25, 25);
-    (*guards)[1] = *init_guard(30, 30);
+    (*guards)[0] = *init_guard(33, 25);
+    (*guards)[1] = *init_guard(35, 40);
 
     *nb_guards = 2;
 }

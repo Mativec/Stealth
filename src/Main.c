@@ -42,7 +42,8 @@ int main(int argc, char* argv[]) {
     generate_walls(&walls, &nb_walls);
     generate_guards(&guards, &nb_guards);
     genere_relique(&reliques, &nb_reliques, walls, nb_walls);
-    add_wall(&walls, &nb_walls, *init_wall(30, 15, OBJECT_DOWN, 10));
+    add_wall(&walls, &nb_walls, *init_wall(31, 10, OBJECT_DOWN, 32));
+    add_wall(&walls, &nb_walls, *init_wall(30, 42, OBJECT_RIGHT, 30));
 
     /* Main loop over the frames... */
     while (!quit) {
@@ -80,8 +81,8 @@ int main(int argc, char* argv[]) {
         }
 
         for (i = 0; i < nb_guards; i++){
-            move_guard(&(guards[i]), walls, nb_walls);
-            if (detection(guards[i].obj, player.obj)) {
+            /* move_guard(&(guards[i]), walls, nb_walls); */
+            if (detection(guards[i].obj, player.obj, walls, nb_walls)) {
                 quit = 1;
             }
         }
