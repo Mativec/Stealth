@@ -21,18 +21,27 @@ void init_window() {
 
 
 void buttons(){
-    MLV_draw_text_box(SIZE_X /2.4 , SIZE_Y / 2, SIZE_X / 6 , SIZE_Y/ 9, "PLAY",120, MLV_COLOR_BLACK, MLV_COLOR_BLUE1, MLV_COLOR_YELLOW1, MLV_TEXT_CENTER,MLV_HORIZONTAL_CENTER, MLV_VERTICAL_CENTER);
-    MLV_draw_text_box(SIZE_X /4.8 , SIZE_Y/2, SIZE_X / 6 , SIZE_Y/ 9 , "SETTINGS",120, MLV_COLOR_BLACK, MLV_COLOR_BLUE1, MLV_COLOR_YELLOW1, MLV_TEXT_CENTER,MLV_HORIZONTAL_CENTER, MLV_VERTICAL_CENTER);
-    MLV_draw_text_box(SIZE_X /1.6 , SIZE_Y/2 , SIZE_X / 6, SIZE_Y/ 9 , "QUIT",120, MLV_COLOR_BLACK, MLV_COLOR_BLUE1, MLV_COLOR_YELLOW1, MLV_TEXT_CENTER,MLV_HORIZONTAL_CENTER, MLV_VERTICAL_CENTER);
+    int width, height;
+
+    width = SIZE_X * SCALE;
+    height = SIZE_Y * SCALE;
+
+    MLV_draw_text_box(width /2.4 , height / 2, width / 6 , height/ 9, "PLAY",120, MLV_COLOR_BLACK, MLV_COLOR_BLUE1, MLV_COLOR_YELLOW1, MLV_TEXT_CENTER,MLV_HORIZONTAL_CENTER, MLV_VERTICAL_CENTER);
+    MLV_draw_text_box(width /4.8 , height/2, width / 6 , height/ 9 , "SETTINGS",120, MLV_COLOR_BLACK, MLV_COLOR_BLUE1, MLV_COLOR_YELLOW1, MLV_TEXT_CENTER,MLV_HORIZONTAL_CENTER, MLV_VERTICAL_CENTER);
+    MLV_draw_text_box(width /1.6 , height/2 , width / 6, height/ 9 , "QUIT",120, MLV_COLOR_BLACK, MLV_COLOR_BLUE1, MLV_COLOR_YELLOW1, MLV_TEXT_CENTER,MLV_HORIZONTAL_CENTER, MLV_VERTICAL_CENTER);
 }
 
 
 void title_screen(MLV_Image *image){
+    int width, height;
     int x,y;
 
-    MLV_create_window( NAME, ICON, SIZE_X, SIZE_Y );
+    width = SIZE_X * SCALE;
+    height = SIZE_Y * SCALE;
+
+    MLV_create_window( NAME, ICON, width, height );
     image = MLV_load_image("res/image_menu_sleath.jpg");
-    MLV_resize_image(image, SIZE_X, SIZE_Y);
+    MLV_resize_image(image, width, height);
     MLV_draw_image(image, 0 , 0);
 
     buttons();
@@ -42,19 +51,19 @@ void title_screen(MLV_Image *image){
     do{
         /*a travailler*/
         MLV_wait_mouse(&x, &y);
-        if((x > SIZE_X/ 2.4) && x < ((SIZE_X/2.4) + (SIZE_X / 6)) && (y > SIZE_Y / 6) && (y < SIZE_Y / 6 + (SIZE_Y / 9))){
+        if((x > width/ 2.4) && x < ((width/2.4) + (width / 6)) && (y > height / 6) && (y < height / 6 + (height / 9))){
             printf("russi");
             break;
         }
-        if(x > SIZE_X /1.6  &&  x < (SIZE_X /1.6 + SIZE_Y/2) && y > SIZE_X / 6 && y < (SIZE_X / 6 + SIZE_Y/ 9)){
-            printf("jeu sorrti");
+        if(x > width /1.6  &&  x < (width /1.6 + height/2) && y > width / 6 && y < (width / 6 + height/ 9)){
+            printf("jeu sorti");
             MLV_free_window();
             break;
         }
 
 
     }
-    while(x > SIZE_X || y > SIZE_Y);
+    while(x > width || y > height);
 
    free_window();
 }
