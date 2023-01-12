@@ -12,8 +12,8 @@
 #ifndef __CONST
 #define __CONST
 
-#define NAME "Game"
-#define ICON NULL
+#define NAME "SLEATH"
+#define ICON "res/image"
 
 #define MOVE_UP MLV_KEYBOARD_z
 #define MOVE_LEFT MLV_KEYBOARD_q
