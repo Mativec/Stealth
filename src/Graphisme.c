@@ -33,7 +33,7 @@ void title_screen(MLV_Image *image){
     MLV_create_window( "SLEATH", "image", SIZE_X, SIZE_Y );
     image = MLV_load_image("image_menu_sleath.jpg");
     MLV_resize_image(image, SIZE_X, SIZE_Y);
-    MLV_draw_image(image, SIZE_ZERO , SIZE_ZERO);
+    MLV_draw_image(image, 0 , 0);
 
     buttons();
     MLV_actualise_window();
