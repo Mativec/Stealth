@@ -11,7 +11,7 @@
 
 #include "../include/Object.h"
 
-Engine_Obj *init_object(float x, float y, int speed) {
+Engine_Obj *init_object(double x, double y) {
     Engine_Obj *new;
 
     new = (Engine_Obj *)malloc(sizeof(Engine_Obj));
@@ -19,13 +19,12 @@ Engine_Obj *init_object(float x, float y, int speed) {
     if (new != NULL) {
         new->x = x;
         new->y = y;
-        new->speed = speed;
     }
     return new;
 }
 
-void move_object(Engine_Obj *obj, Engine_Orientation way) {
-    static int base_x, base_y;
+void move_object(Engine_Obj *obj, Engine_Orientation way, double factor) {
+    static double base_x, base_y;
 
     if (way == OBJECT_REVERT) {
         obj->x = base_x;
@@ -35,16 +34,16 @@ void move_object(Engine_Obj *obj, Engine_Orientation way) {
         base_y = obj->y;
         switch (way) {
             case OBJECT_UP:
-                obj->y -= obj->speed;
+                obj->y -= factor * SPEED;
                 break;
             case OBJECT_LEFT:
-                obj->x -= obj->speed;
+                obj->x -= factor * SPEED;
                 break;
             case OBJECT_RIGHT:
-                obj->x += obj->speed;
+                obj->x += factor * SPEED;
                 break;
             case OBJECT_DOWN:
-                obj->y += obj->speed;
+                obj->y += factor * SPEED;
                 break;
             default:
                 break;
@@ -52,6 +51,81 @@ void move_object(Engine_Obj *obj, Engine_Orientation way) {
     }
 }
 
+int *get_object_coord(Engine_Obj obj) {
+    int *coords;
+
+    coords = (int *)malloc(sizeof(int) * 2);
+    if (coords != NULL) {
+        coords[0] = (int)obj.x;
+        coords[1] = (int)obj.y;
+    }
+    return coords;
+}
+
 char *object_to_string(Engine_Obj obj) {
-    return NULL;
+    int *coord;
+    char *output;
+
+    output = (char *)malloc(sizeof(char) * 64);
+    coord = get_object_coord(obj);
+
+    sprintf(output, "(%d, %d)", coord[0], coord[1]);
+
+    free(coord);
+    return output;
+}
+
+
+int distance_between_objects(Engine_Obj obj1, Engine_Obj obj2){
+    int *coord1, *coord2, result;
+
+    coord1 = get_object_coord(obj1);
+    coord2 = get_object_coord(obj2);
+    
+    result = sqrt(pow(coord1[0] - coord2[0], 2) + pow(coord1[1] - coord2[1], 2));
+
+    free(coord1);
+    free(coord2);
+
+    return result;
+}
+
+int contact_between_objects(Engine_Obj obj1, Engine_Obj obj2){
+    int *coord1, *coord2, result;
+
+    coord1 = get_object_coord(obj1);
+    coord2 = get_object_coord(obj2);
+    
+    result = (coord1[0] == coord2[0]) && (coord1[1] == coord2[1]);
+
+    free(coord1);
+    free(coord2);
+
+    return result;
+}
+
+
+char *orientation_to_string(Engine_Orientation orientation) {
+    switch (orientation) {
+        case OBJECT_UP:
+            return "Up";
+
+        case OBJECT_LEFT:
+            return "Left";
+
+        case OBJECT_DOWN:
+            return "Down";
+
+        case OBJECT_RIGHT:
+            return "Right";
+
+        case OBJECT_REVERT:
+            return "Revert";
+
+        case OBJECT_NONE:
+            return "None";
+            
+        default:
+            return "";
+    }
 }
