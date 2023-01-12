@@ -90,7 +90,7 @@ int main(int argc, char* argv[]) {
             }
             if(!panic_mode){
                 for (j = 0; j < nb_guards; j++){
-                    if(reliques[i].is_picked_up && detection(guards[j], reliques[i].obj, panic_mode)){
+                    if(reliques[i].is_picked_up && detection(guards[j], reliques[i].obj, panic_mode, walls, nb_walls)){
                         panic_mode = 1;
                     }
                 }
@@ -103,7 +103,7 @@ int main(int argc, char* argv[]) {
         /* His seen by a guardian and didn't activate the invisibility */
         for (i = 0; i < nb_guards; i++){
             move_guard(&(guards[i]), panic_mode, walls, nb_walls);
-            if (detection(guards[i], player.obj, panic_mode) && !player.invisibility) {
+            if (detection(guards[i], player.obj, panic_mode, walls, nb_walls) && !player.invisibility) {
                 quit = 1;
             }
         }

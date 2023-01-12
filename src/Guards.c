@@ -83,9 +83,9 @@ int detection_axis_x(Engine_Guard guard, Engine_Obj target, Engine_Walls walls, 
     return 1;
 }
 
-int detection(Engine_Guard guard, Engine_Obj target, Engine_Walls walls, int nb_walls) {
+int detection(Engine_Guard guard, Engine_Obj target, int panic_mode, Engine_Walls walls, int nb_walls) {
 
-    if(in_fov_guard(guard, target)){
+    if(in_fov_guard(guard, target, panic_mode)){
         return
         detection_axis_y(guard, target, walls, nb_walls)
         &&
@@ -147,7 +147,7 @@ void move_guard(Engine_Guard *guard, int panic_mode, Engine_Walls walls, int nb_
     }
     else if(panic_mode){
         for (i = 0; i < nb_walls; i++){
-            if(detection(*guard, walls[i].obj, panic_mode)){
+            if(in_fov_guard(*guard, walls[i].obj, panic_mode)){
                 /* cancel movement */
                 move_object(&(guard->obj), OBJECT_REVERT, 0);
 

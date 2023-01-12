@@ -19,7 +19,7 @@ Engine_Guard *init_guard(int x, int y);
 
 int in_fov_guard(Engine_Guard guard, Engine_Obj target, int panic_mode);
 
-int detection(Engine_Guard guard, Engine_Obj player, Engine_Walls walls, int nb_walls);
+int detection(Engine_Guard guard, Engine_Obj player, int panic_mode, Engine_Walls walls, int nb_walls);
 
 Engine_Orientation guard_direction();
 
