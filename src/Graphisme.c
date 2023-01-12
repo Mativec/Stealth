@@ -177,6 +177,8 @@ void draw_window(Engine_Obj base, Engine_Player player, Engine_Guard *guards, in
     /* draw player */
     draw_player(player);
 
+    draw_player(player);
+
     /* draw walls */
     for (i = 0; i < nb_walls; i++) {
         draw_wall(walls[i]);
