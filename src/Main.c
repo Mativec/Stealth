@@ -82,7 +82,7 @@ int main(int argc, char* argv[]) {
 
         for (i = 0; i < nb_guards; i++){
             /* move_guard(&(guards[i]), walls, nb_walls); */
-            if (detection(guards[i].obj, player.obj, walls, nb_walls)) {
+            if (detection(guards[i], player.obj, walls, nb_walls)) {
                 quit = 1;
             }
         }

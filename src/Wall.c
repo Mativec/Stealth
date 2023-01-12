@@ -92,6 +92,7 @@ int wall_collision(Engine_Obj obj, Engine_Walls walls, int nb_walls) {
     for (i = 0; i < nb_walls; i++) {
         wall_coord = get_object_coord(walls[i].obj);
 
+
         /* on the same line ? horizontally */
         /* obj is between origine and limit of the wall ? Based on it's orientation. */
         if (
