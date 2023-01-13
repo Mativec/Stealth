@@ -1,10 +1,10 @@
 <map id="src/Wall.c" name="src/Wall.c">
-<area shape="rect" id="node1" title="Manage interactions with the walls (header)" alt="" coords="126,5,210,32"/>
+<area shape="rect" id="node1" title="Manage interactions with the walls (source)" alt="" coords="126,5,210,32"/>
 <area shape="rect" id="node2" href="$Wall_8h.html" title="Manage interactions with the walls (header)" alt="" coords="105,80,231,107"/>
 <area shape="rect" id="node3" title=" " alt="" coords="5,155,80,181"/>
 <area shape="rect" id="node4" title=" " alt="" coords="37,229,105,256"/>
 <area shape="rect" id="node5" title=" " alt="" coords="129,229,199,256"/>
-<area shape="rect" id="node6" href="$Config_8h.html" title=" " alt="" coords="409,229,484,256"/>
+<area shape="rect" id="node6" href="$Config_8h.html" title="Store all the settings of the game." alt="" coords="409,229,484,256"/>
 <area shape="rect" id="node7" href="$Object_8h.html" title="Base management for all game objects (header)" alt="" coords="215,155,291,181"/>
 <area shape="rect" id="node8" title=" " alt="" coords="319,229,385,256"/>
 <area shape="rect" id="node9" title=" " alt="" coords="223,229,294,256"/>

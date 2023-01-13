@@ -1,7 +1,7 @@
 /**
  * @file Wall.c
  * @author VECCHIO Matias & ARNAOUT Richard
- * @brief Manage interactions with the walls (header)
+ * @brief Manage interactions with the walls (source)
  * @version 0.1
  * @date 2022-12-20
  *

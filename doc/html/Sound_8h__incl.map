@@ -2,7 +2,7 @@
 <area shape="rect" id="node1" title="Sound manager for the game (header)" alt="" coords="1047,5,1172,32"/>
 <area shape="rect" id="node2" title=" " alt="" coords="925,80,1059,107"/>
 <area shape="rect" id="node3" href="$all_8h.html" title="Simple header to import all the files of the project (used principally by the Main)" alt="" coords="1084,80,1135,107"/>
-<area shape="rect" id="node4" href="$Config_8h.html" title=" " alt="" coords="104,528,179,555"/>
+<area shape="rect" id="node4" href="$Config_8h.html" title="Store all the settings of the game." alt="" coords="104,528,179,555"/>
 <area shape="rect" id="node5" href="$Graphisme_8h.html" title="Graphical module (header)" alt="" coords="766,155,871,181"/>
 <area shape="rect" id="node13" href="$Guards_8h.html" title="Manage all enemies interactions (header)" alt="" coords="93,304,173,331"/>
 <area shape="rect" id="node17" href="$Object_8h.html" title="Base management for all game objects (header)" alt="" coords="523,453,599,480"/>

@@ -2,7 +2,7 @@
 <area shape="rect" id="node1" title="Graphical module (header)" alt="" coords="60,5,216,32"/>
 <area shape="rect" id="node2" href="$Graphisme_8c.html" title="Graphical module (source)" alt="" coords="5,80,132,107"/>
 <area shape="rect" id="node3" href="$all_8h.html" title="Simple header to import all the files of the project (used principally by the Main)" alt="" coords="157,80,258,107"/>
-<area shape="rect" id="node4" href="$Main_8c.html" title="Main du projet." alt="" coords="33,155,121,181"/>
+<area shape="rect" id="node4" href="$Main_8c.html" title="Main file of the project." alt="" coords="33,155,121,181"/>
 <area shape="rect" id="node5" href="$Sound_8h.html" title="Sound manager for the game (header)" alt="" coords="145,155,270,181"/>
 <area shape="rect" id="node6" href="$Sound_8c.html" title="Sound Manager for the game (source)" alt="" coords="159,229,255,256"/>
 </map>

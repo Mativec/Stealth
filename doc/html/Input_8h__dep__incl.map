@@ -7,7 +7,7 @@
 <area shape="rect" id="node9" href="$Relique_8h.html" title="Manage all the interaction with the relics (header)" alt="" coords="250,155,385,181"/>
 <area shape="rect" id="node11" href="$Player_8c.html" title="Manage the player&#39;s character (source)" alt="" coords="129,155,225,181"/>
 <area shape="rect" id="node4" href="$Graphisme_8c.html" title="Graphical module (source)" alt="" coords="342,304,469,331"/>
-<area shape="rect" id="node6" href="$Main_8c.html" title="Main du projet." alt="" coords="5,379,93,405"/>
+<area shape="rect" id="node6" href="$Main_8c.html" title="Main file of the project." alt="" coords="5,379,93,405"/>
 <area shape="rect" id="node7" href="$Sound_8h.html" title="Sound manager for the game (header)" alt="" coords="117,379,243,405"/>
 <area shape="rect" id="node8" href="$Sound_8c.html" title="Sound Manager for the game (source)" alt="" coords="132,453,228,480"/>
 <area shape="rect" id="node10" href="$Relique_8c.html" title="Manage all the interaction with the relics (source)" alt="" coords="146,229,251,256"/>

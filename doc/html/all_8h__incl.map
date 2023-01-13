@@ -1,6 +1,6 @@
 <map id="include/all.h" name="include/all.h">
 <area shape="rect" id="node1" title="Simple header to import all the files of the project (used principally by the Main)" alt="" coords="1105,5,1207,32"/>
-<area shape="rect" id="node2" href="$Config_8h.html" title=" " alt="" coords="573,453,648,480"/>
+<area shape="rect" id="node2" href="$Config_8h.html" title="Store all the settings of the game." alt="" coords="573,453,648,480"/>
 <area shape="rect" id="node3" href="$Graphisme_8h.html" title="Graphical module (header)" alt="" coords="738,80,843,107"/>
 <area shape="rect" id="node11" href="$Guards_8h.html" title="Manage all enemies interactions (header)" alt="" coords="924,229,1004,256"/>
 <area shape="rect" id="node15" href="$Object_8h.html" title="Base management for all game objects (header)" alt="" coords="779,379,855,405"/>

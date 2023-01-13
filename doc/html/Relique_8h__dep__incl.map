@@ -4,7 +4,7 @@
 <area shape="rect" id="node4" href="$all_8h.html" title="Simple header to import all the files of the project (used principally by the Main)" alt="" coords="157,155,258,181"/>
 <area shape="rect" id="node8" href="$Relique_8c.html" title="Manage all the interaction with the relics (source)" alt="" coords="245,80,351,107"/>
 <area shape="rect" id="node3" href="$Graphisme_8c.html" title="Graphical module (source)" alt="" coords="5,155,132,181"/>
-<area shape="rect" id="node5" href="$Main_8c.html" title="Main du projet." alt="" coords="33,229,121,256"/>
+<area shape="rect" id="node5" href="$Main_8c.html" title="Main file of the project." alt="" coords="33,229,121,256"/>
 <area shape="rect" id="node6" href="$Sound_8h.html" title="Sound manager for the game (header)" alt="" coords="145,229,270,256"/>
 <area shape="rect" id="node7" href="$Sound_8c.html" title="Sound Manager for the game (source)" alt="" coords="159,304,255,331"/>
 </map>

@@ -1,7 +1,7 @@
 /**
  * @file Main.c
  * @author Richard ARNAOUT, Matias VECCHIO
- * @brief Main du projet
+ * @brief Main file of the project
  * @version 0.1
  * @date 2022-11-14
  *
