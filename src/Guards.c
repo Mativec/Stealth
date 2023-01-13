@@ -36,6 +36,8 @@ int in_fov_guard(Engine_Guard guard, Engine_Obj target, int panic_mode) {
     return panic_mode? d < SIGHT_GUARDIAN_PANIC : d < SIGHT_GUARDIAN;
 }
 
+
+
 int detection_axis_y(Engine_Guard guard, Engine_Obj target, Engine_Walls walls, int nb_walls){
     Engine_Obj * tmp;
     double a, pa, ya;

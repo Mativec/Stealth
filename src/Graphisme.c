@@ -11,7 +11,7 @@
 
 #include "../include/Graphisme.h"
 
-
+/*create the window*/
 void init_window() {
     MLV_create_window(NAME, ICON, SIZE_X * SCALE, SIZE_Y * SCALE);
     MLV_actualise_window();
@@ -19,7 +19,7 @@ void init_window() {
 
 
 
-
+/*buttons of the menu*/
 void buttons(){
     int width, height;
 
@@ -69,17 +69,21 @@ int title_screen(MLV_Image *image){
 
 
 
-/*ne pas prendreeeee garder celle de player et la resizer ses valeurs a sizex */
+/*title screen for message when the player looses the game*/
 void loose_screen(){
-    /*ne pas prendre , prendre celle du pplayer elle marche mieux*/
-    MLV_free_window();
-    init_window();
-    MLV_draw_text_box(500, 450, 170, 110, "GAME OVER",120, MLV_COLOR_BLACK, MLV_COLOR_BLUE1, MLV_COLOR_YELLOW1, MLV_TEXT_CENTER,MLV_HORIZONTAL_CENTER, MLV_VERTICAL_CENTER);
-    MLV_wait_milliseconds(3);
-    MLV_free_window();
+    MLV_draw_text_box(500, 450, 170, 110, "GAME OVER",120, MLV_COLOR_BLACK, MLV_COLOR_BLUE1, MLV_COLOR_RED1, MLV_TEXT_CENTER,MLV_HORIZONTAL_CENTER, MLV_VERTICAL_CENTER);
+    MLV_actualise_window();
+    MLV_wait_seconds(3);
 }
 
 
+void win_screen(){
+    MLV_draw_text_box(500, 450, 170, 110, "YOU WIN",120, MLV_COLOR_BLACK, MLV_COLOR_BLUE1, MLV_COLOR_GREEN1, MLV_TEXT_CENTER,MLV_HORIZONTAL_CENTER, MLV_VERTICAL_CENTER);
+    MLV_actualise_window();
+    MLV_wait_seconds(3); 
+}
+
+/*draw walls*/
 void draw_wall(Engine_Wall wall) {
     float x, y, width, height;
 
@@ -119,6 +123,7 @@ void draw_wall(Engine_Wall wall) {
     MLV_draw_filled_rectangle(x, y, width, height, MLV_COLOR_GRAY25);
 }
 
+/*draw a relic with library*/
 void draw_relique(Engine_Relique relique) {
     Uint8 red, green, blue, alpha;
     MLV_Color color;
@@ -137,6 +142,8 @@ void draw_relique(Engine_Relique relique) {
         MLV_convert_rgba_to_color(red, green, blue, alpha));
 }
 
+
+/*draw guard with library*/
 void draw_guards(Engine_Guard *guards, int nb_guards) {
     int i;
     for (i = 0; i < nb_guards; i++) {
@@ -144,6 +151,7 @@ void draw_guards(Engine_Guard *guards, int nb_guards) {
     }
 }
 
+/*draw the field of view of guard*/
 void draw_fov_guards(Engine_Guard *guards, int nb_guards, int panic_mode) {
     int i;
     int size;
@@ -158,6 +166,8 @@ void draw_fov_guards(Engine_Guard *guards, int nb_guards, int panic_mode) {
     }
 }
 
+
+/*refresh of the window*/
 void refresh(time_t end_time, time_t new_time) {
     int frametime, extratime;
 
@@ -173,6 +183,8 @@ void refresh(time_t end_time, time_t new_time) {
     MLV_actualise_window();
 }
 
+
+/*representation of the player with library*/
 void draw_player(Engine_Player player) {
     float length, width, offset;
     Uint8 red, green, blue, alpha;
@@ -197,6 +209,7 @@ void draw_player(Engine_Player player) {
     }
 }
 
+/*representation of animation when mode panic is on*/
 void draw_alert(int panic_mode) {
     int i;
     Uint8 red, green, blue, alpha;
@@ -250,11 +263,12 @@ void draw_window(Engine_Obj base, Engine_Player player, Engine_Guard *guards, in
 
     draw_alert(panic_mode);
 }
+/* free window */
 void free_window(){
     MLV_free_window();
 }
 
-
+/*free image */
 void free_image(MLV_Image* image){
     MLV_free_image(image);
 }
