@@ -12,7 +12,7 @@
 #ifndef __CONST
 #define __CONST
 
-#define NAME "SLEATH"
+#define NAME "Stealth"
 #define ICON "res/image"
 
 #define MOVE_UP MLV_KEYBOARD_z
