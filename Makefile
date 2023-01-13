@@ -27,5 +27,7 @@ bin/Graphisme.o : src/Graphisme.c include/Graphisme.h include/Player.h include/R
 bin/Sound.o : src/Sound.c include/Sound.h 
 
 clean:
-	rm bin/*.o
 	rm $(EXEC)
+
+uninstall:
+	rm bin/*.o
