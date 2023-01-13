@@ -65,6 +65,15 @@ void generate_walls(Engine_Walls *walls, int *nb_walls) {
     add_wall(walls, nb_walls, *init_wall(0, 0, OBJECT_RIGHT, SIZE_X));
     add_wall(walls, nb_walls, *init_wall(SIZE_X - 1, SIZE_Y, OBJECT_UP, SIZE_Y));
     add_wall(walls, nb_walls, *init_wall(SIZE_X, SIZE_Y - 1, OBJECT_LEFT, SIZE_X));
+
+    add_wall(walls, nb_walls, *init_wall(0, 10, OBJECT_RIGHT, 30));
+    add_wall(walls, nb_walls, *init_wall(10, 10, OBJECT_UP, 6));
+    add_wall(walls, nb_walls, *init_wall(35, 0, OBJECT_DOWN, 35));
+    add_wall(walls, nb_walls, *init_wall(35, 15, OBJECT_RIGHT, 20));
+    add_wall(walls, nb_walls, *init_wall(45, 0, OBJECT_DOWN, 10));
+    add_wall(walls, nb_walls, *init_wall(45, SIZE_Y, OBJECT_UP, 10));
+    add_wall(walls, nb_walls, *init_wall(SIZE_X, 30, OBJECT_LEFT, 20));
+    add_wall(walls, nb_walls, *init_wall(50, 30, OBJECT_UP, 10));
 }
 
 char *wall_to_string(Engine_Wall wall) {

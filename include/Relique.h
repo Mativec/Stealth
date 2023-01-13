@@ -16,9 +16,9 @@ typedef struct{
 
 Engine_Relique *init_relique(double x, double y);
 
-void add_Relique(Engine_Relique** tab, int* nb_reliques, Engine_Relique relique);
+void add_Relique(Engine_Relique** tab, Engine_Relique relique);
 
-void genere_relique(Engine_Relique **tab, int *nb_reliques, Engine_Walls walls, int nb_walls);
+void generate_relique(Engine_Relique **tab, Engine_Obj spawn, Engine_Walls walls, int nb_walls);
 
-void test_coord_reliques_joueurs(Engine_Relique *reliques, Engine_Player player, int nb_reliques);
+void test_coord_reliques_joueurs(Engine_Relique *reliques, Engine_Player player);
 #endif

@@ -44,6 +44,7 @@
 #define TIMER_PANIC 30 /* secondes */
 #define SIGHT_GUARDIAN_PANIC 6
 
-
+#define NB_RELIQUES 3
+#define NB_GUARDS 5
 
 #endif

@@ -163,12 +163,17 @@ void move_guard(Engine_Guard *guard, int panic_mode, Engine_Walls walls, int nb_
     }
 }
 
-void generate_guards(Engine_Guard ** guards, int *nb_guards){
+void generate_guards(Engine_Guard ** guards, Engine_Obj spawn, Engine_Walls walls, int nb_walls){
+    int i, x , y;
+    Engine_Guard *tmp;
 
-    *guards = (Engine_Guard*)malloc(sizeof(Engine_Guard) * 5);
-
-    (*guards)[0] = *init_guard(25, 25);
-    (*guards)[1] = *init_guard(30, 30);
-
-    *nb_guards = 2;
+    *guards = (Engine_Guard*)malloc(sizeof(Engine_Guard) * NB_GUARDS);
+    for(i = 0; i < NB_GUARDS; i++){
+        do{
+            x =  rand() % SIZE_X;
+            y =  rand() % SIZE_Y;
+            tmp = init_guard(x, y);
+        }while (distance_between_objects(spawn, tmp->obj) < 20 && wall_collision(tmp->obj, walls, nb_walls));
+        (*guards)[i] = *init_guard(x, y);
+    }
 }

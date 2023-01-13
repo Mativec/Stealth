@@ -138,18 +138,18 @@ void draw_relique(Engine_Relique relique) {
         MLV_convert_rgba_to_color(red, green, blue, alpha));
 }
 
-void draw_guards(Engine_Guard *guards, int nb_guards) {
+void draw_guards(Engine_Guard *guards) {
     int i;
-    for (i = 0; i < nb_guards; i++) {
+    for (i = 0; i < NB_GUARDS; i++) {
         MLV_draw_filled_circle(guards[i].obj.x * SCALE, guards[i].obj.y * SCALE, SIZE_GUARD, MLV_COLOR_BLUE);
     }
 }
 
-void draw_fov_guards(Engine_Guard *guards, int nb_guards, int panic_mode) {
+void draw_fov_guards(Engine_Guard *guards, int panic_mode) {
     int i;
     int size;
 
-    for (i = 0; i < nb_guards; i++) {
+    for (i = 0; i < NB_GUARDS; i++) {
         if(panic_mode){
             size = SIGHT_GUARDIAN_PANIC;
         } else{
@@ -211,7 +211,7 @@ void draw_alert(int panic_mode) {
     }
 }
 
-void draw_window(Engine_Obj base, Engine_Player player, Engine_Guard *guards, int nb_guards, int panic_mode, Engine_Walls walls, int nb_walls, Engine_Relique *reliques, int nb_reliques) {
+void draw_window(Engine_Obj base, Engine_Player player, Engine_Guard *guards, int panic_mode, Engine_Walls walls, int nb_walls, Engine_Relique *reliques) {
     static int init = 0;
     int i, offset;
 
@@ -225,10 +225,10 @@ void draw_window(Engine_Obj base, Engine_Player player, Engine_Guard *guards, in
     MLV_clear_window(MLV_COLOR_WHITE);
 
     /* draw guard's fov */
-    draw_fov_guards(guards, nb_guards, panic_mode);
+    draw_fov_guards(guards, panic_mode);
 
     /* draw reliques */
-    for (i = 0; i < nb_reliques; i++) {
+    for (i = 0; i < NB_RELIQUES; i++) {
         draw_relique(reliques[i]);
     }
 
@@ -237,11 +237,9 @@ void draw_window(Engine_Obj base, Engine_Player player, Engine_Guard *guards, in
     MLV_draw_filled_rectangle(base.x * SCALE - offset, base.y * SCALE - offset, SCALE * 1.5, SCALE * 1.5, MLV_COLOR_YELLOW1);
 
     /* draw guards */
-    draw_guards(guards, nb_guards);
+    draw_guards(guards);
 
     /* draw player */
-    draw_player(player);
-
     draw_player(player);
 
     /* draw walls */
