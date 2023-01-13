@@ -18,8 +18,7 @@ int main(int argc, char* argv[]) {
     int i, j;
     int quit, nb_walls, nb_guards, nb_reliques, nb_reliques_claims;
     int mana_cost, panic_mode, timer_panic_mode;
-    char *player_name;
-    struct timespec end_time, new_time;
+    struct timespec end_time, new_time, begin_time;
 
     MLV_Image *image;
     MLV_Music *music;
@@ -30,7 +29,7 @@ int main(int argc, char* argv[]) {
     Engine_Obj base_player;
     Engine_Relique *reliques;
 
-    player_name = "Player";
+
     quit = 0;
     nb_walls = 0;
     nb_guards = 0;
@@ -38,7 +37,6 @@ int main(int argc, char* argv[]) {
     nb_reliques_claims = 0;
     panic_mode = 0;
     timer_panic_mode = ((1/60) * 60) * TIMER_PANIC;
-
     image = NULL;
     music = NULL;
 
@@ -59,6 +57,8 @@ int main(int argc, char* argv[]) {
     if(quit != 1){
         play_sound(music);
     }
+
+    clock_gettime(CLOCK_REALTIME, &begin_time);
     /* Main loop over the frames... */
     while (!quit){
 
@@ -136,17 +136,19 @@ int main(int argc, char* argv[]) {
         refresh(end_time.tv_sec, new_time.tv_sec); /* Graphisme.h */
     }
 
-    if(quit == 2){
+    if(quit >= 2){
+        if(quit == 2){
+            win_screen();   
+            printf("YOU WIN ");
+        }
+        else{
+            loose_screen();
+            printf("Game over !" );
+        }
         free_music(music);
         free_image(image);
         MLV_free_window();
-        printf("Victoire ! %s -> %d pts\n", player_name, player.score);
-    }
-    if(quit == 3){
-        free_music(music);
-        free_image(image);
-        MLV_free_window();
-        printf("game over ! %s -> %d pts\n", player_name, player.score);
+        printf("Seconds of game : %ld seconds\nMana used: %d/%d ",  end_time.tv_sec - begin_time.tv_sec , MAX_MANA - player.mana, MAX_MANA);
     }
     MLV_wait_milliseconds(1000);
 

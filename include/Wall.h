@@ -81,12 +81,5 @@ char *wall_to_string(Engine_Wall wall);
  */
 int wall_collision(Engine_Obj obj, Engine_Walls walls, int nb_walls);
 
-/**
- * @brief Free an array of engine_Wall and reset it's size.
- * 
- * @param walls : an array of Engine_Wall.
- * @param nb_walls : the size of walls.
- */
-void free_walls(Engine_Walls walls, int *nb_walls);
 
 #endif

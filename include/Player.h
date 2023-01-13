@@ -28,10 +28,35 @@ typedef struct __player {
     double speed;
 } Engine_Player;
 
+
+
+/**
+ * @brief initializes the player to a position given in parameter
+ * 
+ * @param x 
+ * @param y 
+ * @return Engine_Player* 
+ */
 Engine_Player *init_player(double x, double y);
 
+
+/**
+ * @brief fuction allows the movement of the player
+ * 
+ * @param player 
+ * @param input 
+ */
 void move_player(Engine_Player *player, Engine_Input input);
 
+
+
+/**
+ * @brief retuns player's object and player orientation in string
+ * 
+ * @param player 
+ * @param player_name 
+ * @return char* 
+ */
 char *player_to_string(Engine_Player player, char *player_name);
 
 #endif

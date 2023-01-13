@@ -84,6 +84,14 @@ int *get_object_coord(Engine_Obj obj);
  */
 int distance_between_objects(Engine_Obj obj1, Engine_Obj obj2);
 
+
+/**
+ * @brief return the result of contact between 2 objects who are in the same place
+ * 
+ * @param obj1 
+ * @param obj2 
+ * @return int 
+ */
 int contact_between_objects(Engine_Obj obj1, Engine_Obj obj2);
 
 /**
