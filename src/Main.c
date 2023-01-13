@@ -136,6 +136,9 @@ int main(int argc, char* argv[]) {
 
         refresh(end_time.tv_sec, new_time.tv_sec); /* Graphisme.h */
     }
+    free(walls);
+    free(guards);
+    free(reliques);
 
     if(quit == 2){
         free_music(music);
@@ -149,8 +152,8 @@ int main(int argc, char* argv[]) {
         MLV_free_window();
         printf("game over ! %s -> %d pts\n", player_name, player.score);
     }
+
+    free(player_name);
     MLV_wait_milliseconds(1000);
-
-
     return 0;
 }

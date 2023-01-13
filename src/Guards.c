@@ -13,16 +13,19 @@
 
 Engine_Guard *init_guard(int x, int y) {
     Engine_Guard *new;
+    Engine_Obj *obj;
 
     new = (Engine_Guard *)malloc(sizeof(Engine_Guard));
+    obj = init_object(x, y);
 
     if (new != NULL) {
-        new->obj = *init_object(x, y);
+        new->obj = *obj;
         new->direction = OBJECT_NONE;
 
         /* Speed between 0.3 & 0.8 -> don't change beside panic mode */
         new->speed = 0;
     }
+    free(obj);
     return new;
 }
 
