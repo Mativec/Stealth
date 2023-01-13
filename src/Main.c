@@ -15,7 +15,7 @@
 #include "../include/all.h"
 
 int main(int argc, char *argv[]) {
-    int i, j;
+    int i, j, time_game;
     int quit, nb_walls, nb_reliques_claims;
     int mana_cost, panic_mode, has_panic_mode;
     struct timespec end_time, new_time, begin_time, panic_time;
@@ -131,22 +131,25 @@ int main(int argc, char *argv[]) {
 
         refresh(end_time.tv_sec, new_time.tv_sec); /* Graphisme.h */
     }
+    time_game = end_time.tv_sec - begin_time.tv_sec;
     free(walls);
     free(guards);
     free(reliques);
 
-    if (quit >= 2) {
-        if (quit == 2) {
+    if(quit >= 2){
+        MLV_draw_text((SIZE_X*SCALE) / 2-100 , (SIZE_Y * SCALE) /3 +100, " TEMPS ECOULE : %ds", MLV_COLOR_ORANGE1, (int)time_game);  
+        MLV_draw_text((SIZE_X*SCALE) / 2-100 , (SIZE_Y * SCALE) /3 +100 + 20, "MANA UTILISE : %d / %d", MLV_COLOR_ORANGE1, MAX_MANA - player.mana, MAX_MANA);  
+        MLV_draw_text((SIZE_X*SCALE) / 2-100 , (SIZE_Y * SCALE) /3 +100 - 200, "CLIQUEZ POUR QUITTER", MLV_COLOR_ORANGE1);  
+        MLV_actualise_window();
+        if(quit == 2){
             win_screen();
-            printf("YOU WIN !\n");
-        } else {
+        }
+        else{
             loose_screen();
-            printf("Game over !\n");
         }
         free_music(music);
         MLV_free_image(image);
         MLV_free_window();
-        printf("Seconds of game : %ld seconds\nMana used: %d/%d\n", end_time.tv_sec - begin_time.tv_sec, MAX_MANA - player.mana, MAX_MANA);
     }
 
     MLV_wait_milliseconds(1000);

@@ -20,6 +20,19 @@ void init_window() {
     MLV_actualise_window();
 }
 
+/*title screen for message when the player looses the game*/
+void loose_screen(){
+    MLV_draw_text_box((SIZE_X * SCALE )/ 3+100, (SIZE_Y *SCALE )/ 2, 170, 110, "GAME OVER",120, MLV_COLOR_BLACK, MLV_COLOR_BLUE1, MLV_COLOR_RED1, MLV_TEXT_CENTER,MLV_HORIZONTAL_CENTER, MLV_VERTICAL_CENTER);
+    MLV_actualise_window();
+    MLV_wait_mouse(NULL,NULL);
+}
+
+
+void win_screen(){
+    MLV_draw_text_box((SIZE_X * SCALE) / 3+100, (SIZE_Y * SCALE) /2, 170, 110, "YOU WIN",120, MLV_COLOR_BLACK, MLV_COLOR_BLUE1, MLV_COLOR_GREEN1, MLV_TEXT_CENTER,MLV_HORIZONTAL_CENTER, MLV_VERTICAL_CENTER);
+    MLV_actualise_window();
+    MLV_wait_mouse(NULL,NULL);
+}
 /**
  * @brief Draw a wall.
  *
@@ -105,14 +118,17 @@ void draw_guard(Engine_Guard guards) {
 void draw_fov_guards(Engine_Guard *guards, int panic_mode) {
     int i;
     int size;
+    MLV_Color color;
 
     for (i = 0; i < NB_GUARDS; i++) {
         if (panic_mode) {
             size = SIGHT_GUARDIAN_PANIC;
+            color = MLV_COLOR_RED2;
         } else {
             size = SIGHT_GUARDIAN;
+            color = MLV_COLOR_LIGHT_BLUE;
         }
-        MLV_draw_filled_circle(guards[i].obj.x * SCALE, guards[i].obj.y * SCALE, size * SCALE, MLV_COLOR_LIGHT_BLUE);
+        MLV_draw_filled_circle(guards[i].obj.x * SCALE, guards[i].obj.y * SCALE, size * SCALE, color);
     }
 }
 
@@ -315,18 +331,6 @@ int title_screen(MLV_Image *image) {
     } while (x > 0 && x < width && y > 0 && y < height);
     MLV_free_window();
     return quit;
-}
-
-void loose_screen() {
-    MLV_draw_text_box(500, 450, 170, 110, "GAME OVER", 120, MLV_COLOR_BLACK, MLV_COLOR_BLUE1, MLV_COLOR_RED1, MLV_TEXT_CENTER, MLV_HORIZONTAL_CENTER, MLV_VERTICAL_CENTER);
-    MLV_actualise_window();
-    MLV_wait_seconds(3);
-}
-
-void win_screen() {
-    MLV_draw_text_box(500, 450, 170, 110, "YOU WIN", 120, MLV_COLOR_BLACK, MLV_COLOR_BLUE1, MLV_COLOR_GREEN1, MLV_TEXT_CENTER, MLV_HORIZONTAL_CENTER, MLV_VERTICAL_CENTER);
-    MLV_actualise_window();
-    MLV_wait_seconds(3);
 }
 
 void refresh(time_t end_time, time_t new_time) {
