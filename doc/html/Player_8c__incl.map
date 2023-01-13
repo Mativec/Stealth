@@ -1,0 +1,13 @@
+<map id="src/Player.c" name="src/Player.c">
+<area shape="rect" id="node1" title="Manage the player&#39;s character (source)" alt="" coords="115,5,211,32"/>
+<area shape="rect" id="node2" href="$Player_8h.html" title="Manage the player&#39;s character (header)" alt="" coords="95,80,232,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,304,76,331"/>
+<area shape="rect" id="node4" href="$Config_8h.html" title="Store all the settings of the game." alt="" coords="101,304,175,331"/>
+<area shape="rect" id="node5" href="$Input_8h.html" title="Manage all the interaction with the player (header)" alt="" coords="259,155,326,181"/>
+<area shape="rect" id="node8" href="$Object_8h.html" title="Base management for all game objects (header)" alt="" coords="176,229,252,256"/>
+<area shape="rect" id="node6" title=" " alt="" coords="375,229,511,256"/>
+<area shape="rect" id="node7" title=" " alt="" coords="277,229,351,256"/>
+<area shape="rect" id="node9" title=" " alt="" coords="200,304,268,331"/>
+<area shape="rect" id="node10" title=" " alt="" coords="293,304,359,331"/>
+<area shape="rect" id="node11" title=" " alt="" coords="384,304,455,331"/>
+</map>

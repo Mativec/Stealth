@@ -1,7 +1,7 @@
 /**
  * @file Wall.c
- * @author your name (you@domain.com)
- * @brief
+ * @author VECCHIO Matias & ARNAOUT Richard
+ * @brief Manage interactions with the walls (source)
  * @version 0.1
  * @date 2022-12-20
  *
@@ -101,36 +101,19 @@ int wall_collision(Engine_Obj obj, Engine_Walls walls, int nb_walls) {
     for (i = 0; i < nb_walls; i++) {
         get_object_coord(walls[i].obj, wall_coord);
 
-
         /* on the same line ? horizontally */
         /* obj is between origine and limit of the wall ? Based on it's orientation. */
         if (
-            obj_coord[0] == wall_coord[0]
-            && walls[i].orientation == OBJECT_UP
-            && obj_coord[1] < wall_coord[1]
-            && obj_coord[1] >= wall_coord[1] - walls[i].size
-        ) {
+            obj_coord[0] == wall_coord[0] && walls[i].orientation == OBJECT_UP && obj_coord[1] < wall_coord[1] && obj_coord[1] >= wall_coord[1] - walls[i].size) {
             return 1;
         } else if (
-            obj_coord[0] == wall_coord[0]
-            && walls[i].orientation == OBJECT_DOWN
-            && obj_coord[1] >= wall_coord[1]
-            && obj_coord[1] < wall_coord[1] + walls[i].size
-        ) {
+            obj_coord[0] == wall_coord[0] && walls[i].orientation == OBJECT_DOWN && obj_coord[1] >= wall_coord[1] && obj_coord[1] < wall_coord[1] + walls[i].size) {
             return 1;
         } else if (
-            obj_coord[1] == wall_coord[1]
-            && walls[i].orientation == OBJECT_LEFT
-            && obj_coord[0] < wall_coord[0]
-            && obj_coord[0] >= wall_coord[0] - walls[i].size
-        ) {
+            obj_coord[1] == wall_coord[1] && walls[i].orientation == OBJECT_LEFT && obj_coord[0] < wall_coord[0] && obj_coord[0] >= wall_coord[0] - walls[i].size) {
             return 1;
         } else if (
-            obj_coord[1] == wall_coord[1]
-            && walls[i].orientation == OBJECT_RIGHT
-            && obj_coord[0] >= wall_coord[0]
-            && obj_coord[0] < wall_coord[0] + walls[i].size
-        ) {
+            obj_coord[1] == wall_coord[1] && walls[i].orientation == OBJECT_RIGHT && obj_coord[0] >= wall_coord[0] && obj_coord[0] < wall_coord[0] + walls[i].size) {
             return 1;
         }
     }

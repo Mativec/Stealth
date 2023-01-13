@@ -1,7 +1,7 @@
 /**
  * @file Input.c
- * @author your name (you@domain.com)
- * @brief
+ * @author Richard ARNAOUT, Matias VECCHIO
+ * @brief Manage all the interaction with the player (source)
  * @version 0.1
  * @date 2022-12-07
  *
@@ -52,21 +52,17 @@ Engine_Input get_event(int *power_one, int *power_two) {
 
     output = INPUT_NONE;
 
-    if(noTwice){
+    if (noTwice) {
         noTwice = 0;
-    }
-    else{
+    } else {
         noTwice = 1;
-        
+
         MLV_get_event(&button, &button_mod, NULL, NULL, NULL, NULL, NULL, NULL, &button_state);
 
         if (power_one != NULL) {
             *power_one =
-            MLV_get_keyboard_state(MLV_KEYBOARD_LSHIFT) == MLV_PRESSED
-            ||
-            MLV_get_keyboard_state(MLV_KEYBOARD_RSHIFT) == MLV_PRESSED
-            ;
-            
+                MLV_get_keyboard_state(MLV_KEYBOARD_LSHIFT) == MLV_PRESSED ||
+                MLV_get_keyboard_state(MLV_KEYBOARD_RSHIFT) == MLV_PRESSED;
         }
 
         if (MLV_get_keyboard_state(MOVE_UP) == MLV_PRESSED) {
@@ -81,7 +77,7 @@ Engine_Input get_event(int *power_one, int *power_two) {
             output = INPUT_QUIT;
         }
         if (power_two != NULL) {
-            if (button == MLV_KEYBOARD_SPACE && button_state == MLV_PRESSED){
+            if (button == MLV_KEYBOARD_SPACE && button_state == MLV_PRESSED) {
                 *power_two = 1 - *power_two;
             }
         }

@@ -1,7 +1,7 @@
 /**
  * @file Object.h
- * @author your name (you@domain.com)
- * @brief
+ * @author Richard ARNAOUT, Matias VECCHIO
+ * @brief Base management for all game objects (header)
  * @version 0.1
  * @date 2022-12-08
  *
@@ -11,7 +11,6 @@
 
 #ifndef __OBJECT
 #define __OBJECT
-
 
 #include <math.h>
 #include <stdio.h>
@@ -24,7 +23,7 @@
  * @brief Base object for the game
  *
  */
-typedef struct engine_object {
+typedef struct {
     double x;
     double y;
 } Engine_Obj;
@@ -33,7 +32,7 @@ typedef struct engine_object {
  * @brief Orientation used for movement / object in general
  *
  */
-typedef enum __orientation {
+typedef enum {
     OBJECT_NONE,
     OBJECT_UP,
     OBJECT_LEFT,
@@ -84,19 +83,18 @@ void get_object_coord(Engine_Obj obj, int coords[2]);
  */
 int distance_between_objects(Engine_Obj obj1, Engine_Obj obj2);
 
-
 /**
  * @brief return the result of contact between 2 objects who are in the same place
- * 
- * @param obj1 
- * @param obj2 
- * @return int 
+ *
+ * @param obj1
+ * @param obj2
+ * @return int
  */
 int contact_between_objects(Engine_Obj obj1, Engine_Obj obj2);
 
 /**
  * @brief Return a char* equivalent of the enum Engine_Orientation.
- * 
+ *
  * @param orientation : an Engine_Orientation's instance.
  * @return char* : it's string equivalent.
  */
