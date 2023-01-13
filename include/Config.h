@@ -44,6 +44,7 @@
 #define TIMER_PANIC 30 /* Time of panic mode in secondes */
 #define SIGHT_GUARDIAN_PANIC 6 /*Vision of guard in panic mode*/
 
-
+#define NB_RELIQUES 3
+#define NB_GUARDS 5
 
 #endif
