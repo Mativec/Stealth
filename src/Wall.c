@@ -1,7 +1,7 @@
 /**
  * @file Wall.c
- * @author your name (you@domain.com)
- * @brief
+ * @author VECCHIO Matias & ARNAOUT Richard
+ * @brief Manage interactions with the walls (header)
  * @version 0.1
  * @date 2022-12-20
  *

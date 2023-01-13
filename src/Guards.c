@@ -1,7 +1,7 @@
 /**
  * @file Guards.c
  * @author Richard ARNAOUT, Matias VECCHIO
- * @brief Implémentation du module des gardes
+ * @brief Manage all enemies interactions (source)
  * @version 0.1
  * @date 2022-11-14
  *

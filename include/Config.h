@@ -1,7 +1,7 @@
 /**
  * @file const.h
  * @author VECCHIO Matias & ARNAOUT Richard
- * @brief Stock les reglages du jeu.
+ * @brief Store all the settings of the game.
  * @version 0.1
  * @date 2022-12-07
  *

@@ -1,3 +1,14 @@
+/**
+ * @file Sound.c
+ * @author Richard ARNAOUT, Matias VECCHIO
+ * @brief Sound Manager for the game (source)
+ * @version 0.1
+ * @date 2023-01-13
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
+
 #include "../include/Sound.h"
 
 void play_sound(MLV_Music* music) {

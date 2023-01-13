@@ -1,7 +1,7 @@
 /**
  * @file Object.h
- * @author your name (you@domain.com)
- * @brief
+ * @author Richard ARNAOUT, Matias VECCHIO
+ * @brief Base management for all game objects (header)
  * @version 0.1
  * @date 2022-12-08
  *
@@ -23,7 +23,7 @@
  * @brief Base object for the game
  *
  */
-typedef struct engine_object {
+typedef struct {
     double x;
     double y;
 } Engine_Obj;
@@ -32,7 +32,7 @@ typedef struct engine_object {
  * @brief Orientation used for movement / object in general
  *
  */
-typedef enum __orientation {
+typedef enum {
     OBJECT_NONE,
     OBJECT_UP,
     OBJECT_LEFT,

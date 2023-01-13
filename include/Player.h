@@ -1,7 +1,7 @@
 /**
  * @file Player.h
- * @author your name (you@domain.com)
- * @brief
+ * @author Richard ARNAOUT, Matias VECCHIO
+ * @brief Manage the player's character (header)
  * @version 0.1
  * @date 2022-12-08
  *
@@ -18,7 +18,12 @@
 #include "Input.h"
 #include "Object.h"
 
-typedef struct __player {
+/**
+ * @brief Represent the player's character.
+ * His goal is to find all the relics and get out safe by where he enter the place.
+ *
+ */
+typedef struct {
     Engine_Obj obj;
     Engine_Orientation orientation;
     int score;

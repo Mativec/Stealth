@@ -1,7 +1,7 @@
 /**
  * @file Input.c
- * @author your name (you@domain.com)
- * @brief
+ * @author Richard ARNAOUT, Matias VECCHIO
+ * @brief Manage all the interaction with the player (source)
  * @version 0.1
  * @date 2022-12-07
  *

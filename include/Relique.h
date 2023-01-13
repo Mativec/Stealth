@@ -1,3 +1,14 @@
+/**
+ * @file Relique.h
+ * @author Richard ARNAOUT, Matias VECCHIO
+ * @brief Manage all the interaction with the relics (header)
+ * @version 0.1
+ * @date 2023-01-13
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
+
 #ifndef __RELIQUE__
 #define __RELIQUE__
 
@@ -8,6 +19,10 @@
 #include "Player.h"
 #include "Wall.h"
 
+/**
+ * @brief Relic's structure for the game, can be picked up by the player.
+ *
+ */
 typedef struct {
     Engine_Obj obj;
     int is_picked_up;

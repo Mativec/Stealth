@@ -1,7 +1,7 @@
 /**
  * @file Graphisme.h
  * @author Richard ARNAOUT, Matias VECCHIO
- * @brief Module graphique
+ * @brief Graphical module (header)
  * @version 0.1
  * @date 2022-11-14
  *

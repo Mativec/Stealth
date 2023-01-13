@@ -1,7 +1,7 @@
 /**
  * @file Wall.h
  * @author VECCHIO Matias & ARNAOUT Richard
- * @brief Module de gestion des murs du jeu.
+ * @brief Manage interactions with the walls (header)
  * @version 0.1
  * @date 2022-12-20
  *
@@ -23,7 +23,7 @@
  * Walls represent an array of Wall.
  *
  */
-typedef struct _wall {
+typedef struct {
     Engine_Obj obj;
     Engine_Orientation orientation;
     int size;

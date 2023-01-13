@@ -1,7 +1,7 @@
 /**
  * @file Player.c
- * @author your name (you@domain.com)
- * @brief
+ * @author Richard ARNAOUT, Matias VECCHIO
+ * @brief Manage the player's character (source)
  * @version 0.1
  * @date 2022-12-08
  *

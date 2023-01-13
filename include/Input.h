@@ -1,7 +1,7 @@
 /**
  * @file Input.h
- * @author your name (you@domain.com)
- * @brief
+ * @author Richard ARNAOUT, Matias VECCHIO
+ * @brief Manage all the interaction with the player (header)
  * @version 0.1
  * @date 2022-12-07
  *
@@ -17,13 +17,18 @@
 
 #include "Object.h"
 
-typedef enum __input {
+/**
+ * @brief Represent the input of thee player to interact with the game
+ * skills are manage in the get_event function.
+ *
+ */
+typedef enum {
     INPUT_NONE,
-    INPUT_UP,
-    INPUT_RIGHT,
-    INPUT_LEFT,
-    INPUT_DOWN,
-    INPUT_QUIT
+    INPUT_UP,    /* want to move to the  up */
+    INPUT_RIGHT, /* want move to the right */
+    INPUT_LEFT,  /* want to move to the left */
+    INPUT_DOWN,  /* want to move to the down */
+    INPUT_QUIT   /* want to quit the game */
 } Engine_Input;
 
 /**

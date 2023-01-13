@@ -1,7 +1,7 @@
 /**
  * @file Object.c
- * @author your name (you@domain.com)
- * @brief
+ * @author Richard ARNAOUT, Matias VECCHIO
+ * @brief Base management for all game objects (source)
  * @version 0.1
  * @date 2022-12-08
  *

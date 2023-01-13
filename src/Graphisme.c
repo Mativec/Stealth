@@ -1,7 +1,7 @@
 /**
  * @file Graphisme.c
  * @author Richard ARNAOUT, Matias VECCHIO
- * @brief Implémentation du module graphique
+ * @brief Graphical module (source)
  * @version 0.1
  * @date 2022-11-14
  *

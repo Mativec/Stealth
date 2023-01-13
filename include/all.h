@@ -1,7 +1,7 @@
 /**
  * @file all.h
- * @author your name (you@domain.com)
- * @brief
+ * @author Richard ARNAOUT, Matias VECCHIO
+ * @brief Simple header to import all the files of the project (used principally by the Main)
  * @version 0.1
  * @date 2022-12-08
  *
