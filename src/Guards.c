@@ -160,7 +160,7 @@ void generate_guards(Engine_Guard ** guards, Engine_Obj spawn, Engine_Walls wall
             x =  rand() % SIZE_X;
             y =  rand() % SIZE_Y;
             tmp = init_guard(x, y);
-        }while (distance_between_objects(spawn, tmp->obj) < 20 && wall_collision(tmp->obj, walls, nb_walls));
+        }while (distance_between_objects(spawn, tmp->obj) <= 20 || wall_collision(tmp->obj, walls, nb_walls));
         (*guards)[i] = *init_guard(x, y);
     }
 }
