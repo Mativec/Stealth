@@ -51,57 +51,40 @@ void move_object(Engine_Obj *obj, Engine_Orientation way, double factor) {
     }
 }
 
-int *get_object_coord(Engine_Obj obj) {
-    int *coords;
-
-    coords = (int *)malloc(sizeof(int) * 2);
-    if (coords != NULL) {
-        coords[0] = (int)obj.x;
-        coords[1] = (int)obj.y;
-    }
-    return coords;
+void get_object_coord(Engine_Obj obj, int coords[2]) {
+    coords[0] = (int)obj.x;
+    coords[1] = (int)obj.y;
 }
 
 char *object_to_string(Engine_Obj obj) {
-    int *coord;
+    int coord[2];
     char *output;
 
     output = (char *)malloc(sizeof(char) * 64);
-    coord = get_object_coord(obj);
+    get_object_coord(obj, coord);
 
     sprintf(output, "(%d, %d)", coord[0], coord[1]);
 
-    free(coord);
     return output;
 }
 
 
 int distance_between_objects(Engine_Obj obj1, Engine_Obj obj2){
-    int *coord1, *coord2, result;
+    int coord1[2], coord2[2];
 
-    coord1 = get_object_coord(obj1);
-    coord2 = get_object_coord(obj2);
+    get_object_coord(obj1, coord1);
+    get_object_coord(obj2, coord2);
     
-    result = sqrt(pow(coord1[0] - coord2[0], 2) + pow(coord1[1] - coord2[1], 2));
-
-    free(coord1);
-    free(coord2);
-
-    return result;
+    return sqrt(pow(coord1[0] - coord2[0], 2) + pow(coord1[1] - coord2[1], 2));
 }
 
 int contact_between_objects(Engine_Obj obj1, Engine_Obj obj2){
-    int *coord1, *coord2, result;
+    int coord1[2], coord2[2];
 
-    coord1 = get_object_coord(obj1);
-    coord2 = get_object_coord(obj2);
+    get_object_coord(obj1, coord1);
+    get_object_coord(obj2, coord2);
     
-    result = (coord1[0] == coord2[0]) && (coord1[1] == coord2[1]);
-
-    free(coord1);
-    free(coord2);
-
-    return result;
+    return (coord1[0] == coord2[0]) && (coord1[1] == coord2[1]);
 }
 
 

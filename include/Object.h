@@ -73,7 +73,7 @@ char *object_to_string(Engine_Obj obj);
  * @param obj : the Engine_Object which we want the coordinate
  * @return int* : an array of two integers ([x][y])
  */
-int *get_object_coord(Engine_Obj obj);
+void get_object_coord(Engine_Obj obj, int coords[2]);
 
 /**
  * @brief Return the distance between 2 objects.
