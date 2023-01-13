@@ -118,14 +118,17 @@ void draw_guard(Engine_Guard guards) {
 void draw_fov_guards(Engine_Guard *guards, int panic_mode) {
     int i;
     int size;
+    MLV_Color color;
 
     for (i = 0; i < NB_GUARDS; i++) {
         if (panic_mode) {
             size = SIGHT_GUARDIAN_PANIC;
+            color = MLV_COLOR_RED2;
         } else {
             size = SIGHT_GUARDIAN;
+            color = MLV_COLOR_LIGHT_BLUE;
         }
-        MLV_draw_filled_circle(guards[i].obj.x * SCALE, guards[i].obj.y * SCALE, size * SCALE, MLV_COLOR_LIGHT_BLUE);
+        MLV_draw_filled_circle(guards[i].obj.x * SCALE, guards[i].obj.y * SCALE, size * SCALE, color);
     }
 }
 
