@@ -17,8 +17,8 @@
 int main(int argc, char* argv[]) {
     int i, j;
     int quit, nb_walls, nb_guards, nb_reliques, nb_reliques_claims;
-    int mana_cost, panic_mode, timer_panic_mode;
-    struct timespec end_time, new_time, begin_time;
+    int mana_cost, panic_mode, has_panic_mode;
+    struct timespec end_time, new_time, begin_time, panic_time;
 
     MLV_Image *image;
     MLV_Music *music;
@@ -35,6 +35,7 @@ int main(int argc, char* argv[]) {
     nb_guards = 0;
     nb_reliques = 0;
     nb_reliques_claims = 0;
+    has_panic_mode = 0;
     panic_mode = 0;
     timer_panic_mode = ((1/60) * 60) * TIMER_PANIC;
     image = NULL;
@@ -99,10 +100,12 @@ int main(int argc, char* argv[]) {
                 reliques[i].is_picked_up = 1;
                 nb_reliques_claims++;
             }
-            if(!panic_mode){
+            if(!panic_mode && !has_panic_mode){
                 for (j = 0; j < nb_guards; j++){
                     if(reliques[i].is_picked_up && detection(guards[j], reliques[i].obj, panic_mode, walls, nb_walls)){
+                        has_panic_mode = 1;
                         panic_mode = 1;
+                        clock_gettime(CLOCK_REALTIME, &panic_time);
                     }
                 }
             }
@@ -124,8 +127,7 @@ int main(int argc, char* argv[]) {
         }
 
         if(panic_mode){
-            timer_panic_mode -= 1;
-            if(timer_panic_mode <= 0){
+            if(new_time.tv_sec - panic_time.tv_sec >= 30){
                 panic_mode = 0;
             }
         }
@@ -135,6 +137,9 @@ int main(int argc, char* argv[]) {
 
         refresh(end_time.tv_sec, new_time.tv_sec); /* Graphisme.h */
     }
+    free(walls);
+    free(guards);
+    free(reliques);
 
     if(quit >= 2){
         if(quit == 2){
@@ -150,8 +155,8 @@ int main(int argc, char* argv[]) {
         MLV_free_window();
         printf("Seconds of game : %ld seconds\nMana used: %d/%d ",  end_time.tv_sec - begin_time.tv_sec , MAX_MANA - player.mana, MAX_MANA);
     }
+
+    free(player_name);
     MLV_wait_milliseconds(1000);
-
-
     return 0;
 }

@@ -13,13 +13,17 @@
 
 Engine_Player *init_player(double x, double y) {
     Engine_Player *new;
+    Engine_Obj *obj;
 
     new = (Engine_Player *)malloc(sizeof(Engine_Player));
+    obj = init_object(x, y);
+
     if (new == NULL) {
         fprintf(stderr, "Failed to init Player...\n");
         exit(EXIT_FAILURE);
     }
-    new->obj = *init_object(x, y);
+    
+    new->obj = *obj;
     new->orientation = OBJECT_NONE;
     new->mana = MAX_MANA;
     new->score = 0;
@@ -27,6 +31,7 @@ Engine_Player *init_player(double x, double y) {
     new->invisibility = 0;
     new->speed = 0;
 
+    free(obj);
     return new;
 }
 
