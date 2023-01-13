@@ -29,7 +29,7 @@ Engine_Guard *init_guard(int x, int y);
 
 
 /**
- * @brief displays field of vision of the guard 
+ * @brief Tell if the target is on the field of view of the guard.
  * 
  * @param guard 
  * @param target 

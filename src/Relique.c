@@ -28,11 +28,3 @@ void generate_relique(Engine_Relique **tab, Engine_Obj spawn, Engine_Walls walls
     }
 
 }
-
-
-void test_coord_reliques_joueurs(Engine_Relique *reliques, Engine_Player player){
-    int i;
-    for(i = 0; i < NB_RELIQUES; i++){
-        printf("pos joueur : %s\n pos relique : %s", object_to_string(player.obj) , object_to_string(reliques[i].obj));
-    }
-}

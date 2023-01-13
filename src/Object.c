@@ -68,25 +68,23 @@ char *object_to_string(Engine_Obj obj) {
     return output;
 }
 
-
-int distance_between_objects(Engine_Obj obj1, Engine_Obj obj2){
+int distance_between_objects(Engine_Obj obj1, Engine_Obj obj2) {
     int coord1[2], coord2[2];
 
     get_object_coord(obj1, coord1);
     get_object_coord(obj2, coord2);
-    
+
     return sqrt(pow(coord1[0] - coord2[0], 2) + pow(coord1[1] - coord2[1], 2));
 }
 
-int contact_between_objects(Engine_Obj obj1, Engine_Obj obj2){
+int contact_between_objects(Engine_Obj obj1, Engine_Obj obj2) {
     int coord1[2], coord2[2];
 
     get_object_coord(obj1, coord1);
     get_object_coord(obj2, coord2);
-    
+
     return (coord1[0] == coord2[0]) && (coord1[1] == coord2[1]);
 }
-
 
 char *orientation_to_string(Engine_Orientation orientation) {
     switch (orientation) {
@@ -107,7 +105,7 @@ char *orientation_to_string(Engine_Orientation orientation) {
 
         case OBJECT_NONE:
             return "None";
-            
+
         default:
             return "";
     }

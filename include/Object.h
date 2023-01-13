@@ -12,7 +12,6 @@
 #ifndef __OBJECT
 #define __OBJECT
 
-
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -84,19 +83,18 @@ void get_object_coord(Engine_Obj obj, int coords[2]);
  */
 int distance_between_objects(Engine_Obj obj1, Engine_Obj obj2);
 
-
 /**
  * @brief return the result of contact between 2 objects who are in the same place
- * 
- * @param obj1 
- * @param obj2 
- * @return int 
+ *
+ * @param obj1
+ * @param obj2
+ * @return int
  */
 int contact_between_objects(Engine_Obj obj1, Engine_Obj obj2);
 
 /**
  * @brief Return a char* equivalent of the enum Engine_Orientation.
- * 
+ *
  * @param orientation : an Engine_Orientation's instance.
  * @return char* : it's string equivalent.
  */

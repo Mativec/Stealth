@@ -22,7 +22,7 @@ Engine_Player *init_player(double x, double y) {
         fprintf(stderr, "Failed to init Player...\n");
         exit(EXIT_FAILURE);
     }
-    
+
     new->obj = *obj;
     new->orientation = OBJECT_NONE;
     new->mana = MAX_MANA;
@@ -50,9 +50,8 @@ void move_player(Engine_Player *player, Engine_Input way) {
 
         if (!player->overcharge && player->speed > MAX_SPEED_PLAYER) {
             player->speed = MAX_SPEED_PLAYER;
-        } else if(player->overcharge && player->speed > MAX_SPEED_PLAYER_OVERCHARGED){
+        } else if (player->overcharge && player->speed > MAX_SPEED_PLAYER_OVERCHARGED) {
             player->speed = MAX_SPEED_PLAYER_OVERCHARGED;
-
         }
 
         move_object(&(player->obj), player->orientation, player->speed);

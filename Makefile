@@ -2,7 +2,7 @@ CC = gcc
 OBJ = bin/Object.o bin/Input.o bin/Wall.o bin/Player.o bin/Guards.o bin/Relique.o bin/Graphisme.o bin/Sound.o
 CFLAGS = -ansi -pedantic -Wall
 LDFLAGS = -lMLV -lm
-EXEC = a.out
+EXEC = stealth.exe
 
 $(EXEC): src/Main.c $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS)
