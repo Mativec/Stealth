@@ -1,0 +1,4 @@
+<map id="Engine_Player" name="Engine_Player">
+<area shape="rect" id="node1" title="Represent the player&#39;s character. His goal is to find all the relics and get out safe by where he ent..." alt="" coords="5,95,120,121"/>
+<area shape="rect" id="node2" href="$structEngine__Obj.html" title="Base object for the game." alt="" coords="15,5,110,32"/>
+</map>

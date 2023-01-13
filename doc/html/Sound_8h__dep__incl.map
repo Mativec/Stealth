@@ -1,0 +1,6 @@
+<map id="include/Sound.h" name="include/Sound.h">
+<area shape="rect" id="node1" title="Sound manager for the game (header)" alt="" coords="5,5,131,32"/>
+<area shape="rect" id="node2" href="$all_8h.html" title="Simple header to import all the files of the project (used principally by the Main)" alt="" coords="17,80,119,107"/>
+<area shape="rect" id="node4" href="$Sound_8c.html" title="Sound Manager for the game (source)" alt="" coords="143,80,239,107"/>
+<area shape="rect" id="node3" href="$Main_8c.html" title="Main file of the project." alt="" coords="24,155,112,181"/>
+</map>
