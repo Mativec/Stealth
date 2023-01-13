@@ -13,16 +13,19 @@
 
 Engine_Guard *init_guard(int x, int y) {
     Engine_Guard *new;
+    Engine_Obj *obj;
 
     new = (Engine_Guard *)malloc(sizeof(Engine_Guard));
+    obj = init_object(x, y);
 
     if (new != NULL) {
-        new->obj = *init_object(x, y);
+        new->obj = *obj;
         new->direction = OBJECT_NONE;
 
         /* Speed between 0.3 & 0.8 -> don't change beside panic mode */
         new->speed = 0;
     }
+    free(obj);
     return new;
 }
 
@@ -32,6 +35,8 @@ int in_fov_guard(Engine_Guard guard, Engine_Obj target, int panic_mode) {
     d = distance_between_objects(guard.obj, target);
     return panic_mode? d < SIGHT_GUARDIAN_PANIC : d < SIGHT_GUARDIAN;
 }
+
+
 
 int detection_axis_y(Engine_Guard guard, Engine_Obj target, Engine_Walls walls, int nb_walls){
     Engine_Obj * tmp;
@@ -121,8 +126,6 @@ double guard_speed(int panic_mode){
 }
 
 void move_guard(Engine_Guard *guard, int panic_mode, Engine_Walls walls, int nb_walls) {
-    int i;
-
     if(guard->speed == 0 || panic_mode || guard->speed == 1){
         guard->speed = guard_speed(panic_mode);
     }
@@ -134,7 +137,7 @@ void move_guard(Engine_Guard *guard, int panic_mode, Engine_Walls walls, int nb_
 
     move_object(&(guard->obj), guard->direction, guard->speed);
 
-    if (!panic_mode && wall_collision(guard->obj, walls, nb_walls)) {
+    if (wall_collision(guard->obj, walls, nb_walls)) {
         /* cancel movement */
         move_object(&(guard->obj), OBJECT_REVERT, 0);
 
@@ -144,22 +147,6 @@ void move_guard(Engine_Guard *guard, int panic_mode, Engine_Walls walls, int nb_
 
         /* retry a movement */
         move_guard(guard, panic_mode, walls, nb_walls);
-    }
-    else if(panic_mode){
-        for (i = 0; i < nb_walls; i++){
-            if(in_fov_guard(*guard, walls[i].obj, panic_mode)){
-                /* cancel movement */
-                move_object(&(guard->obj), OBJECT_REVERT, 0);
-
-                /* reset guard's property */
-                guard->direction = OBJECT_NONE;
-                guard->speed = 0;
-
-                /* retry a movement */
-                move_guard(guard, panic_mode, walls, nb_walls);
-                return;
-            }
-        }
     }
 }
 

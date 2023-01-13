@@ -92,14 +92,14 @@ char *wall_to_string(Engine_Wall wall) {
 
 int wall_collision(Engine_Obj obj, Engine_Walls walls, int nb_walls) {
     int i;
-    int *obj_coord, *wall_coord;
+    int obj_coord[2], wall_coord[2];
 
     assert(walls != NULL);
 
-    obj_coord = get_object_coord(obj);
+    get_object_coord(obj, obj_coord);
 
     for (i = 0; i < nb_walls; i++) {
-        wall_coord = get_object_coord(walls[i].obj);
+        get_object_coord(walls[i].obj, wall_coord);
 
 
         /* on the same line ? horizontally */
@@ -110,8 +110,6 @@ int wall_collision(Engine_Obj obj, Engine_Walls walls, int nb_walls) {
             && obj_coord[1] < wall_coord[1]
             && obj_coord[1] >= wall_coord[1] - walls[i].size
         ) {
-            free(obj_coord);
-            free(wall_coord);
             return 1;
         } else if (
             obj_coord[0] == wall_coord[0]
@@ -119,8 +117,6 @@ int wall_collision(Engine_Obj obj, Engine_Walls walls, int nb_walls) {
             && obj_coord[1] >= wall_coord[1]
             && obj_coord[1] < wall_coord[1] + walls[i].size
         ) {
-            free(obj_coord);
-            free(wall_coord);
             return 1;
         } else if (
             obj_coord[1] == wall_coord[1]
@@ -128,8 +124,6 @@ int wall_collision(Engine_Obj obj, Engine_Walls walls, int nb_walls) {
             && obj_coord[0] < wall_coord[0]
             && obj_coord[0] >= wall_coord[0] - walls[i].size
         ) {
-            free(obj_coord);
-            free(wall_coord);
             return 1;
         } else if (
             obj_coord[1] == wall_coord[1]
@@ -137,13 +131,8 @@ int wall_collision(Engine_Obj obj, Engine_Walls walls, int nb_walls) {
             && obj_coord[0] >= wall_coord[0]
             && obj_coord[0] < wall_coord[0] + walls[i].size
         ) {
-            free(obj_coord);
-            free(wall_coord);
             return 1;
         }
-
     }
-    free(obj_coord);
-    free(wall_coord);
     return 0;
 }
