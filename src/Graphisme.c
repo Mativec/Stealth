@@ -71,16 +71,16 @@ int title_screen(MLV_Image *image){
 
 /*title screen for message when the player looses the game*/
 void loose_screen(){
-    MLV_draw_text_box(500, 450, 170, 110, "GAME OVER",120, MLV_COLOR_BLACK, MLV_COLOR_BLUE1, MLV_COLOR_RED1, MLV_TEXT_CENTER,MLV_HORIZONTAL_CENTER, MLV_VERTICAL_CENTER);
+    MLV_draw_text_box((SIZE_X * SCALE )/ 3+100, (SIZE_Y *SCALE )/ 2, 170, 110, "GAME OVER",120, MLV_COLOR_BLACK, MLV_COLOR_BLUE1, MLV_COLOR_RED1, MLV_TEXT_CENTER,MLV_HORIZONTAL_CENTER, MLV_VERTICAL_CENTER);
     MLV_actualise_window();
-    MLV_wait_seconds(3);
+    MLV_wait_mouse(NULL,NULL);
 }
 
 
 void win_screen(){
-    MLV_draw_text_box(500, 450, 170, 110, "YOU WIN",120, MLV_COLOR_BLACK, MLV_COLOR_BLUE1, MLV_COLOR_GREEN1, MLV_TEXT_CENTER,MLV_HORIZONTAL_CENTER, MLV_VERTICAL_CENTER);
+    MLV_draw_text_box((SIZE_X * SCALE) / 3+100, (SIZE_Y * SCALE) /2, 170, 110, "YOU WIN",120, MLV_COLOR_BLACK, MLV_COLOR_BLUE1, MLV_COLOR_GREEN1, MLV_TEXT_CENTER,MLV_HORIZONTAL_CENTER, MLV_VERTICAL_CENTER);
     MLV_actualise_window();
-    MLV_wait_seconds(3); 
+    MLV_wait_mouse(NULL,NULL);
 }
 
 /*draw walls*/
