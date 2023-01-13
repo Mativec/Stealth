@@ -14,6 +14,7 @@
 
 #define NAME "Stealth"
 #define ICON "res/image"
+#define BACKGROUND_MENU "res/menu.jpg"
 
 #define MOVE_UP MLV_KEYBOARD_z
 #define MOVE_LEFT MLV_KEYBOARD_q
