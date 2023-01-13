@@ -51,10 +51,16 @@ int main(int argc, char* argv[]) {
     generate_guards(&guards, &nb_guards);
     genere_relique(&reliques, &nb_reliques, walls, nb_walls);
 
-    title_screen(image);
-    play_sound(music);
+
+    if(title_screen(image) == 1){
+        quit = 1;
+    }
+
+    if(quit != 1){
+        play_sound(music);
+    }
     /* Main loop over the frames... */
-    do {
+    while (!quit){
 
         /*Get the time in nano second at the start of the frame */
         clock_gettime(CLOCK_REALTIME, &end_time);
@@ -109,7 +115,7 @@ int main(int argc, char* argv[]) {
         for (i = 0; i < nb_guards; i++){
             move_guard(&(guards[i]), panic_mode, walls, nb_walls);
             if (detection(guards[i], player.obj, panic_mode, walls, nb_walls) && !player.invisibility) {
-                quit = 1;
+                quit = 3;
             }
         }
         /* TODO : Mana on tuile */
@@ -128,16 +134,22 @@ int main(int argc, char* argv[]) {
         clock_gettime(CLOCK_REALTIME, &new_time);
 
         refresh(end_time.tv_sec, new_time.tv_sec); /* Graphisme.h */
-    } while (!quit);
+    }
 
     if(quit == 2){
+        free_music(music);
+        free_image(image);
+        MLV_free_window();
         printf("Victoire ! %s -> %d pts\n", player_name, player.score);
+    }
+    if(quit == 3){
+        free_music(music);
+        free_image(image);
+        MLV_free_window();
+        printf("game over ! %s -> %d pts\n", player_name, player.score);
     }
     MLV_wait_milliseconds(1000);
 
-    free_music(music);
-    free_image(image);
 
-    MLV_free_window();
     return 0;
 }

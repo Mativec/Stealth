@@ -32,9 +32,10 @@ void buttons(){
 }
 
 
-void title_screen(MLV_Image *image){
+int title_screen(MLV_Image *image){
     int width, height;
     int x,y;
+    int quit;
 
     width = SIZE_X * SCALE;
     height = SIZE_Y * SCALE;
@@ -46,26 +47,24 @@ void title_screen(MLV_Image *image){
 
     buttons();
     MLV_actualise_window();
-    MLV_wait_mouse(&x,&y);
     /*affichage du bouton jouer et des options et de quitter*/
     do{
         /*a travailler*/
         MLV_wait_mouse(&x, &y);
-        if((x > width/ 2.4) && x < ((width/2.4) + (width / 6)) && (y > height / 6) && (y < height / 6 + (height / 9))){
-            printf("russi");
+        if((x > width/ 2.4) && x < ((width/2.4) + (width / 6)) && (y > height / 2 ) && (y < height / 2 + (height / 9))){
+            quit = 0;
             break;
         }
-        if(x > width /1.6  &&  x < (width /1.6 + height/2) && y > width / 6 && y < (width / 6 + height/ 9)){
-            printf("jeu sorti");
-            MLV_free_window();
+        if(x > width /1.6  &&  x < (width /1.6 + width/6) && y > height / 2 && y < (height / 2 + height/ 9)){
+            quit = 1;
             break;
         }
 
 
     }
-    while(x > width || y > height);
-
-   free_window();
+    while(x > 0 && x < width && y > 0 && y < height);
+    free_window();
+    return quit;
 }
 
 

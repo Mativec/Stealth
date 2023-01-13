@@ -31,7 +31,7 @@ void draw_window(Engine_Obj base, Engine_Player player, Engine_Guard *guards, in
 
 void refresh(time_t end_time, time_t new_time);
 
-void title_screen(MLV_Image *image);
+int title_screen(MLV_Image *image);
 
 void free_window();
 
