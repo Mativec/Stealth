@@ -17,9 +17,8 @@
 int main(int argc, char* argv[]) {
     int i, j;
     int quit, nb_walls, nb_reliques_claims;
-    int mana_cost, panic_mode, timer_panic_mode;
-    char *player_name;
-    struct timespec end_time, new_time;
+    int mana_cost, panic_mode, has_panic_mode;
+    struct timespec end_time, new_time, begin_time, panic_time;
 
     MLV_Image *image;
     MLV_Music *music;
@@ -30,13 +29,13 @@ int main(int argc, char* argv[]) {
     Engine_Obj base_player;
     Engine_Relique *reliques;
 
-    player_name = "Player";
+
     quit = 0;
     nb_walls = 0;
     nb_reliques_claims = 0;
+    has_panic_mode = 0;
     panic_mode = 0;
     timer_panic_mode = ((1/60) * 60) * TIMER_PANIC;
-
     image = NULL;
     music = NULL;
 
@@ -49,10 +48,18 @@ int main(int argc, char* argv[]) {
     generate_guards(&guards, base_player, walls, nb_walls);
     generate_relique(&reliques, base_player, walls, nb_walls);
 
-    title_screen(image);
-    play_sound(music);
+
+    if(title_screen(image) == 1){
+        quit = 1;
+    }
+
+    if(quit != 1){
+        play_sound(music);
+    }
+
+    clock_gettime(CLOCK_REALTIME, &begin_time);
     /* Main loop over the frames... */
-    do {
+    while (!quit){
 
         /*Get the time in nano second at the start of the frame */
         clock_gettime(CLOCK_REALTIME, &end_time);
@@ -91,10 +98,12 @@ int main(int argc, char* argv[]) {
                 reliques[i].is_picked_up = 1;
                 nb_reliques_claims++;
             }
-            if(!panic_mode){
+            if(!panic_mode && !has_panic_mode){
                 for (j = 0; j < NB_GUARDS; j++){
                     if(reliques[i].is_picked_up && detection(guards[j], reliques[i].obj, panic_mode, walls, nb_walls)){
+                        has_panic_mode = 1;
                         panic_mode = 1;
+                        clock_gettime(CLOCK_REALTIME, &panic_time);
                     }
                 }
             }
@@ -107,7 +116,7 @@ int main(int argc, char* argv[]) {
         for (i = 0; i < NB_GUARDS; i++){
             move_guard(&(guards[i]), panic_mode, walls, nb_walls);
             if (detection(guards[i], player.obj, panic_mode, walls, nb_walls) && !player.invisibility) {
-                quit = 1;
+                quit = 3;
             }
         }
         /* TODO : Mana on tuile */
@@ -116,8 +125,7 @@ int main(int argc, char* argv[]) {
         }
 
         if(panic_mode){
-            timer_panic_mode -= 1;
-            if(timer_panic_mode <= 0){
+            if(new_time.tv_sec - panic_time.tv_sec >= 30){
                 panic_mode = 0;
             }
         }
@@ -126,16 +134,27 @@ int main(int argc, char* argv[]) {
         clock_gettime(CLOCK_REALTIME, &new_time);
 
         refresh(end_time.tv_sec, new_time.tv_sec); /* Graphisme.h */
-    } while (!quit);
-
-    if(quit == 2){
-        printf("Victoire ! %s -> %d pts\n", player_name, player.score);
     }
+    free(walls);
+    free(guards);
+    free(reliques);
+
+    if(quit >= 2){
+        if(quit == 2){
+            win_screen();   
+            printf("YOU WIN ");
+        }
+        else{
+            loose_screen();
+            printf("Game over !" );
+        }
+        free_music(music);
+        free_image(image);
+        MLV_free_window();
+        printf("Seconds of game : %ld seconds\nMana used: %d/%d ",  end_time.tv_sec - begin_time.tv_sec , MAX_MANA - player.mana, MAX_MANA);
+    }
+
+    free(player_name);
     MLV_wait_milliseconds(1000);
-
-    free_music(music);
-    free_image(image);
-
-    MLV_free_window();
     return 0;
 }
