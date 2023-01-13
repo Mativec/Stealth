@@ -1,4 +1,0 @@
-<map id="Engine_Relique" name="Engine_Relique">
-<area shape="rect" id="node1" title="Relic&#39;s structure for the game, can be picked up by the player." alt="" coords="5,95,128,121"/>
-<area shape="rect" id="node2" href="$de/db9/structEngine__Obj.html" title="Base object for the game." alt="" coords="19,5,114,32"/>
-</map>

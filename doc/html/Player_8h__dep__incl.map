@@ -1,0 +1,12 @@
+<map id="include/Player.h" name="include/Player.h">
+<area shape="rect" id="node1" title="Manage the player&#39;s character (header)" alt="" coords="189,5,314,32"/>
+<area shape="rect" id="node2" href="$Graphisme_8h.html" title="Graphical module (header)" alt="" coords="5,155,161,181"/>
+<area shape="rect" id="node4" href="$all_8h.html" title="Simple header to import all the files of the project (used principally by the Main)" alt="" coords="161,229,262,256"/>
+<area shape="rect" id="node8" href="$Relique_8h.html" title="Manage all the interaction with the relics (header)" alt="" coords="237,80,372,107"/>
+<area shape="rect" id="node10" href="$Player_8c.html" title="Manage the player&#39;s character (source)" alt="" coords="397,80,493,107"/>
+<area shape="rect" id="node3" href="$Graphisme_8c.html" title="Graphical module (source)" alt="" coords="9,229,136,256"/>
+<area shape="rect" id="node5" href="$Main_8c.html" title="Main du projet." alt="" coords="37,304,125,331"/>
+<area shape="rect" id="node6" href="$Sound_8h.html" title="Sound manager for the game (header)" alt="" coords="149,304,274,331"/>
+<area shape="rect" id="node7" href="$Sound_8c.html" title="Sound Manager for the game (source)" alt="" coords="163,379,259,405"/>
+<area shape="rect" id="node9" href="$Relique_8c.html" title="Manage all the interaction with the relics (source)" alt="" coords="288,155,393,181"/>
+</map>
