@@ -26,7 +26,7 @@
 
 #define PROB_NEXT_DIRECTION_GUARD 50 /* 1/x chance to change a guard's direction */
 
-#define SPEED 0.04 /* Speed of all objects */
+#define SPEED 0.03 /* Speed of all objects */
 #define MAX_SPEED_PLAYER 0.9 /*Speed of the player*/
 #define MAX_SPEED_PLAYER_OVERCHARGED 1.2 /*Speed changed at the time of events*/
 

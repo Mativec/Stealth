@@ -35,7 +35,6 @@ int main(int argc, char* argv[]) {
     nb_reliques_claims = 0;
     has_panic_mode = 0;
     panic_mode = 0;
-    timer_panic_mode = ((1/60) * 60) * TIMER_PANIC;
     image = NULL;
     music = NULL;
 
@@ -125,7 +124,7 @@ int main(int argc, char* argv[]) {
         }
 
         if(panic_mode){
-            if(new_time.tv_sec - panic_time.tv_sec >= 30){
+            if(new_time.tv_sec - panic_time.tv_sec >= TIMER_PANIC){
                 panic_mode = 0;
             }
         }
@@ -142,19 +141,18 @@ int main(int argc, char* argv[]) {
     if(quit >= 2){
         if(quit == 2){
             win_screen();   
-            printf("YOU WIN ");
+            printf("YOU WIN !\n");
         }
         else{
             loose_screen();
-            printf("Game over !" );
+            printf("Game over !\n");
         }
         free_music(music);
         free_image(image);
         MLV_free_window();
-        printf("Seconds of game : %ld seconds\nMana used: %d/%d ",  end_time.tv_sec - begin_time.tv_sec , MAX_MANA - player.mana, MAX_MANA);
+        printf("Seconds of game : %ld seconds\nMana used: %d/%d\n",  end_time.tv_sec - begin_time.tv_sec , MAX_MANA - player.mana, MAX_MANA);
     }
 
-    free(player_name);
     MLV_wait_milliseconds(1000);
     return 0;
 }
