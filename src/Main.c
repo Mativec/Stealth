@@ -142,22 +142,19 @@ int main(int argc, char* argv[]) {
     free(reliques);
 
     if(quit >= 2){
+        MLV_draw_text((SIZE_X*SCALE) / 2-100 , (SIZE_Y * SCALE) /3 +100, " TEMPS ECOULE : %ds", MLV_COLOR_ORANGE1, (int)time_game);  
+        MLV_draw_text((SIZE_X*SCALE) / 2-100 , (SIZE_Y * SCALE) /3 +100 + 20, "MANA UTILISE : %d / %d", MLV_COLOR_ORANGE1, MAX_MANA - player.mana, MAX_MANA);  
+        MLV_draw_text((SIZE_X*SCALE) / 2-100 , (SIZE_Y * SCALE) /3 +100 - 200, "CLIQUEZ POUR QUITTER", MLV_COLOR_ORANGE1);  
+        MLV_actualise_window();
         if(quit == 2){
-            MLV_draw_text((SIZE_X*SCALE) / 3 , (SIZE_Y * SCALE) /3 +100, " SECONDS : %d MANA USED : %d/%d", (int)time_game , MAX_MANA - player.mana, MAX_MANA, MLV_COLOR_ORANGE1);  
-            MLV_actualise_window();
             win_screen();
-            printf("YOU WIN ");
         }
         else{
-            MLV_draw_text((SIZE_X*SCALE) / 3 , (SIZE_Y * SCALE) /3 +100, " SECONDS : %d MANA USED : %d/%d", (int)time_game, MAX_MANA - player.mana, MAX_MANA, MLV_COLOR_ORANGE1);  
-            MLV_actualise_window();
             loose_screen();
-            printf("Game over !" );
         }
         free_music(music);
         free_image(image);
         MLV_free_window();
-        printf("Seconds of game : %d seconds\nMana used: %d/%d ",  (int)time_game , MAX_MANA - player.mana, MAX_MANA);
     }
 
     MLV_wait_milliseconds(1000);
