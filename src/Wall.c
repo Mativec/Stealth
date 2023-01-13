@@ -1,7 +1,7 @@
 /**
  * @file Wall.c
- * @author your name (you@domain.com)
- * @brief
+ * @author VECCHIO Matias & ARNAOUT Richard
+ * @brief Manage interactions with the walls (source)
  * @version 0.1
  * @date 2022-12-20
  *
@@ -65,6 +65,15 @@ void generate_walls(Engine_Walls *walls, int *nb_walls) {
     add_wall(walls, nb_walls, *init_wall(0, 0, OBJECT_RIGHT, SIZE_X));
     add_wall(walls, nb_walls, *init_wall(SIZE_X - 1, SIZE_Y, OBJECT_UP, SIZE_Y));
     add_wall(walls, nb_walls, *init_wall(SIZE_X, SIZE_Y - 1, OBJECT_LEFT, SIZE_X));
+
+    add_wall(walls, nb_walls, *init_wall(0, 10, OBJECT_RIGHT, 30));
+    add_wall(walls, nb_walls, *init_wall(10, 10, OBJECT_UP, 6));
+    add_wall(walls, nb_walls, *init_wall(35, 0, OBJECT_DOWN, 35));
+    add_wall(walls, nb_walls, *init_wall(35, 15, OBJECT_RIGHT, 20));
+    add_wall(walls, nb_walls, *init_wall(45, 0, OBJECT_DOWN, 10));
+    add_wall(walls, nb_walls, *init_wall(45, SIZE_Y, OBJECT_UP, 10));
+    add_wall(walls, nb_walls, *init_wall(SIZE_X, 30, OBJECT_LEFT, 20));
+    add_wall(walls, nb_walls, *init_wall(50, 30, OBJECT_UP, 10));
 }
 
 char *wall_to_string(Engine_Wall wall) {
@@ -92,36 +101,19 @@ int wall_collision(Engine_Obj obj, Engine_Walls walls, int nb_walls) {
     for (i = 0; i < nb_walls; i++) {
         get_object_coord(walls[i].obj, wall_coord);
 
-
         /* on the same line ? horizontally */
         /* obj is between origine and limit of the wall ? Based on it's orientation. */
         if (
-            obj_coord[0] == wall_coord[0]
-            && walls[i].orientation == OBJECT_UP
-            && obj_coord[1] < wall_coord[1]
-            && obj_coord[1] >= wall_coord[1] - walls[i].size
-        ) {
+            obj_coord[0] == wall_coord[0] && walls[i].orientation == OBJECT_UP && obj_coord[1] < wall_coord[1] && obj_coord[1] >= wall_coord[1] - walls[i].size) {
             return 1;
         } else if (
-            obj_coord[0] == wall_coord[0]
-            && walls[i].orientation == OBJECT_DOWN
-            && obj_coord[1] >= wall_coord[1]
-            && obj_coord[1] < wall_coord[1] + walls[i].size
-        ) {
+            obj_coord[0] == wall_coord[0] && walls[i].orientation == OBJECT_DOWN && obj_coord[1] >= wall_coord[1] && obj_coord[1] < wall_coord[1] + walls[i].size) {
             return 1;
         } else if (
-            obj_coord[1] == wall_coord[1]
-            && walls[i].orientation == OBJECT_LEFT
-            && obj_coord[0] < wall_coord[0]
-            && obj_coord[0] >= wall_coord[0] - walls[i].size
-        ) {
+            obj_coord[1] == wall_coord[1] && walls[i].orientation == OBJECT_LEFT && obj_coord[0] < wall_coord[0] && obj_coord[0] >= wall_coord[0] - walls[i].size) {
             return 1;
         } else if (
-            obj_coord[1] == wall_coord[1]
-            && walls[i].orientation == OBJECT_RIGHT
-            && obj_coord[0] >= wall_coord[0]
-            && obj_coord[0] < wall_coord[0] + walls[i].size
-        ) {
+            obj_coord[1] == wall_coord[1] && walls[i].orientation == OBJECT_RIGHT && obj_coord[0] >= wall_coord[0] && obj_coord[0] < wall_coord[0] + walls[i].size) {
             return 1;
         }
     }
